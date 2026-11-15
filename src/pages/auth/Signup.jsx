@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { CheckCircle2, ExternalLink, AlertCircle } from "lucide-react";
+import { CheckCircle2, ExternalLink, AlertCircle, ArrowRight } from "lucide-react";
 import { FormInput } from "../../components/common/Forms";
 import { useAuth } from "../../context/AuthContext";
 import { ApiError } from "../../api/client";
@@ -77,26 +77,34 @@ export default function Signup() {
 
   if (result) {
     return (
-      <div className="text-center">
-        <div className="w-16 h-16 rounded-2xl bg-forest-light dark:bg-forest/20 text-forest-dark dark:text-forest-light flex items-center justify-center mx-auto mb-6">
-          <CheckCircle2 className="h-8 w-8" />
+      <div className="text-center space-y-4">
+        <div className="w-16 h-16 rounded-2xl bg-champagne/15 border border-champagne/30 text-champagne flex items-center justify-center mx-auto mb-4">
+          <CheckCircle2 className="w-8 h-8" />
         </div>
-        <h1 className="text-2xl font-bold text-charcoal dark:text-white font-display mb-3">Account created</h1>
-        <p className="text-sm text-muted dark:text-gray-400 mb-6">{result.message}</p>
+        <h1 className="text-2xl font-serif font-bold text-light-text">Account Created</h1>
+        <p className="text-xs sm:text-sm text-warm-grey">{result.message}</p>
 
         {result.devVerificationUrl && (
-          <div className="mb-6 rounded-xl border border-amber-200 bg-amber-50 p-4 text-left text-sm text-amber-800 dark:border-amber-800/40 dark:bg-amber-900/20 dark:text-amber-200">
-            <p className="font-medium mb-2">Development email delivery is not configured.</p>
+          <div className="rounded-xl border border-champagne/30 bg-espresso/60 p-4 text-left text-xs text-warm-grey">
+            <p className="font-semibold text-champagne mb-1.5">Development Environment Note:</p>
             <a
               href={result.devVerificationUrl}
-              className="inline-flex items-center gap-1 font-medium underline break-all"
+              className="inline-flex items-center gap-1 font-medium text-light-text underline break-all hover:text-champagne"
             >
-              Open verification link <ExternalLink className="h-3.5 w-3.5 shrink-0" />
+              Click here to verify email in local dev mode <ExternalLink className="w-3.5 h-3.5 shrink-0" />
             </a>
           </div>
         )}
 
-        <Link to="/login" className="btn-primary inline-flex px-6 py-3">Go to sign in</Link>
+        <div className="pt-4">
+          <Link
+            to="/login"
+            className="w-full py-3 rounded-xl bg-gradient-to-r from-champagne to-caramel text-espresso font-bold text-xs inline-flex items-center justify-center gap-2 shadow"
+          >
+            <span>Proceed to Sign In</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
       </div>
     );
   }
@@ -104,46 +112,50 @@ export default function Signup() {
   return (
     <div>
       <div className="text-center mb-8">
-        <h1 className="text-2xl font-bold text-charcoal dark:text-white font-display">Create your account</h1>
-        <p className="text-sm text-muted dark:text-gray-400 mt-2">
-          Track projects, orders and enquiries in one place.
+        <h1 className="text-2xl sm:text-3xl font-serif font-bold text-light-text">
+          Create Client Account
+        </h1>
+        <p className="text-xs sm:text-sm text-warm-grey mt-2">
+          Track project milestones, tickets and deliverables.
         </p>
       </div>
 
       {formError && (
         <div
           role="alert"
-          className="mb-5 flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700 dark:border-red-800/40 dark:bg-red-900/20 dark:text-red-300"
+          className="mb-5 flex items-start gap-3 rounded-xl border border-red-500/30 bg-red-900/20 p-4 text-xs text-red-300"
         >
-          <AlertCircle className="h-5 w-5 mt-0.5 shrink-0" />
+          <AlertCircle className="w-4 h-4 mt-0.5 shrink-0 text-red-400" />
           <span>{formError}</span>
         </div>
       )}
 
       <form onSubmit={handleSubmit} className="space-y-4" noValidate>
         <FormInput
-          label="Full name"
+          label="Full Name"
           name="name"
           id="signup-name"
           value={formData.name}
           onChange={handleChange}
           error={errors.name}
-          placeholder="Your name"
+          placeholder="e.g. Eleanor Vance"
           autoComplete="name"
           required
         />
+
         <FormInput
-          label="Email address"
+          label="Email Address"
           type="email"
           name="email"
           id="signup-email"
           value={formData.email}
           onChange={handleChange}
           error={errors.email}
-          placeholder="you@company.com"
+          placeholder="eleanor@company.com"
           autoComplete="email"
           required
         />
+
         <FormInput
           label="Password"
           type="password"
@@ -152,18 +164,18 @@ export default function Signup() {
           value={formData.password}
           onChange={handleChange}
           error={errors.password}
-          placeholder="Create a strong password"
+          placeholder="Create a secure passphrase"
           autoComplete="new-password"
           required
         />
 
-        <ul className="grid grid-cols-2 gap-1.5 text-xs">
+        <ul className="grid grid-cols-2 gap-1.5 text-[11px] py-1">
           {passwordChecks.map((check) => {
             const passed = check.test(formData.password);
             return (
               <li
                 key={check.label}
-                className={passed ? "text-green-600 dark:text-green-400" : "text-muted dark:text-gray-500"}
+                className={passed ? "text-champagne font-medium" : "text-warm-grey/60"}
               >
                 {passed ? "✓" : "•"} {check.label}
               </li>
@@ -172,7 +184,7 @@ export default function Signup() {
         </ul>
 
         <FormInput
-          label="Confirm password"
+          label="Confirm Password"
           type="password"
           name="confirmPassword"
           id="signup-confirm-password"
@@ -184,14 +196,20 @@ export default function Signup() {
           required
         />
 
-        <p className="text-xs text-muted dark:text-gray-500">
-          Public sign-up creates a customer account. Staff and administrative roles are assigned
-          only by a super administrator.
+        <p className="text-[11px] text-warm-grey/70 leading-relaxed">
+          Public signup creates a client account. Staff and administrator roles are
+          assigned exclusively by a super administrator.
         </p>
 
-        <button type="submit" disabled={isSubmitting} className="btn-primary w-full py-3.5 disabled:opacity-60">
-          {isSubmitting ? "Creating account..." : "Create Account"}
-        </button>
+        <div className="pt-2">
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full py-3.5 rounded-xl bg-gradient-to-r from-champagne via-caramel to-champagne bg-[length:200%_auto] hover:bg-[position:right_center] text-espresso font-bold text-sm shadow-md hover:shadow-glow-gold hover:-translate-y-0.5 transition-all duration-300 disabled:opacity-50"
+          >
+            {isSubmitting ? "Creating Account..." : "Create Account ↗"}
+          </button>
+        </div>
       </form>
     </div>
   );

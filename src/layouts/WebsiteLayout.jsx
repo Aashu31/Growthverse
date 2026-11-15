@@ -6,7 +6,7 @@ import Footer from "../components/navigation/Footer";
 
 export default function WebsiteLayout() {
   return (
-    <div className="min-h-screen flex flex-col bg-white dark:bg-dark text-primary-text dark:text-white">
+    <div className="min-h-screen flex flex-col bg-espresso text-light-text selection:bg-champagne selection:text-espresso">
       <AnnouncementBar />
       <Navbar />
       <main className="flex-1">{<Outlet />}</main>

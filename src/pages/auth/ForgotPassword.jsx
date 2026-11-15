@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Mail, AlertCircle, ExternalLink } from "lucide-react";
+import { Mail, AlertCircle, ExternalLink, ArrowRight, ArrowLeft } from "lucide-react";
 import { FormInput } from "../../components/common/Forms";
 import { useAuth } from "../../context/AuthContext";
 import { ApiError } from "../../api/client";
@@ -36,7 +36,6 @@ export default function ForgotPassword() {
       if (requestError instanceof ApiError && requestError.status >= 500) {
         setError("The server could not process the request. Please try again shortly.");
       } else {
-        // Keep the response generic even for validation or network issues.
         setMessage(
           "If an account exists for that email, password reset instructions have been sent."
         );
@@ -49,23 +48,31 @@ export default function ForgotPassword() {
 
   if (sent) {
     return (
-      <div className="text-center">
-        <div className="w-16 h-16 rounded-2xl bg-forest-light dark:bg-forest/20 text-forest-dark dark:text-forest-light flex items-center justify-center mx-auto mb-6">
-          <Mail className="h-8 w-8" />
+      <div className="text-center space-y-4">
+        <div className="w-16 h-16 rounded-2xl bg-champagne/15 border border-champagne/30 text-champagne flex items-center justify-center mx-auto mb-4">
+          <Mail className="w-8 h-8" />
         </div>
-        <h1 className="text-2xl font-bold text-charcoal dark:text-white font-display mb-3">Check your email</h1>
-        <p className="text-sm text-muted dark:text-gray-400 mb-6">{message}</p>
+        <h1 className="text-2xl font-serif font-bold text-light-text">Check Your Email</h1>
+        <p className="text-xs sm:text-sm text-warm-grey">{message}</p>
 
         {devResetUrl && (
-          <div className="mb-6 rounded-xl border border-amber-200 bg-amber-50 p-4 text-left text-sm text-amber-800 dark:border-amber-800/40 dark:bg-amber-900/20 dark:text-amber-200">
-            <p className="font-medium mb-2">Development email delivery is not configured.</p>
-            <a href={devResetUrl} className="inline-flex items-center gap-1 font-medium underline break-all">
-              Open reset link <ExternalLink className="h-3.5 w-3.5 shrink-0" />
+          <div className="rounded-xl border border-champagne/30 bg-espresso/60 p-4 text-left text-xs text-warm-grey">
+            <p className="font-semibold text-champagne mb-1.5">Development Environment Note:</p>
+            <a href={devResetUrl} className="inline-flex items-center gap-1 font-medium text-light-text underline break-all hover:text-champagne">
+              Open single-use reset link <ExternalLink className="w-3.5 h-3.5 shrink-0" />
             </a>
           </div>
         )}
 
-        <Link to="/login" className="btn-primary inline-flex px-6 py-3">Back to sign in</Link>
+        <div className="pt-4">
+          <Link
+            to="/login"
+            className="w-full py-3 rounded-xl bg-gradient-to-r from-champagne to-caramel text-espresso font-bold text-xs inline-flex items-center justify-center gap-2 shadow"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            <span>Return to Sign In</span>
+          </Link>
+        </div>
       </div>
     );
   }
@@ -73,25 +80,27 @@ export default function ForgotPassword() {
   return (
     <div>
       <div className="text-center mb-8">
-        <h1 className="text-2xl font-bold text-charcoal dark:text-white font-display">Forgot your password?</h1>
-        <p className="text-sm text-muted dark:text-gray-400 mt-2">
-          Enter your email and we will send a single-use reset link.
+        <h1 className="text-2xl sm:text-3xl font-serif font-bold text-light-text">
+          Reset Password
+        </h1>
+        <p className="text-xs sm:text-sm text-warm-grey mt-2">
+          Enter your registered email address and we'll transmit a secure recovery token.
         </p>
       </div>
 
       {error && (
         <div
           role="alert"
-          className="mb-5 flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700 dark:border-red-800/40 dark:bg-red-900/20 dark:text-red-300"
+          className="mb-5 flex items-start gap-3 rounded-xl border border-red-500/30 bg-red-900/20 p-4 text-xs text-red-300"
         >
-          <AlertCircle className="h-5 w-5 mt-0.5 shrink-0" />
+          <AlertCircle className="w-4 h-4 mt-0.5 shrink-0 text-red-400" />
           <span>{error}</span>
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+      <form onSubmit={handleSubmit} className="space-y-4" noValidate>
         <FormInput
-          label="Email address"
+          label="Email Address"
           type="email"
           name="email"
           id="forgot-email"
@@ -101,13 +110,20 @@ export default function ForgotPassword() {
           autoComplete="email"
           required
         />
-        <button type="submit" disabled={isSubmitting} className="btn-primary w-full py-3.5 disabled:opacity-60">
-          {isSubmitting ? "Sending..." : "Send Reset Link"}
-        </button>
+
+        <div className="pt-2">
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full py-3.5 rounded-xl bg-gradient-to-r from-champagne via-caramel to-champagne bg-[length:200%_auto] hover:bg-[position:right_center] text-espresso font-bold text-sm shadow-md hover:shadow-glow-gold hover:-translate-y-0.5 transition-all duration-300 disabled:opacity-50"
+          >
+            {isSubmitting ? "Transmitting..." : "Send Reset Token ↗"}
+          </button>
+        </div>
       </form>
 
-      <p className="mt-6 text-xs text-center text-muted dark:text-gray-500">
-        For your security, the response is the same whether or not an account exists.
+      <p className="mt-6 text-xs text-center text-warm-grey/60">
+        For your security, the response is identical regardless of whether an account exists.
       </p>
     </div>
   );

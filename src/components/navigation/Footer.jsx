@@ -1,15 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { ArrowUpRight, Github, Mail, ShieldCheck, Sparkles } from "lucide-react";
+import { COMPANY_DATA } from "../../data";
 
 const FOOTER_LINKS = [
   {
     title: "Explore",
     items: [
       { name: "Home", path: "/" },
-      { name: "About", path: "/about" },
-      { name: "Services", path: "/services" },
-      { name: "Portfolio", path: "/portfolio" },
-      { name: "Technologies", path: "/technologies" },
+      { name: "About GrowthVerse", path: "/about" },
+      { name: "Our Services", path: "/services" },
+      { name: "Portfolio & Case Studies", path: "/portfolio" },
+      { name: "Technology Stack", path: "/technologies" },
+      { name: "Features & Architecture", path: "/features" },
     ],
   },
   {
@@ -28,47 +31,90 @@ const FOOTER_LINKS = [
   {
     title: "Company",
     items: [
-      { name: "Sarthi", path: "/sarthi" },
-      { name: "Pricing", path: "/pricing" },
-      { name: "Contact", path: "/contact" },
+      { name: "Sarthi (EdTech)", path: "/sarthi" },
+      { name: "Transparent Pricing", path: "/pricing" },
+      { name: "Contact & Enquiry", path: "/contact" },
+      { name: "Customer Login", path: "/login" },
+      { name: "Client Signup", path: "/signup" },
     ],
   },
 ];
 
 export default function Footer() {
   return (
-    <footer className="bg-charcoal-dark text-white border-t border-dark-border mt-auto">
-      <div className="container-premium py-12 lg:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-12 mb-12">
-          <div className="col-span-1 md:col-span-2">
-            <div className="flex items-center gap-2 mb-6">
-              <div className="w-10 h-10 bg-forest rounded-lg flex items-center justify-center shadow-lg shadow-forest/25">
-                <span className="text-white font-bold text-lg">GV</span>
+    <footer className="bg-espresso text-light-text border-t border-champagne/15 relative overflow-hidden mt-auto">
+      {/* Subtle ambient glow in background */}
+      <div className="absolute top-0 right-1/4 w-96 h-96 bg-champagne/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-1/3 w-80 h-80 bg-caramel/5 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="container-premium py-16 lg:py-20 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
+          {/* Brand Info Column */}
+          <div className="lg:col-span-2 space-y-6">
+            <Link to="/" className="flex items-center gap-3 group inline-flex">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-champagne via-caramel to-deep-coffee p-[1px] shadow-glow-gold">
+                <div className="w-full h-full bg-espresso rounded-[11px] flex items-center justify-center">
+                  <span className="font-serif font-bold text-champagne text-xl italic">G</span>
+                </div>
               </div>
-              <span className="text-xl font-bold text-white font-display tracking-tight">
-                GrowthVerse
-              </span>
-            </div>
-            <p className="text-gray-400 text-sm leading-relaxed mb-6 max-w-sm">
-              GrowthVerse is a digital technology and solutions company
-              helping businesses establish and improve their digital presence
-              through thoughtful design and modern development.
+              <div className="flex items-baseline">
+                <span className="text-2xl font-bold font-serif tracking-tight text-light-text group-hover:text-champagne transition-colors">
+                  GrowthVerse
+                </span>
+                <span className="text-[10px] font-sans text-champagne/80 font-semibold ml-0.5 relative -top-2">
+                  ®
+                </span>
+              </div>
+            </Link>
+
+            <p className="text-warm-grey text-sm leading-relaxed max-w-sm">
+              GrowthVerse is a premier digital engineering and creative technology agency.
+              We build scalable web platforms, high-impact brands, and modern software that
+              turn ambitious ideas into sustainable business growth.
             </p>
+
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-dark-mocha/70 border border-champagne/20 text-xs text-champagne">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Build Digital. Grow Business.</span>
+            </div>
+
+            {/* Social links where actual URLs exist */}
+            <div className="pt-2 flex items-center gap-3">
+              <a
+                href={COMPANY_DATA.website}
+                target="_blank"
+                rel="noreferrer"
+                className="w-9 h-9 rounded-xl border border-champagne/20 bg-deep-coffee/60 flex items-center justify-center text-warm-grey hover:text-champagne hover:border-champagne/60 hover:bg-champagne/10 transition-all"
+                aria-label="GitHub Repository"
+              >
+                <Github className="w-4 h-4" />
+              </a>
+              <Link
+                to="/contact"
+                className="w-9 h-9 rounded-xl border border-champagne/20 bg-deep-coffee/60 flex items-center justify-center text-warm-grey hover:text-champagne hover:border-champagne/60 hover:bg-champagne/10 transition-all"
+                aria-label="Contact Email"
+              >
+                <Mail className="w-4 h-4" />
+              </Link>
+            </div>
           </div>
 
+          {/* Navigation Links Columns */}
           {FOOTER_LINKS.map((section) => (
-            <div key={section.title}>
-              <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-6">
+            <div key={section.title} className="space-y-4">
+              <h4 className="text-xs font-bold uppercase tracking-widest text-champagne font-sans">
                 {section.title}
               </h4>
-              <ul className="space-y-3">
+              <ul className="space-y-2.5">
                 {section.items.map((item) => (
                   <li key={item.name}>
                     <Link
                       to={item.path}
-                      className="text-gray-400 text-sm hover:text-white transition-colors"
+                      className="text-warm-grey hover:text-light-text text-sm transition-colors duration-200 inline-flex items-center gap-1 group/link"
                     >
-                      {item.name}
+                      <span className="group-hover/link:translate-x-0.5 transition-transform">
+                        {item.name}
+                      </span>
                     </Link>
                   </li>
                 ))}
@@ -77,19 +123,14 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="border-t border-dark-border pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            <p className="text-gray-500 text-sm">
-              Copyright (c) 2026 GrowthVerse. All rights reserved.
-            </p>
-            <div className="flex gap-6 text-sm text-gray-500">
-              <Link to="/privacy" className="hover:text-white transition-colors">
-                Privacy Policy
-              </Link>
-              <Link to="/terms" className="hover:text-white transition-colors">
-                Terms & Conditions
-              </Link>
-            </div>
+        {/* Bottom Bar */}
+        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-warm-grey">
+          <p>© 2026 GrowthVerse. All rights reserved.</p>
+          <div className="flex items-center gap-6">
+            <span className="flex items-center gap-1.5 text-warm-grey/80">
+              <ShieldCheck className="w-4 h-4 text-champagne/80" />
+              <span>Enterprise-grade Architecture & Security</span>
+            </span>
           </div>
         </div>
       </div>

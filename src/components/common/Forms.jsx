@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from "react";
+import React from "react";
 import { Button } from "./Button";
 
 export function SearchInput({
@@ -15,11 +15,11 @@ export function SearchInput({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        className={`w-full pl-10 pr-4 py-3 rounded-xl border border-border dark:border-gray-600 bg-white dark:bg-gray-800 text-primary-text dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-600/50 focus:border-blue-600 transition-all ${className}`}
+        className={`w-full pl-10 pr-4 py-2.5 rounded-xl border border-champagne/30 bg-deep-coffee/80 text-light-text placeholder-warm-grey/60 text-xs font-medium focus:outline-none focus:border-champagne focus:ring-2 focus:ring-champagne/20 transition-all ${className}`}
         {...props}
       />
       <svg
-        className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400"
+        className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-warm-grey"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -45,12 +45,14 @@ export function FormInput({
 }) {
   return (
     <div className="mb-4">
-      <label
-        htmlFor={id}
-        className="block text-sm font-medium text-primary-text dark:text-white mb-1"
-      >
-        {label} {required && <span className="text-red-500">*</span>}
-      </label>
+      {label && (
+        <label
+          htmlFor={id}
+          className="block text-xs font-bold uppercase tracking-wider text-warm-grey mb-1.5"
+        >
+          {label} {required && <span className="text-red-400">*</span>}
+        </label>
+      )}
       <input
         id={id}
         name={name}
@@ -59,11 +61,13 @@ export function FormInput({
         onChange={onChange}
         placeholder={placeholder}
         required={required}
-        className={`w-full px-4 py-3 rounded-xl border ${error ? "border-red-500" : "border-border"} bg-white dark:bg-gray-800 text-primary-text dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-600/50 focus:border-blue-600 transition-all ${error ? "ring-red-500/20" : ""} ${className}`}
+        className={`w-full px-4 py-3 rounded-xl border ${
+          error ? "border-red-500 ring-2 ring-red-500/20" : "border-champagne/30"
+        } bg-deep-coffee/70 text-light-text placeholder-warm-grey/50 text-sm focus:outline-none focus:border-champagne focus:ring-2 focus:ring-champagne/20 transition-all ${className}`}
         {...props}
       />
       {error && (
-        <p className="mt-1 text-xs text-red-600 dark:text-red-400">{error}</p>
+        <p className="mt-1 text-xs text-red-400 font-medium">{error}</p>
       )}
     </div>
   );
@@ -84,32 +88,40 @@ export function Select({
 }) {
   return (
     <div className="mb-4">
-      <label
-        htmlFor={id}
-        className="block text-sm font-medium text-primary-text dark:text-white mb-1"
-      >
-        {label} {required && <span className="text-red-500">*</span>}
-      </label>
+      {label && (
+        <label
+          htmlFor={id}
+          className="block text-xs font-bold uppercase tracking-wider text-warm-grey mb-1.5"
+        >
+          {label} {required && <span className="text-red-400">*</span>}
+        </label>
+      )}
       <select
         id={id}
         name={name}
         value={value || ""}
         onChange={onChange}
         required={required}
-        className={`w-full px-4 py-3 rounded-xl border border-border bg-white dark:bg-gray-800 text-primary-text dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-600/50 focus:border-blue-600 transition-all ${error ? "border-red-500 ring-red-500/20" : ""} ${className}`}
+        className={`w-full px-4 py-3 rounded-xl border ${
+          error ? "border-red-500 ring-2 ring-red-500/20" : "border-champagne/30"
+        } bg-deep-coffee text-light-text text-sm focus:outline-none focus:border-champagne focus:ring-2 focus:ring-champagne/20 transition-all ${className}`}
         {...props}
       >
-        <option value="" disabled>
+        <option value="" disabled className="bg-espresso text-warm-grey">
           {placeholder}
         </option>
         {options.map((option) => (
-          <option key={option.value || option} value={option.value || option}>
+          <option
+            key={option.value || option}
+            value={option.value || option}
+            className="bg-espresso text-light-text"
+          >
             {option.label || option}
           </option>
         ))}
       </select>
       {error && (
-        <p className="mt-1 text-xs text-red-600 dark:text-red-400">{error}</p>
+        <p className="mt-1 text-xs text-red-400 font-medium">{error}</p>
       )}
     </div>
   );
@@ -130,12 +142,14 @@ export function Textarea({
 }) {
   return (
     <div className="mb-4">
-      <label
-        htmlFor={id}
-        className="block text-sm font-medium text-primary-text dark:text-white mb-1"
-      >
-        {label} {required && <span className="text-red-500">*</span>}
-      </label>
+      {label && (
+        <label
+          htmlFor={id}
+          className="block text-xs font-bold uppercase tracking-wider text-warm-grey mb-1.5"
+        >
+          {label} {required && <span className="text-red-400">*</span>}
+        </label>
+      )}
       <textarea
         id={id}
         name={name}
@@ -144,11 +158,13 @@ export function Textarea({
         placeholder={placeholder}
         rows={rows}
         required={required}
-        className={`w-full px-4 py-3 rounded-xl border border-border bg-white dark:bg-gray-800 text-primary-text dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-600/50 focus:border-blue-600 transition-all ${error ? "border-red-500 ring-red-500/20" : ""} ${className}`}
+        className={`w-full px-4 py-3 rounded-xl border ${
+          error ? "border-red-500 ring-2 ring-red-500/20" : "border-champagne/30"
+        } bg-deep-coffee/70 text-light-text placeholder-warm-grey/50 text-sm focus:outline-none focus:border-champagne focus:ring-2 focus:ring-champagne/20 transition-all ${className}`}
         {...props}
       />
       {error && (
-        <p className="mt-1 text-xs text-red-600 dark:text-red-400">{error}</p>
+        <p className="mt-1 text-xs text-red-400 font-medium">{error}</p>
       )}
     </div>
   );
@@ -165,18 +181,18 @@ export function Pagination({
   return (
     <div className={`flex items-center justify-between gap-4 ${className}`}>
       <Button
-        variant="outline"
+        variant="secondary-dark"
         size="sm"
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
       >
         Previous
       </Button>
-      <span className="text-sm text-secondary-text dark:text-gray-300">
+      <span className="text-xs font-semibold text-warm-grey">
         Page {currentPage} of {totalPages}
       </span>
       <Button
-        variant="outline"
+        variant="secondary-dark"
         size="sm"
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}

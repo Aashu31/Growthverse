@@ -1,10 +1,17 @@
 import React, { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
-import { Search } from "lucide-react";
+import { Search, Sparkles, ArrowUpRight, ArrowRight } from "lucide-react";
 import { PORTFOLIO_DATA } from "../../data";
 import { SectionHeader } from "../../components/website/Hero";
 
-const CATEGORIES = ["All", "Websites", "Web Applications", "UI/UX", "AI Solutions", "Cloud and DevOps", "Branding"];
+const CATEGORIES = [
+  "All",
+  "Websites",
+  "Web Applications",
+  "UI/UX",
+  "AI Solutions",
+  "Branding",
+];
 
 export default function Portfolio() {
   const [activeCategory, setActiveCategory] = useState("All");
@@ -22,99 +29,143 @@ export default function Portfolio() {
   }, [activeCategory, search]);
 
   return (
-    <div className="min-h-screen bg-ivory text-charcoal dark:bg-charcoal-dark dark:text-white">
-      <section className="py-20 lg:py-32">
+    <div className="min-h-screen bg-espresso text-light-text selection:bg-champagne selection:text-espresso">
+      {/* Hero Header */}
+      <section className="relative py-24 lg:py-32 bg-gradient-to-b from-espresso via-deep-coffee to-espresso overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-champagne/10 rounded-full blur-[140px] pointer-events-none" />
+
+        <div className="container-premium relative z-10 text-center max-w-3xl mx-auto space-y-6">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-champagne/10 text-champagne border border-champagne/20">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>Selected Case Studies</span>
+          </div>
+
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold tracking-tight text-light-text">
+            Crafted for High Impact & <br />
+            <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-champagne via-light-gold to-caramel">
+              Commercial Scale.
+            </span>
+          </h1>
+
+          <p className="text-base sm:text-lg text-warm-grey leading-relaxed">
+            Explore our featured client engagements, digital platforms, and production
+            applications built with modern frontend engineering.
+          </p>
+        </div>
+      </section>
+
+      {/* Projects Showcase (Warm Cream Palette) */}
+      <section className="py-20 lg:py-28 bg-[#FFF8ED] text-dark-text relative">
         <div className="container-premium">
-          <div className="flex flex-col lg:flex-row justify-between items-end gap-8 mb-16">
-            <div>
-              <SectionHeader
-                title="Our Portfolio"
-                description="Explore our featured projects and case studies."
+          {/* Controls: Search and Filter Pills */}
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-14">
+            <div className="flex flex-wrap items-center gap-2">
+              {CATEGORIES.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCategory(cat)}
+                  className={`px-5 py-2 rounded-full text-xs font-semibold transition-all ${
+                    activeCategory === cat
+                      ? "bg-gradient-to-r from-champagne to-caramel text-espresso shadow-md"
+                      : "bg-white border border-gv-border text-dark-text hover:border-champagne hover:bg-champagne/10"
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+
+            {/* Search Input */}
+            <div className="relative w-full md:w-72">
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-dark-mocha/50" />
+              <input
+                type="text"
+                placeholder="Search projects by keyword..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="w-full pl-10 pr-4 py-2.5 rounded-full border border-gv-border bg-white text-xs font-medium text-dark-text focus:outline-none focus:border-champagne focus:ring-2 focus:ring-champagne/20 transition-all shadow-sm"
               />
             </div>
-            <div className="flex gap-4 w-full lg:w-auto">
-              <div className="relative flex-1 lg:w-64">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted dark:text-gray-400" />
-                <input
-                  type="text"
-                  placeholder="Search projects..."
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 rounded-xl border border-border dark:border-dark-border bg-white dark:bg-charcoal-dark text-charcoal dark:text-white focus:outline-none focus:ring-2 focus:ring-forest/50 transition-colors"
-                />
-              </div>
+          </div>
+
+          {/* Grid of Projects */}
+          {filteredProjects.length === 0 ? (
+            <div className="text-center py-24 bg-white rounded-3xl border border-gv-border">
+              <p className="text-sm text-dark-mocha/60">
+                No projects matched your criteria. Try adjusting your search query.
+              </p>
             </div>
-          </div>
-          <div className="flex flex-wrap gap-4 mb-12">
-            <button
-              onClick={() => setActiveCategory("All")}
-              className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${
-                activeCategory === "All"
-                  ? "bg-forest text-white shadow-md shadow-forest/20"
-                  : "bg-surface dark:bg-charcoal text-charcoal dark:text-white border border-border dark:border-dark-border hover:bg-forest/10 dark:hover:bg-forest/5 hover:text-forest dark:hover:text-forest-light"
-              }`}
-            >
-              All
-            </button>
-            {CATEGORIES.slice(1).map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
-                className={`px-6 py-2 rounded-full text-sm font-medium transition-all border border-border dark:border-dark-border bg-white dark:bg-charcoal-dark text-charcoal dark:text-white hover:bg-surface dark:hover:bg-charcoal hover:text-forest dark:hover:text-forest-light ${activeCategory === cat ? "bg-forest text-white" : ""}`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProjects.length === 0 ? (
-              <div className="col-span-full text-center py-20">
-                <p className="text-muted dark:text-gray-400">
-                  No projects found matching your criteria.
-                </p>
-              </div>
-            ) : (
-              filteredProjects.map((project) => (
-                <a
+          ) : (
+            <div className="grid md:grid-cols-2 gap-8">
+              {filteredProjects.map((project) => (
+                <Link
                   key={project.id}
-                  href={`/portfolio/${project.slug}`}
-                  className="group block"
+                  to={`/portfolio/${project.slug}`}
+                  className="group rounded-3xl overflow-hidden bg-white border border-gv-border shadow-sm hover:shadow-card-warm-lg hover:border-champagne transition-all duration-300 flex flex-col"
                 >
-                  <div className="card-premium hover:border-forest/50 transition-all">
-                    <div className="relative h-48 rounded-xl overflow-hidden mb-6">
-                      <img
-                        src={project.image}
-                        alt={project.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        loading="lazy"
-                      />
-                      <div className="absolute inset-0 bg-black/20 dark:bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                        <span className="text-white font-medium">View Project</span>
-                      </div>
+                  <div className="relative aspect-[16/10] overflow-hidden bg-sand-beige">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-espresso/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <span className="px-5 py-2.5 rounded-full bg-champagne text-espresso font-semibold text-xs flex items-center gap-2 shadow-lg">
+                        <span>Read Case Study</span>
+                        <ArrowUpRight className="w-3.5 h-3.5" />
+                      </span>
                     </div>
-                    <span className="text-xs font-medium text-forest-dark dark:text-forest-light uppercase tracking-wider mb-2 block">
-                      {project.category}
-                    </span>
-                    <h3 className="text-lg font-semibold text-charcoal dark:text-white mb-3">
-                      {project.title}
-                    </h3>
-                    <p className="text-muted dark:text-gray-400 text-sm leading-relaxed mb-6">
-                      {project.description}
-                    </p>
-                    <div className="flex flex-wrap gap-2">
+                  </div>
+
+                  <div className="p-8 flex-1 flex flex-col justify-between">
+                    <div>
+                      <span className="text-[11px] font-bold uppercase tracking-wider text-caramel mb-2 block">
+                        {project.category}
+                      </span>
+                      <h3 className="text-2xl font-serif font-bold text-dark-text mb-2 group-hover:text-caramel transition-colors">
+                        {project.title}
+                      </h3>
+                      <p className="text-xs sm:text-sm text-dark-mocha/70 leading-relaxed mb-6">
+                        {project.description}
+                      </p>
+                    </div>
+
+                    <div className="flex flex-wrap gap-2 pt-4 border-t border-sand-beige/60">
                       {project.technologies.map((tech) => (
                         <span
                           key={tech}
-                          className="px-2.5 py-1 rounded text-xs font-medium bg-surface dark:bg-charcoal text-charcoal dark:text-white"
+                          className="px-3 py-1 rounded-md text-[11px] font-medium bg-sand-beige/60 text-dark-mocha"
                         >
                           {tech}
                         </span>
                       ))}
                     </div>
                   </div>
-                </a>
-              ))
-            )}
+                </Link>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 bg-deep-coffee text-light-text text-center border-t border-champagne/15">
+        <div className="container-premium max-w-2xl mx-auto space-y-6">
+          <h2 className="text-3xl font-serif font-bold text-light-text">
+            Have a Project You Would Like to Feature Here?
+          </h2>
+          <p className="text-sm text-warm-grey">
+            We partner with startups and companies to launch extraordinary digital flagships.
+          </p>
+          <div className="pt-2">
+            <Link
+              to="/contact"
+              className="px-8 py-3.5 rounded-full bg-gradient-to-r from-champagne via-caramel to-champagne text-espresso font-bold text-xs inline-flex items-center gap-2 shadow-lg hover:shadow-glow-gold transition-all"
+            >
+              <span>Build With GrowthVerse</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </div>
       </section>

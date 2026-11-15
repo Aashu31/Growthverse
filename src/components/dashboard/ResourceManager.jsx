@@ -225,18 +225,18 @@ export function ResourceManager({
   const renderField = (field) => {
     const value = form[field.name] ?? "";
     const commonClass =
-      "w-full px-4 py-3 rounded-xl border border-border dark:border-gray-600 bg-white dark:bg-gray-800 text-primary-text dark:text-white focus:outline-none focus:ring-2 focus:ring-forest/40";
+      "w-full px-4 py-3 rounded-xl border border-gv-border dark:border-gv-border-dark bg-white dark:bg-deep-coffee text-dark-text dark:text-light-text focus:outline-none focus:ring-2 focus:ring-champagne/40";
 
     if (field.type === "checkbox") {
       return (
-        <label className="flex items-center gap-3 px-4 py-3 rounded-xl border border-border dark:border-gray-600 bg-white dark:bg-gray-800 cursor-pointer">
+        <label className="flex items-center gap-3 px-4 py-3 rounded-xl border border-gv-border dark:border-gv-border-dark bg-white dark:bg-deep-coffee cursor-pointer">
           <input
             type="checkbox"
             checked={Boolean(form[field.name])}
             onChange={(event) => setForm((previous) => ({ ...previous, [field.name]: event.target.checked }))}
-            className="h-4 w-4 rounded border-gray-300 text-forest focus:ring-forest"
+            className="h-4 w-4 rounded border-gv-border text-champagne focus:ring-champagne"
           />
-          <span className="text-sm text-primary-text dark:text-white">{field.label}</span>
+          <span className="text-sm text-dark-text dark:text-light-text">{field.label}</span>
         </label>
       );
     }
@@ -297,8 +297,8 @@ export function ResourceManager({
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h2 className="text-h2 text-primary-text dark:text-white">{title}</h2>
-          {description && <p className="text-secondary-text dark:text-gray-300 mt-1">{description}</p>}
+          <h2 className="text-h2 text-dark-text dark:text-light-text">{title}</h2>
+          {description && <p className="text-warm-grey dark:text-dark-mocha/60 mt-1">{description}</p>}
         </div>
         {allowCreate && canManage && (
           <Button variant="primary" onClick={openCreate}>
@@ -329,13 +329,13 @@ export function ResourceManager({
 
       <div className="flex flex-col sm:flex-row gap-3">
         <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-warm-grey" />
           <input
             type="search"
             value={search}
             onChange={(event) => setSearch(event.target.value)}
             placeholder={searchPlaceholder}
-            className="w-full pl-10 pr-4 py-3 rounded-xl border border-border dark:border-gray-600 bg-white dark:bg-gray-800 text-primary-text dark:text-white focus:outline-none focus:ring-2 focus:ring-forest/40"
+            className="w-full pl-10 pr-4 py-3 rounded-xl border border-gv-border dark:border-gv-border-dark bg-white dark:bg-deep-coffee text-dark-text dark:text-light-text focus:outline-none focus:ring-2 focus:ring-champagne/40"
             aria-label={searchPlaceholder}
           />
         </div>
@@ -343,7 +343,7 @@ export function ResourceManager({
           <select
             value={filterValue}
             onChange={(event) => setFilterValue(event.target.value)}
-            className="px-4 py-3 rounded-xl border border-border dark:border-gray-600 bg-white dark:bg-gray-800 text-primary-text dark:text-white focus:outline-none focus:ring-2 focus:ring-forest/40"
+            className="px-4 py-3 rounded-xl border border-gv-border dark:border-gv-border-dark bg-white dark:bg-deep-coffee text-dark-text dark:text-light-text focus:outline-none focus:ring-2 focus:ring-champagne/40"
             aria-label="Filter records"
           >
             <option value="all">All</option>
@@ -354,17 +354,17 @@ export function ResourceManager({
         )}
       </div>
 
-      <div className="overflow-x-auto bg-white dark:bg-dark-secondary rounded-2xl border border-border dark:border-gray-700">
+      <div className="overflow-x-auto bg-white dark:bg-deep-coffee rounded-2xl border border-gv-border dark:border-gv-border-dark">
         <table className="w-full text-left text-sm">
           <thead>
-            <tr className="border-b border-border dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
+            <tr className="border-b border-gv-border dark:border-gv-border-dark bg-sand-beige/50 dark:bg-deep-coffee/50">
               {columns.map((column) => (
-                <th key={column.key} className="px-4 py-3 font-medium text-secondary-text dark:text-gray-400 whitespace-nowrap">
+                <th key={column.key} className="px-4 py-3 font-medium text-warm-grey dark:text-dark-mocha/60 whitespace-nowrap">
                   {column.label}
                 </th>
               ))}
               {(allowEdit || allowDelete) && (
-                <th className="px-4 py-3 font-medium text-secondary-text dark:text-gray-400 text-right">Actions</th>
+                <th className="px-4 py-3 font-medium text-warm-grey dark:text-dark-mocha/60 text-right">Actions</th>
               )}
             </tr>
           </thead>
@@ -377,17 +377,17 @@ export function ResourceManager({
               </tr>
             ) : filteredRows.length === 0 ? (
               <tr>
-                <td colSpan={columns.length + 1} className="py-12 text-center text-secondary-text dark:text-gray-400">
+                <td colSpan={columns.length + 1} className="py-12 text-center text-warm-grey dark:text-dark-mocha/60">
                   {emptyMessage}
                 </td>
               </tr>
             ) : (
               filteredRows.map((row) => (
-                <tr key={row.id} className="border-b border-border dark:border-gray-700 last:border-0 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+                <tr key={row.id} className="border-b border-gv-border dark:border-gv-border-dark last:border-0 hover:bg-sand-beige/50 dark:hover:bg-deep-coffee/50 transition-colors">
                   {columns.map((column) => {
                     const value = column.key.split(".").reduce((accumulator, part) => accumulator?.[part], row);
                     return (
-                      <td key={column.key} className="px-4 py-3 text-secondary-text dark:text-gray-300 align-top">
+                      <td key={column.key} className="px-4 py-3 text-warm-grey dark:text-dark-mocha/60 align-top">
                         {column.rowRender ? column.rowRender(row) : displayValue(value, column)}
                       </td>
                     );
@@ -431,12 +431,12 @@ export function ResourceManager({
             {fields.map((field) => (
               <div key={field.name} className={field.span === "full" ? "md:col-span-2" : ""}>
                 {field.type !== "checkbox" && (
-                  <label htmlFor={field.name} className="block text-sm font-medium text-primary-text dark:text-white mb-1">
+                  <label htmlFor={field.name} className="block text-sm font-medium text-dark-text dark:text-light-text mb-1">
                     {field.label} {field.required && <span className="text-red-500">*</span>}
                   </label>
                 )}
                 {renderField(field)}
-                {field.help && <p className="mt-1 text-xs text-muted dark:text-gray-500">{field.help}</p>}
+                {field.help && <p className="mt-1 text-xs text-warm-grey dark:text-dark-mocha/60">{field.help}</p>}
                 {fieldErrors[field.name] && (
                   <p className="mt-1 text-xs text-red-600 dark:text-red-400">{fieldErrors[field.name]}</p>
                 )}
@@ -444,7 +444,7 @@ export function ResourceManager({
             ))}
           </div>
 
-          <div className="flex justify-end gap-3 pt-4 border-t border-border dark:border-gray-700">
+          <div className="flex justify-end gap-3 pt-4 border-t border-gv-border dark:border-gv-border-dark">
             <Button variant="ghost" onClick={closeModal} disabled={isSubmitting}>Cancel</Button>
             <Button variant="primary" type="submit" loading={isSubmitting}>
               {editingId ? "Save changes" : createLabel}

@@ -9,27 +9,34 @@ export function Button({
   onClick,
   className = "",
   type = "button",
+  asChild = false,
   ...props
 }) {
   const baseStyles =
-    "inline-flex items-center justify-center font-medium rounded-xl transition-all duration-200 transform active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:ring-2 focus:ring-offset-2";
+    "inline-flex items-center justify-center font-sans font-semibold rounded-xl transition-all duration-300 transform active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 gap-2";
 
   const variants = {
     primary:
-      "bg-forest text-white hover:bg-forest-dark focus:ring-forest/50 shadow-sm hover:shadow-forest/25",
+      "bg-gradient-to-r from-champagne to-caramel text-espresso hover:from-light-gold hover:to-champagne focus-visible:ring-champagne/50 shadow-md shadow-champagne/20 hover:shadow-lg hover:shadow-champagne/30 hover:-translate-y-0.5",
     secondary:
-      "bg-white text-primary-text border border-border hover:bg-gray-50 dark:bg-dark-secondary dark:text-white dark:border-gray-600 dark:hover:bg-gray-800 focus:ring-gray-300 dark:focus:ring-gray-600",
+      "bg-transparent text-dark-text border-[1.5px] border-gv-border hover:border-champagne hover:text-caramel hover:bg-champagne/5 focus-visible:ring-champagne/50",
     ghost:
-      "bg-transparent text-primary-text hover:bg-gray-100 dark:hover:bg-gray-800 focus:ring-gray-300 dark:focus:ring-gray-600",
+      "bg-transparent text-dark-text hover:bg-champagne/8 focus-visible:ring-champagne/30",
     outline:
-      "border border-border text-primary-text hover:bg-blue-50 hover:border-blue-600 focus:ring-blue-600/50",
+      "border-[1.5px] border-gv-border text-dark-text hover:bg-champagne/5 hover:border-champagne focus-visible:ring-champagne/50",
     danger:
-      "bg-red-600 text-white hover:bg-red-700 focus:ring-red-600/50 shadow-sm hover:shadow-red-600/25",
+      "bg-status-error text-white hover:bg-red-700 focus-visible:ring-red-600/50 shadow-sm hover:shadow-red-600/25",
+    "primary-dark":
+      "bg-gradient-to-r from-champagne to-caramel text-espresso hover:from-light-gold hover:to-champagne focus-visible:ring-champagne/50 shadow-md shadow-champagne/20",
+    "ghost-dark":
+      "bg-transparent text-light-text hover:bg-white/10 focus-visible:ring-white/30",
+    "secondary-dark":
+      "bg-transparent text-light-text border-[1.5px] border-champagne/20 hover:border-champagne/50 hover:bg-champagne/10 focus-visible:ring-champagne/30",
   };
 
   const sizes = {
     sm: "px-4 py-2 text-sm",
-    md: "px-6 py-3 text-base",
+    md: "px-6 py-3 text-[0.95rem]",
     lg: "px-8 py-4 text-base",
   };
 
@@ -56,12 +63,20 @@ export function Button({
     </svg>
   ) : null;
 
+  // If asChild is true, render children directly with class merge
+  if (asChild && React.isValidElement(children)) {
+    return React.cloneElement(children, {
+      className: `${baseStyles} ${variants[variant] || variants.primary} ${sizes[size]} ${className} ${children.props.className || ""}`.trim(),
+      ...props,
+    });
+  }
+
   return (
     <button
       type={type}
       disabled={disabled || loading}
       onClick={onClick}
-      className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`}
+      className={`${baseStyles} ${variants[variant] || variants.primary} ${sizes[size]} ${className}`}
       {...props}
     >
       {loading ? <span className="flex items-center">{icon}{children}</span> : children}
@@ -101,19 +116,17 @@ export function IconButton({
 
 export function Badge({ children, variant = "default", className = "" }) {
   const variants = {
-    default: "bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-200 border-gray-200 dark:border-gray-600",
-    success:
-      "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 border-green-200 dark:border-green-500",
-    warning:
-      "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400 border-yellow-200 dark:border-yellow-500",
-    error: "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400 border-red-200 dark:border-red-500",
-    info: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400 border-blue-200 dark:border-blue-500",
-    purple: "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400 border-purple-200 dark:border-purple-500",
+    default: "bg-sand-beige/50 text-dark-mocha border-gv-border",
+    success: "bg-green-50 text-green-700 border-green-200",
+    warning: "bg-amber-50 text-amber-700 border-amber-200",
+    error: "bg-red-50 text-red-700 border-red-200",
+    info: "bg-blue-50 text-blue-700 border-blue-200",
+    gold: "bg-champagne/10 text-caramel border-champagne/20",
   };
 
   return (
     <span
-      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${variants[variant]} ${className}`}
+      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium font-sans border ${variants[variant]} ${className}`}
     >
       {children}
     </span>
@@ -125,11 +138,12 @@ export function Card({
   className = "",
   padding = "p-6",
   hover = false,
+  dark = false,
   ...props
 }) {
   return (
     <div
-      className={`bg-white dark:bg-dark-secondary rounded-3xl border border-border shadow-sm ${hover ? "hover:shadow-xl transition-all duration-300 group" : ""} ${padding} ${className}`}
+      className={`${dark ? "card-dark" : "card-premium"} ${hover ? "hover:shadow-card-warm-lg" : ""} ${padding} ${className}`}
       {...props}
     >
       {children}

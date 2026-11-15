@@ -40,18 +40,18 @@ export function Accordion({
         const id = item.id || index;
         const isItemOpen = isOpen(id);
         return (
-          <div key={id} className="border border-border rounded-xl overflow-hidden transition-all">
+          <div key={id} className="border border-gv-border rounded-xl overflow-hidden transition-all">
             <button
               onClick={() => toggleItem(id)}
-              className="w-full flex items-center justify-between px-6 py-4 text-left bg-transparent hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors focus:outline-none"
+              className="w-full flex items-center justify-between px-6 py-4 text-left bg-transparent hover:bg-sand-beige/10 dark:hover:bg-deep-coffee/20 transition-colors focus:outline-none"
               aria-expanded={isItemOpen}
               aria-controls={`accordion-panel-${id}`}
             >
-              <span className="text-primary-text dark:text-white font-medium">
+              <span className="text-dark-text dark:text-light-text font-medium">
                 {item.title}
               </span>
               <svg
-                className={`w-5 h-5 text-secondary-text transition-transform duration-300 ${
+                className={`w-5 h-5 text-warm-grey transition-transform duration-300 ${
                   isItemOpen ? "rotate-180" : ""
                 }`}
                 fill="none"
@@ -64,9 +64,9 @@ export function Accordion({
             {isItemOpen && (
               <div
                 id={`accordion-panel-${id}`}
-                className="px-6 pb-4 border-t border-border dark:border-gray-700"
+                className="px-6 pb-4 border-t border-gv-border dark:border-gv-border-dark"
               >
-                <div className="text-secondary-text dark:text-gray-300 text-sm leading-relaxed">
+                <div className="text-warm-grey dark:text-dark-mocha/60 text-sm leading-relaxed">
                   {item.content}
                 </div>
               </div>
@@ -86,7 +86,7 @@ export function Tabs({
 }) {
   return (
     <div className={className}>
-      <div className="flex gap-8 mb-8 border-b border-border dark:border-gray-700">
+      <div className="flex gap-8 mb-8 border-b border-gv-border dark:border-gv-border-dark">
         {items.map((tab) => (
           <button
             key={tab.id}
@@ -94,7 +94,7 @@ export function Tabs({
             className={`px-6 py-4 text-sm font-medium transition-colors border-b-2 ${
               activeTab === tab.id
                 ? "border-blue-600 text-blue-600 dark:text-electric-blue"
-                : "border-transparent text-secondary-text hover:text-primary-text dark:hover:text-white"
+                : "border-transparent text-warm-grey hover:text-dark-text dark:hover:text-light-text"
             }`}
           >
             {tab.label}

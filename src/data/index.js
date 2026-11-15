@@ -255,72 +255,7 @@ export const TECHNOLOGIES_DATA = {
   ],
 };
 
-export const PORTFOLIO_DATA = [
-  {
-    id: "port-001",
-    title: "E-Commerce Platform for Luna Boutique",
-    slug: "ecommerce-luna-boutique",
-    category: "Websites",
-    description:
-      "A complete e-commerce frontend experience for Luna Boutique, featuring product catalog, shopping cart, and checkout flow with responsive design.",
-    shortDescription:
-      "Responsive e-commerce frontend with cart and checkout.",
-    image:
-      "https://images.unsplash.com/photo-1557821552-17105176677c?w=800&q=80",
-    technologies: ["React", "Tailwind CSS", "JavaScript"],
-    liveUrl: "https://example.com",
-    visibility: true,
-    createdDate: new Date().toISOString(),
-  },
-  {
-    id: "port-002",
-    title: "FinTech Dashboard for Nova Bank",
-    slug: "fintech-dashboard-nova-bank",
-    category: "Web Applications",
-    description:
-      "Business dashboard for Nova Bank with transaction analytics, account management, and real-time data visualization.",
-    shortDescription:
-      "Business dashboard with transaction analytics.",
-    image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
-    technologies: ["React", "Recharts", "Tailwind CSS"],
-    liveUrl: "https://example.com",
-    visibility: true,
-    createdDate: new Date().toISOString(),
-  },
-  {
-    id: "port-003",
-    title: "Brand Identity for Apex Fitness",
-    slug: "brand-identity-apex-fitness",
-    category: "Branding",
-    description:
-      "Complete brand identity system including logo, color palette, typography, and brand guidelines for Apex Fitness.",
-    shortDescription:
-      "Brand identity system with logo and guidelines.",
-    image:
-      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80",
-    technologies: ["Figma", "Illustrator", "Brand Strategy"],
-    liveUrl: "https://example.com",
-    visibility: true,
-    createdDate: new Date().toISOString(),
-  },
-  {
-    id: "port-004",
-    title: "AI Chatbot for Support Desk",
-    slug: "ai-chatbot-support-desk",
-    category: "AI Solutions",
-    description:
-      "AI-powered customer support chatbot interface with natural language processing and ticket escalation workflows.",
-    shortDescription:
-      "AI chatbot interface for customer support.",
-    image:
-      "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&q=80",
-    technologies: ["React", "AI Integration", "JavaScript"],
-    liveUrl: "https://example.com",
-    visibility: true,
-    createdDate: new Date().toISOString(),
-  },
-];
+export const PORTFOLIO_DATA = [];
 
 export const PRICING_DATA = [
   {

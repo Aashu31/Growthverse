@@ -30,7 +30,7 @@ module.exports = {
         use: ["style-loader", "css-loader", "postcss-loader"],
       },
       {
-        test: /\.(png|jpe?g|gif|svg|ico)$/i,
+        test: /\.(png|jpe?g|gif|svg|ico|webp)$/i,
         type: "asset/resource",
         generator: {
           filename: "assets/images/[name].[hash][ext][query]",

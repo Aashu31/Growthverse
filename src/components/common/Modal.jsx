@@ -52,12 +52,12 @@ export function Modal({
         onClick={handleBackdropClick}
       />
       <div
-        className={`fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full ${sizes[size]} bg-white dark:bg-dark-secondary rounded-3xl border border-border shadow-2xl transform transition-all duration-300 z-50 ${className}`}
+        className={`fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full ${sizes[size]} bg-white dark:bg-deep-coffee rounded-3xl border border-gv-border shadow-2xl transform transition-all duration-300 z-50 ${className}`}
         role="document"
       >
         {title && (
-          <div className="flex items-center justify-between px-8 py-6 border-b border-border dark:border-gray-700">
-            <h3 className="text-lg font-semibold text-primary-text dark:text-white" id="modal-title">
+          <div className="flex items-center justify-between px-8 py-6 border-b border-gv-border dark:border-gv-border-dark">
+            <h3 className="text-lg font-semibold text-dark-text dark:text-light-text" id="modal-title">
               {title}
             </h3>
             <Button
@@ -96,7 +96,7 @@ export function ConfirmDialog({
       title={title}
       size="sm"
     >
-      <p className="text-secondary-text dark:text-gray-300 mb-8">{message}</p>
+      <p className="text-warm-grey dark:text-dark-mocha/60 mb-8">{message}</p>
       <div className="flex justify-end gap-3">
         <Button variant="ghost" size="sm" onClick={onCancel}>
           {cancelLabel}

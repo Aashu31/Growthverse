@@ -89,8 +89,8 @@ export default function Settings() {
   return (
     <div className="space-y-8">
       <div>
-        <h2 className="text-h2 text-primary-text dark:text-white">Settings</h2>
-        <p className="text-secondary-text dark:text-gray-300 mt-1">
+        <h2 className="text-h2 text-dark-text dark:text-light-text">Settings</h2>
+        <p className="text-warm-grey dark:text-dark-mocha/60 mt-1">
           Manage dashboard preferences and account security.
         </p>
       </div>
@@ -98,14 +98,14 @@ export default function Settings() {
       <div className="card-premium p-6 md:p-8">
         <div className="flex items-start justify-between gap-4">
           <div>
-            <h3 className="text-lg font-semibold text-primary-text dark:text-white">Appearance</h3>
-            <p className="text-sm text-secondary-text dark:text-gray-400 mt-1">
+            <h3 className="text-lg font-semibold text-dark-text dark:text-light-text">Appearance</h3>
+            <p className="text-sm text-warm-grey dark:text-dark-mocha/60 mt-1">
               Switch between light and dark mode. This preference is stored only on this device.
             </p>
           </div>
           <button
             onClick={toggleTheme}
-            className="w-14 h-7 rounded-full bg-gray-200 dark:bg-gray-700 relative transition-colors duration-300 shrink-0"
+            className="w-14 h-7 rounded-full bg-sand-beige/30 dark:bg-deep-coffee/30 relative transition-colors duration-300 shrink-0"
             aria-label="Toggle dark mode"
             aria-pressed={theme === "dark"}
           >
@@ -114,7 +114,7 @@ export default function Settings() {
                 theme === "dark" ? "translate-x-8" : "translate-x-1"
               }`}
             >
-              {theme === "dark" ? <Moon className="h-3 w-3 text-gray-700" /> : <Sun className="h-3 w-3 text-amber-500" />}
+              {theme === "dark" ? <Moon className="h-3 w-3 text-dark-mocha" /> : <Sun className="h-3 w-3 text-amber-500" />}
             </span>
           </button>
         </div>
@@ -122,12 +122,12 @@ export default function Settings() {
 
       <div className="card-premium p-6 md:p-8">
         <div className="flex items-center gap-3 mb-6">
-          <div className="w-10 h-10 rounded-xl bg-forest-light dark:bg-forest/20 text-forest-dark dark:text-forest-light flex items-center justify-center">
+          <div className="w-10 h-10 rounded-xl bg-sand-beige/30 dark:bg-deep-coffee/20 text-caramel dark:text-light-gold flex items-center justify-center">
             <KeyRound className="h-5 w-5" />
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-primary-text dark:text-white">Change password</h3>
-            <p className="text-sm text-secondary-text dark:text-gray-400">
+            <h3 className="text-lg font-semibold text-dark-text dark:text-light-text">Change password</h3>
+            <p className="text-sm text-warm-grey dark:text-dark-mocha/60">
               All other sessions are revoked when the password changes.
             </p>
           </div>
@@ -190,8 +190,8 @@ export default function Settings() {
               <ShieldCheck className="h-5 w-5" />
             </div>
             <div>
-              <h3 className="text-lg font-semibold text-primary-text dark:text-white">Active sessions</h3>
-              <p className="text-sm text-secondary-text dark:text-gray-400">
+              <h3 className="text-lg font-semibold text-dark-text dark:text-light-text">Active sessions</h3>
+              <p className="text-sm text-warm-grey dark:text-dark-mocha/60">
                 Devices currently signed in to your account.
               </p>
             </div>
@@ -213,26 +213,26 @@ export default function Settings() {
         )}
 
         {sessionState.loading ? (
-          <p className="text-sm text-secondary-text dark:text-gray-400">Loading sessions...</p>
+          <p className="text-sm text-warm-grey dark:text-dark-mocha/60">Loading sessions...</p>
         ) : sessions.length === 0 ? (
-          <p className="text-sm text-secondary-text dark:text-gray-400">No active sessions found.</p>
+          <p className="text-sm text-warm-grey dark:text-dark-mocha/60">No active sessions found.</p>
         ) : (
           <div className="space-y-3">
             {sessions.map((session) => (
               <div
                 key={session.id}
-                className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-xl border border-border dark:border-gray-700 p-4"
+                className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-xl border border-gv-border dark:border-gv-border-dark p-4"
               >
                 <div className="flex items-start gap-3">
-                  <Laptop className="h-5 w-5 text-gray-400 mt-0.5" />
+                  <Laptop className="h-5 w-5 text-warm-grey mt-0.5" />
                   <div>
-                    <p className="text-sm font-medium text-primary-text dark:text-white">
+                    <p className="text-sm font-medium text-dark-text dark:text-light-text">
                       {session.userAgent || "Unknown device"}
                       {session.current && (
                         <span className="ml-2 text-xs font-medium text-green-700 dark:text-green-400">This device</span>
                       )}
                     </p>
-                    <p className="text-xs text-secondary-text dark:text-gray-400">
+                    <p className="text-xs text-warm-grey dark:text-dark-mocha/60">
                       IP {session.ipAddress || "unknown"} · started {formatDate(session.createdAt)} · expires{" "}
                       {formatDate(session.expiresAt)}
                     </p>
@@ -253,8 +253,8 @@ export default function Settings() {
       </div>
 
       <div className="card-premium p-6 md:p-8">
-        <h3 className="text-lg font-semibold text-primary-text dark:text-white mb-2">Account</h3>
-        <p className="text-sm text-secondary-text dark:text-gray-400 mb-4">
+        <h3 className="text-lg font-semibold text-dark-text dark:text-light-text mb-2">Account</h3>
+        <p className="text-sm text-warm-grey dark:text-dark-mocha/60 mb-4">
           Update your personal profile or review your customer account details.
         </p>
         <Link to="/account" className="btn-primary inline-flex px-5 py-2.5">Open my account</Link>

@@ -1,159 +1,139 @@
 import React from "react";
-import { ArrowRight } from "lucide-react";
-import { Button } from "../../components/common/Button";
+import { Link } from "react-router-dom";
+import { GraduationCap, ArrowRight, CheckCircle2, Sparkles, BookOpen, Clock, Users, ShieldCheck } from "lucide-react";
+import { SectionHeader } from "../../components/website/Hero";
 
 const FEATURE_CATEGORIES = [
   {
-    title: "Student Management",
-    description:
-      "Manage student records, enrollment, and academic information in one place.",
+    title: "Student Lifecycle Management",
+    description: "Centralized student profiles, enrollment workflows, and academic histories in a secure cloud database.",
   },
   {
-    title: "Attendance Management",
-    description:
-      "Track student attendance, generate reports, and monitor patterns easily.",
+    title: "Smart Attendance Tracking",
+    description: "Daily automated attendance tracking with SMS/WhatsApp alerts for parents and administrative anomaly alerts.",
   },
   {
-    title: "Academic Management",
-    description:
-      "Organize classes, subjects, timetables, and academic schedules efficiently.",
+    title: "Curriculum & Timetable Planning",
+    description: "Intuitive drag-and-drop schedule builder, teacher allocation, and exam timetable management.",
   },
   {
-    title: "Fee Management",
-    description:
-      "Handle fee collection, invoicing, payment tracking, and financial reports.",
+    title: "Fee Management & Digital Receipts",
+    description: "Automated billing cycles, recurring fee reminders, online payments, and instant accounting ledger exports.",
   },
   {
-    title: "Parent Communication",
-    description:
-      "Stay connected with parents through announcements, messages, and updates.",
+    title: "Parent & Teacher Communication",
+    description: "Transparent broadcast notices, direct messaging, report cards, and parent consultation portals.",
   },
   {
-    title: "Reports & Insights",
-    description:
-      "Generate academic reports, performance analytics, and institutional insights.",
+    title: "Institutional Analytics & Reports",
+    description: "High-level administrative reporting on student retention, staff workloads, and financial metrics.",
   },
 ];
 
 export default function Sarthi() {
   return (
-    <div className="min-h-screen bg-white dark:bg-charcoal-dark text-charcoal dark:text-white">
-      {/* Hero */}
-      <section className="relative bg-charcoal-dark py-24 lg:py-32 text-white overflow-hidden">
-        <div className="container-premium relative">
-          <div className="text-center max-w-3xl mx-auto">
-            <span className="badge-accent mb-4 block">School Management Solution</span>
-            <h1 className="text-h1 mb-6">Sarthi</h1>
-            <p className="text-gray-300 text-lg max-w-xl mx-auto leading-relaxed mb-8">
-              A school management solution presented as a GrowthVerse service
-              offering. Sarthi helps educational institutions digitize their
-              operations and improve administrative efficiency.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="/contact" className="btn-primary">
-                Enquire About Sarthi
-              </a>
-              <a href="/services" className="btn-secondary">
-                View All Services
-              </a>
-            </div>
+    <div className="min-h-screen bg-espresso text-light-text selection:bg-champagne selection:text-espresso">
+      {/* Hero Header */}
+      <section className="relative py-24 lg:py-32 bg-gradient-to-b from-espresso via-deep-coffee to-espresso overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-champagne/10 rounded-full blur-[140px] pointer-events-none" />
+
+        <div className="container-premium relative z-10 text-center max-w-3xl mx-auto space-y-6">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-champagne/10 text-champagne border border-champagne/20">
+            <GraduationCap className="w-4 h-4 text-champagne" />
+            <span>GrowthVerse EdTech Offering</span>
+          </div>
+
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold tracking-tight text-light-text">
+            Sarthi — Modern Digital{" "}
+            <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-champagne via-light-gold to-caramel">
+              School Management.
+            </span>
+          </h1>
+
+          <p className="text-base sm:text-lg text-warm-grey leading-relaxed">
+            A comprehensive school administration platform engineered by GrowthVerse to
+            streamline campus operations, fee collection, and parent engagement.
+          </p>
+
+          <div className="pt-2 flex flex-wrap justify-center gap-4">
+            <Link
+              to="/contact"
+              className="px-8 py-3.5 rounded-full bg-gradient-to-r from-champagne via-caramel to-champagne text-espresso font-bold text-xs inline-flex items-center gap-2 shadow-lg hover:shadow-glow-gold transition-all"
+            >
+              <span>Enquire About Sarthi</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+
+            <Link
+              to="/services"
+              className="px-6 py-3.5 rounded-full border border-champagne/30 text-light-text hover:text-champagne font-semibold text-xs transition-colors"
+            >
+              View All Services
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* About */}
-      <section className="section-padding bg-surface dark:bg-charcoal-dark">
+      {/* Feature Breakdown (Warm Cream Palette) */}
+      <section className="py-20 lg:py-28 bg-[#FFF8ED] text-dark-text relative">
         <div className="container-premium">
-          <div className="text-center mb-16">
-            <h2 className="text-h3 mb-6">About Sarthi</h2>
-            <p className="text-muted dark:text-gray-400 max-w-2xl mx-auto">
-              Feature presentation within the GrowthVerse platform.
-            </p>
-          </div>
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className="space-y-8">
-              <h3 className="text-h3 mb-4">Digital School Management</h3>
-              <p className="text-muted dark:text-gray-400 leading-relaxed mb-6">
-                Sarthi is positioned as a school management solution under the
-                GrowthVerse brand. It presents feature categories that help
-                educational institutions manage their operations through
-                digital tools.
-              </p>
-              <div className="space-y-4">
-                {[
-                  "Student enrollment and record management",
-                  "Attendance tracking and reporting",
-                  "Academic scheduling and subject management",
-                  "Fee collection and payment tracking",
-                  "Parent-teacher communication",
-                  "Performance reports and analytics",
-                ].map((item, idx) => (
-                  <div key={idx} className="flex items-start gap-3">
-                    <div className="w-5 h-5 rounded-full bg-forest-light flex-shrink-0 mt-0.5 flex items-center justify-center text-forest-dark">
-                      <span className="text-[10px]">✓</span>
-                    </div>
-                    <span className="text-muted dark:text-gray-400 text-sm">{item}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="hidden lg:flex justify-center items-center">
-              <div className="w-full h-[400px] rounded-xl border border-dark-border bg-charcoal p-8 relative overflow-hidden flex flex-col justify-center items-center text-center">
-                <div className="w-32 h-32 rounded-full bg-forest/20 flex items-center justify-center mb-6 text-forest-light">
-                  <span className="text-[48px]">🏫</span>
-                </div>
-                <p className="text-gray-400 text-sm">Feature Presentation Only</p>
-                <p className="text-xs text-gray-500 mt-2">
-                  Sarthi software is not developed in this project.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+          <SectionHeader
+            title="Institutional Modules"
+            description="Designed to minimize administrative burden and empower educators, students, and parents."
+            badge="Modules"
+            dark={false}
+          />
 
-      {/* Feature Categories */}
-      <section className="section-padding">
-        <div className="container-premium">
-          <div className="text-center mb-16">
-            <h2 className="text-h3 mb-6">Feature Categories</h2>
-            <p className="text-muted dark:text-gray-400 max-w-2xl mx-auto">
-              Explore the capabilities presented in Sarthi.
-            </p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-6">
-            {FEATURE_CATEGORIES.map((cat, idx) => (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {FEATURE_CATEGORIES.map((module, idx) => (
               <div
-                key={cat.title}
-                className="p-8 rounded-xl border border-border dark:border-dark-border bg-white dark:bg-charcoal-dark hover:shadow-lg transition-all duration-300"
+                key={module.title}
+                className="p-8 rounded-3xl bg-white border border-gv-border shadow-sm hover:shadow-card-warm-lg hover:border-champagne transition-all group flex flex-col justify-between"
               >
-                <div className="w-14 h-14 rounded-xl flex items-center justify-center mb-6 bg-forest-light text-forest-dark">
-                  <span className="text-[20px]">●</span>
+                <div>
+                  <div className="w-12 h-12 rounded-xl bg-sand-beige/60 border border-champagne/30 flex items-center justify-center text-caramel mb-6 group-hover:bg-caramel group-hover:text-white transition-colors">
+                    <BookOpen className="w-6 h-6" />
+                  </div>
+
+                  <h3 className="text-xl font-serif font-bold text-dark-text mb-2 group-hover:text-caramel transition-colors">
+                    {module.title}
+                  </h3>
+
+                  <p className="text-xs sm:text-sm text-dark-mocha/70 leading-relaxed mb-6">
+                    {module.description}
+                  </p>
                 </div>
-                <h4 className="font-semibold text-charcoal dark:text-white mb-3">
-                  {cat.title}
-                </h4>
-                <p className="text-muted dark:text-gray-400 text-sm leading-relaxed">
-                  {cat.description}
-                </p>
+
+                <div className="pt-4 border-t border-sand-beige/60 flex items-center gap-2 text-xs font-semibold text-caramel">
+                  <CheckCircle2 className="w-4 h-4" />
+                  <span>Integrated Module</span>
+                </div>
               </div>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* Contact CTA */}
-      <section className="section-padding bg-charcoal-dark text-white">
-        <div className="container-premium">
-          <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-h2 mb-6">Interested in Sarthi?</h2>
-            <p className="text-gray-300 text-lg mb-10 leading-relaxed">
-              Contact us to learn more about how Sarthi can support your
-              educational institution's digital needs.
-            </p>
-            <a href="/contact" className="btn-primary">
-              Send Enquiry
-            </a>
+          {/* Sarthi Architecture Card */}
+          <div className="mt-20 p-8 sm:p-12 rounded-3xl bg-espresso text-light-text border border-champagne/30 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="space-y-3">
+              <span className="text-xs uppercase tracking-wider text-champagne font-bold block">
+                Custom Institutional Deployment
+              </span>
+              <h3 className="text-2xl sm:text-3xl font-serif font-bold text-light-text">
+                Ready to Digitize Your Educational Institution?
+              </h3>
+              <p className="text-xs sm:text-sm text-warm-grey max-w-xl">
+                We configure Sarthi to match your exact academic schedules, fee structures,
+                and reporting requirements.
+              </p>
+            </div>
+
+            <Link
+              to="/contact"
+              className="px-8 py-3.5 rounded-full bg-gradient-to-r from-champagne to-caramel text-espresso font-bold text-xs inline-flex items-center gap-2 shadow-lg hover:shadow-glow-gold transition-all shrink-0"
+            >
+              <span>Schedule Institutional Demo</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </div>
       </section>

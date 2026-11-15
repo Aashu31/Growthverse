@@ -70,8 +70,8 @@ export default function ProfileManagement() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-h2 text-primary-text dark:text-white">Company Profile</h2>
-        <p className="text-secondary-text dark:text-gray-300 mt-1">
+        <h2 className="text-h2 text-dark-text dark:text-light-text">Company Profile</h2>
+        <p className="text-warm-grey dark:text-dark-mocha/60 mt-1">
           Public company information served by the settings API.
         </p>
       </div>
@@ -96,21 +96,21 @@ export default function ProfileManagement() {
 
       <form onSubmit={handleSubmit} className="card-premium p-6 md:p-8">
         {loading.settings && !settings?.companyName && (
-          <p className="text-sm text-secondary-text dark:text-gray-400 mb-4">Loading profile...</p>
+          <p className="text-sm text-warm-grey dark:text-dark-mocha/60 mb-4">Loading profile...</p>
         )}
         <div className="grid md:grid-cols-2 gap-5">
           {FIELDS.map((field) => {
             const Icon = field.icon;
             const common =
-              "w-full px-4 py-3 rounded-xl border border-border dark:border-gray-600 bg-white dark:bg-gray-800 text-primary-text dark:text-white focus:outline-none focus:ring-2 focus:ring-forest/40 disabled:opacity-60";
+              "w-full px-4 py-3 rounded-xl border border-gv-border dark:border-gv-border-dark bg-white dark:bg-deep-coffee text-dark-text dark:text-light-text focus:outline-none focus:ring-2 focus:ring-champagne/40 disabled:opacity-60";
             return (
               <div key={field.key} className={field.span === "full" ? "md:col-span-2" : ""}>
-                <label htmlFor={`profile-${field.key}`} className="block text-sm font-medium text-primary-text dark:text-white mb-1">
+                <label htmlFor={`profile-${field.key}`} className="block text-sm font-medium text-dark-text dark:text-light-text mb-1">
                   {field.label}
                 </label>
                 <div className="relative">
                   {Icon && (
-                    <Icon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400 pointer-events-none" />
+                    <Icon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-warm-grey pointer-events-none" />
                   )}
                   {field.type === "textarea" ? (
                     <textarea
@@ -139,7 +139,7 @@ export default function ProfileManagement() {
         </div>
 
         {canManage && (
-          <div className="flex justify-end pt-6 mt-6 border-t border-border dark:border-gray-700">
+          <div className="flex justify-end pt-6 mt-6 border-t border-gv-border dark:border-gv-border-dark">
             <Button type="submit" variant="primary" loading={isSaving}>
               <Save className="h-4 w-4 mr-2" /> Save profile
             </Button>

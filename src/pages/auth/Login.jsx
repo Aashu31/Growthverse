@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Mail, Lock, Eye, EyeOff, AlertCircle, CheckCircle2 } from "lucide-react";
+import { Mail, Lock, Eye, EyeOff, AlertCircle, CheckCircle2, ArrowRight } from "lucide-react";
 import { FormInput } from "../../components/common/Forms";
 import { useAuth } from "../../context/AuthContext";
 import { ApiError } from "../../api/client";
@@ -67,15 +67,17 @@ export default function Login() {
   return (
     <div>
       <div className="text-center mb-8">
-        <h1 className="text-2xl font-bold text-charcoal dark:text-white font-display">Welcome back</h1>
-        <p className="text-sm text-muted dark:text-gray-400 mt-2">
-          Sign in to manage your projects and account.
+        <h1 className="text-2xl sm:text-3xl font-bold font-serif text-light-text">
+          Welcome Back
+        </h1>
+        <p className="text-xs sm:text-sm text-warm-grey mt-2">
+          Sign in to access your GrowthVerse account & project portal.
         </p>
       </div>
 
       {verified && (
-        <div className="mb-5 flex items-start gap-3 rounded-xl border border-green-200 bg-green-50 p-4 text-sm text-green-700 dark:border-green-800/40 dark:bg-green-900/20 dark:text-green-300">
-          <CheckCircle2 className="h-5 w-5 mt-0.5 shrink-0" />
+        <div className="mb-5 flex items-start gap-3 rounded-xl border border-green-500/30 bg-green-900/20 p-4 text-xs text-green-300">
+          <CheckCircle2 className="w-4 h-4 mt-0.5 shrink-0 text-green-400" />
           <span>Your email address is verified. You can sign in now.</span>
         </div>
       )}
@@ -83,46 +85,59 @@ export default function Login() {
       {formError && (
         <div
           role="alert"
-          className="mb-5 flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700 dark:border-red-800/40 dark:bg-red-900/20 dark:text-red-300"
+          className="mb-5 flex items-start gap-3 rounded-xl border border-red-500/30 bg-red-900/20 p-4 text-xs text-red-300"
         >
-          <AlertCircle className="h-5 w-5 mt-0.5 shrink-0" />
+          <AlertCircle className="w-4 h-4 mt-0.5 shrink-0 text-red-400" />
           <span>{formError}</span>
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-5" noValidate>
-        <div className="relative">
-          <FormInput
-            label="Email address"
-            type="email"
-            name="email"
-            id="login-email"
-            value={formData.email}
-            onChange={handleChange}
-            error={errors.email}
-            placeholder="you@company.com"
-            autoComplete="email"
-            required
-            className="pl-10"
-          />
-          <Mail className="absolute left-3 top-[42px] h-4 w-4 text-gray-400 pointer-events-none" />
+      <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+        <div>
+          <label
+            htmlFor="login-email"
+            className="block text-xs font-bold uppercase tracking-wider text-warm-grey mb-1.5"
+          >
+            Email Address <span className="text-red-400">*</span>
+          </label>
+          <div className="relative">
+            <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-warm-grey/60 pointer-events-none" />
+            <input
+              id="login-email"
+              name="email"
+              type="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="you@company.com"
+              autoComplete="email"
+              required
+              className={`w-full pl-10 pr-4 py-3 rounded-xl border ${
+                errors.email ? "border-red-500 ring-2 ring-red-500/20" : "border-champagne/30"
+              } bg-espresso text-light-text text-sm focus:outline-none focus:border-champagne focus:ring-2 focus:ring-champagne/20 transition-all`}
+            />
+          </div>
+          {errors.email && (
+            <p className="mt-1 text-xs text-red-400 font-medium">{errors.email}</p>
+          )}
         </div>
 
         <div>
-          <div className="flex items-center justify-between mb-1">
-            <label htmlFor="login-password" className="block text-sm font-medium text-primary-text dark:text-white">
-              Password <span className="text-red-500">*</span>
-            </label>
-            <button
-              type="button"
-              onClick={() => setShowPassword((previous) => !previous)}
-              className="text-xs text-forest-dark dark:text-forest-light hover:underline"
+          <div className="flex items-center justify-between mb-1.5">
+            <label
+              htmlFor="login-password"
+              className="block text-xs font-bold uppercase tracking-wider text-warm-grey"
             >
-              {showPassword ? "Hide" : "Show"}
-            </button>
+              Password <span className="text-red-400">*</span>
+            </label>
+            <Link
+              to="/forgot-password"
+              className="text-xs text-champagne hover:text-light-gold font-medium transition-colors"
+            >
+              Forgot password?
+            </Link>
           </div>
           <div className="relative">
-            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400 pointer-events-none" />
+            <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-warm-grey/60 pointer-events-none" />
             <input
               id="login-password"
               name="password"
@@ -132,32 +147,33 @@ export default function Login() {
               autoComplete="current-password"
               placeholder="Your password"
               required
-              aria-invalid={Boolean(errors.password)}
               className={`w-full pl-10 pr-11 py-3 rounded-xl border ${
-                errors.password ? "border-red-500 ring-red-500/20" : "border-border"
-              } bg-white dark:bg-gray-800 text-primary-text dark:text-white focus:outline-none focus:ring-2 focus:ring-forest/40`}
+                errors.password ? "border-red-500 ring-2 ring-red-500/20" : "border-champagne/30"
+              } bg-espresso text-light-text text-sm focus:outline-none focus:border-champagne focus:ring-2 focus:ring-champagne/20 transition-all`}
             />
             <button
               type="button"
-              onClick={() => setShowPassword((previous) => !previous)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+              onClick={() => setShowPassword((prev) => !prev)}
+              className="absolute right-3.5 top-1/2 -translate-y-1/2 text-warm-grey hover:text-light-text transition-colors"
               aria-label={showPassword ? "Hide password" : "Show password"}
             >
-              {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+              {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
             </button>
           </div>
-          {errors.password && <p className="mt-1 text-xs text-red-600 dark:text-red-400">{errors.password}</p>}
+          {errors.password && (
+            <p className="mt-1 text-xs text-red-400 font-medium">{errors.password}</p>
+          )}
         </div>
 
-        <div className="flex items-center justify-end">
-          <Link to="/forgot-password" className="text-sm text-forest-dark dark:text-forest-light hover:underline">
-            Forgot password?
-          </Link>
+        <div className="pt-2">
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full py-3.5 rounded-xl bg-gradient-to-r from-champagne via-caramel to-champagne bg-[length:200%_auto] hover:bg-[position:right_center] text-espresso font-bold text-sm shadow-md hover:shadow-glow-gold hover:-translate-y-0.5 transition-all duration-300 disabled:opacity-50"
+          >
+            {isSubmitting ? "Signing in..." : "Sign In to GrowthVerse ↗"}
+          </button>
         </div>
-
-        <button type="submit" disabled={isSubmitting} className="btn-primary w-full py-3.5 disabled:opacity-60">
-          {isSubmitting ? "Signing in..." : "Sign In"}
-        </button>
       </form>
     </div>
   );

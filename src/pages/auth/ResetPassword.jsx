@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { AlertCircle, CheckCircle2, KeyRound } from "lucide-react";
+import { AlertCircle, CheckCircle2, KeyRound, ArrowRight } from "lucide-react";
 import { FormInput } from "../../components/common/Forms";
 import { useAuth } from "../../context/AuthContext";
 import { ApiError } from "../../api/client";
@@ -25,15 +25,23 @@ export default function ResetPassword() {
 
   if (!completed && !token) {
     return (
-      <div className="text-center">
-        <div className="w-16 h-16 rounded-2xl bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 flex items-center justify-center mx-auto mb-6">
-          <AlertCircle className="h-8 w-8" />
+      <div className="text-center space-y-4">
+        <div className="w-16 h-16 rounded-2xl bg-red-500/20 text-red-400 border border-red-500/30 flex items-center justify-center mx-auto mb-4">
+          <AlertCircle className="w-8 h-8" />
         </div>
-        <h1 className="text-2xl font-bold text-charcoal dark:text-white font-display mb-3">Invalid reset link</h1>
-        <p className="text-sm text-muted dark:text-gray-400 mb-8">
-          This link is missing its token. Request a new password reset email to continue.
+        <h1 className="text-2xl font-serif font-bold text-light-text">Invalid Reset Link</h1>
+        <p className="text-xs sm:text-sm text-warm-grey">
+          This security link is missing its authorization token. Please request a new recovery email.
         </p>
-        <Link to="/forgot-password" className="btn-primary inline-flex px-6 py-3">Request a new link</Link>
+        <div className="pt-2">
+          <Link
+            to="/forgot-password"
+            className="w-full py-3 rounded-xl bg-gradient-to-r from-champagne to-caramel text-espresso font-bold text-xs inline-flex items-center justify-center gap-2 shadow"
+          >
+            <span>Request New Reset Link</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
       </div>
     );
   }
@@ -68,16 +76,24 @@ export default function ResetPassword() {
 
   if (completed) {
     return (
-      <div className="text-center">
-        <div className="w-16 h-16 rounded-2xl bg-forest-light dark:bg-forest/20 text-forest-dark dark:text-forest-light flex items-center justify-center mx-auto mb-6">
-          <CheckCircle2 className="h-8 w-8" />
+      <div className="text-center space-y-4">
+        <div className="w-16 h-16 rounded-2xl bg-champagne/15 border border-champagne/30 text-champagne flex items-center justify-center mx-auto mb-4">
+          <CheckCircle2 className="w-8 h-8" />
         </div>
-        <h1 className="text-2xl font-bold text-charcoal dark:text-white font-display mb-3">Password reset</h1>
-        <p className="text-sm text-muted dark:text-gray-400 mb-8">
-          Your password has been changed and all existing sessions were revoked. Sign in with your
-          new password.
+        <h1 className="text-2xl font-serif font-bold text-light-text">Password Updated</h1>
+        <p className="text-xs sm:text-sm text-warm-grey">
+          Your credentials have been securely reset. You can now access your account with
+          the new password.
         </p>
-        <Link to="/login" className="btn-primary inline-flex px-6 py-3">Sign in</Link>
+        <div className="pt-2">
+          <Link
+            to="/login"
+            className="w-full py-3 rounded-xl bg-gradient-to-r from-champagne to-caramel text-espresso font-bold text-xs inline-flex items-center justify-center gap-2 shadow"
+          >
+            <span>Sign In Now</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
       </div>
     );
   }
@@ -85,50 +101,57 @@ export default function ResetPassword() {
   return (
     <div>
       <div className="text-center mb-8">
-        <div className="w-14 h-14 rounded-2xl bg-forest-light dark:bg-forest/20 text-forest-dark dark:text-forest-light flex items-center justify-center mx-auto mb-4">
-          <KeyRound className="h-7 w-7" />
+        <div className="w-12 h-12 rounded-xl bg-champagne/15 border border-champagne/30 text-champagne flex items-center justify-center mx-auto mb-3">
+          <KeyRound className="w-6 h-6" />
         </div>
-        <h1 className="text-2xl font-bold text-charcoal dark:text-white font-display">Choose a new password</h1>
-        <p className="text-sm text-muted dark:text-gray-400 mt-2">
-          This link can be used once. All other sessions will be signed out.
+        <h1 className="text-2xl sm:text-3xl font-serif font-bold text-light-text">
+          Set New Password
+        </h1>
+        <p className="text-xs sm:text-sm text-warm-grey mt-2">
+          Choose a strong password to safeguard your account.
         </p>
       </div>
 
       {error && (
         <div
           role="alert"
-          className="mb-5 flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700 dark:border-red-800/40 dark:bg-red-900/20 dark:text-red-300"
+          className="mb-5 flex items-start gap-3 rounded-xl border border-red-500/30 bg-red-900/20 p-4 text-xs text-red-300"
         >
-          <AlertCircle className="h-5 w-5 mt-0.5 shrink-0" />
+          <AlertCircle className="w-4 h-4 mt-0.5 shrink-0 text-red-400" />
           <span>{error}</span>
         </div>
       )}
 
       <form onSubmit={handleSubmit} className="space-y-4" noValidate>
         <FormInput
-          label="New password"
+          label="New Password"
           type="password"
           name="password"
           id="reset-password"
           value={password}
           onChange={(event) => setPassword(event.target.value)}
           error={errors.password}
-          placeholder="New password"
+          placeholder="New secure password"
           autoComplete="new-password"
           required
         />
-        <ul className="grid grid-cols-2 gap-1.5 text-xs">
+
+        <ul className="grid grid-cols-2 gap-1.5 text-[11px] py-1">
           {checks.map((check) => {
             const passed = check.test(password);
             return (
-              <li key={check.label} className={passed ? "text-green-600 dark:text-green-400" : "text-muted dark:text-gray-500"}>
+              <li
+                key={check.label}
+                className={passed ? "text-champagne font-medium" : "text-warm-grey/60"}
+              >
                 {passed ? "✓" : "•"} {check.label}
               </li>
             );
           })}
         </ul>
+
         <FormInput
-          label="Confirm new password"
+          label="Confirm New Password"
           type="password"
           name="confirmPassword"
           id="reset-confirm-password"
@@ -139,9 +162,16 @@ export default function ResetPassword() {
           autoComplete="new-password"
           required
         />
-        <button type="submit" disabled={isSubmitting} className="btn-primary w-full py-3.5 disabled:opacity-60">
-          {isSubmitting ? "Resetting..." : "Reset Password"}
-        </button>
+
+        <div className="pt-2">
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full py-3.5 rounded-xl bg-gradient-to-r from-champagne via-caramel to-champagne bg-[length:200%_auto] hover:bg-[position:right_center] text-espresso font-bold text-sm shadow-md hover:shadow-glow-gold hover:-translate-y-0.5 transition-all duration-300 disabled:opacity-50"
+          >
+            {isSubmitting ? "Updating Password..." : "Update Password ↗"}
+          </button>
+        </div>
       </form>
     </div>
   );

@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { AlertCircle, CheckCircle2, MailCheck } from "lucide-react";
+import { AlertCircle, CheckCircle2, MailCheck, ArrowRight } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
 import { FormInput } from "../../components/common/Forms";
 
@@ -58,23 +58,31 @@ export default function VerifyEmail() {
 
   if (state === "verifying") {
     return (
-      <div className="text-center py-6">
-        <div className="animate-spin rounded-full border-2 border-forest border-t-transparent h-10 w-10 mx-auto mb-6" />
-        <h1 className="text-2xl font-bold text-charcoal dark:text-white font-display mb-2">Verifying your email</h1>
-        <p className="text-sm text-muted dark:text-gray-400">One moment while we validate your link.</p>
+      <div className="text-center py-6 space-y-4">
+        <div className="animate-spin rounded-full border-2 border-champagne border-t-transparent h-10 w-10 mx-auto mb-4" />
+        <h1 className="text-2xl font-serif font-bold text-light-text">Validating Security Token</h1>
+        <p className="text-xs sm:text-sm text-warm-grey">Please wait while your email token is verified...</p>
       </div>
     );
   }
 
   if (state === "success") {
     return (
-      <div className="text-center">
-        <div className="w-16 h-16 rounded-2xl bg-forest-light dark:bg-forest/20 text-forest-dark dark:text-forest-light flex items-center justify-center mx-auto mb-6">
-          <CheckCircle2 className="h-8 w-8" />
+      <div className="text-center space-y-4">
+        <div className="w-16 h-16 rounded-2xl bg-champagne/15 border border-champagne/30 text-champagne flex items-center justify-center mx-auto mb-4">
+          <CheckCircle2 className="w-8 h-8" />
         </div>
-        <h1 className="text-2xl font-bold text-charcoal dark:text-white font-display mb-3">Email verified</h1>
-        <p className="text-sm text-muted dark:text-gray-400 mb-8">{message}</p>
-        <Link to="/login?verified=1" className="btn-primary inline-flex px-6 py-3">Sign in</Link>
+        <h1 className="text-2xl font-serif font-bold text-light-text">Email Verified</h1>
+        <p className="text-xs sm:text-sm text-warm-grey">{message}</p>
+        <div className="pt-4">
+          <Link
+            to="/login?verified=1"
+            className="w-full py-3 rounded-xl bg-gradient-to-r from-champagne to-caramel text-espresso font-bold text-xs inline-flex items-center justify-center gap-2 shadow"
+          >
+            <span>Sign In to Account</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
       </div>
     );
   }
@@ -82,29 +90,29 @@ export default function VerifyEmail() {
   return (
     <div>
       <div className="text-center mb-8">
-        <div className="w-16 h-16 rounded-2xl bg-amber-50 dark:bg-amber-900/20 text-amber-600 dark:text-amber-400 flex items-center justify-center mx-auto mb-4">
-          {state === "missing" ? <MailCheck className="h-8 w-8" /> : <AlertCircle className="h-8 w-8" />}
+        <div className="w-12 h-12 rounded-xl bg-champagne/15 border border-champagne/30 text-champagne flex items-center justify-center mx-auto mb-3">
+          {state === "missing" ? <MailCheck className="w-6 h-6" /> : <AlertCircle className="w-6 h-6" />}
         </div>
-        <h1 className="text-2xl font-bold text-charcoal dark:text-white font-display">
-          {state === "missing" ? "Verification required" : "Link not valid"}
+        <h1 className="text-2xl sm:text-3xl font-serif font-bold text-light-text">
+          {state === "missing" ? "Verification Required" : "Link Expired or Invalid"}
         </h1>
-        <p className="text-sm text-muted dark:text-gray-400 mt-2">
+        <p className="text-xs sm:text-sm text-warm-grey mt-2">
           {state === "missing"
-            ? "Open the verification link from your email, or request a new one below."
+            ? "Open the verification link sent to your inbox, or request a fresh link below."
             : message}
         </p>
       </div>
 
       {resendState.error && (
-        <p className="mb-4 text-sm text-red-600 dark:text-red-400" role="alert">{resendState.error}</p>
+        <p className="mb-4 text-xs text-red-400 font-medium" role="alert">{resendState.error}</p>
       )}
       {resendState.message && (
-        <p className="mb-4 text-sm text-green-700 dark:text-green-400" role="status">{resendState.message}</p>
+        <p className="mb-4 text-xs text-green-300 font-medium" role="status">{resendState.message}</p>
       )}
 
       <form onSubmit={handleResend} className="space-y-4">
         <FormInput
-          label="Email address"
+          label="Registered Email Address"
           type="email"
           name="email"
           id="resend-email"
@@ -114,9 +122,16 @@ export default function VerifyEmail() {
           autoComplete="email"
           required
         />
-        <button type="submit" disabled={resendState.submitting} className="btn-primary w-full py-3.5 disabled:opacity-60">
-          {resendState.submitting ? "Sending..." : "Resend verification email"}
-        </button>
+
+        <div className="pt-2">
+          <button
+            type="submit"
+            disabled={resendState.submitting}
+            className="w-full py-3.5 rounded-xl bg-gradient-to-r from-champagne via-caramel to-champagne bg-[length:200%_auto] hover:bg-[position:right_center] text-espresso font-bold text-sm shadow-md hover:shadow-glow-gold hover:-translate-y-0.5 transition-all duration-300 disabled:opacity-50"
+          >
+            {resendState.submitting ? "Sending..." : "Resend Verification Link ↗"}
+          </button>
+        </div>
       </form>
     </div>
   );
