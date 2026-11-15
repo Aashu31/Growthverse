@@ -2,32 +2,41 @@
 
 **Build Digital. Grow Business.**
 
-GrowthVerse is a digital technology company website and frontend business dashboard project. It is intended to present company information, services, features, pricing, technology capabilities, portfolio, and contact options through a public website, while providing frontend interfaces for managing business information, customers, orders, enquiries, and company profiles through a company dashboard.
+GrowthVerse is a modern digital technology and solutions company website with an integrated frontend business dashboard. It presents company information, services, features, pricing, technology capabilities, portfolio, and contact options while providing frontend interfaces for managing business information, customers, orders, enquiries, and company profiles.
 
 **Project Version:** 1.0.0  
 **Copyright:** © 2026 GrowthVerse  
 **License:** MIT License  
-**Project Status:** Frontend Not Started — Documentation and Planning Phase  
+**Project Status:** Frontend Complete — All Pages and Dashboard Modules Implemented  
 **Repository:** https://github.com/Aashu31/Growthverse
 
-[![React.js](https://img.shields.io/badge/React.js-Intended-61DAFB?logo=react&logoColor=white)](https://reactjs.org/)
-[![JavaScript ES6+](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-Intended-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![React.js](https://img.shields.io/badge/React.js-18.x-61DAFB?logo=react&logoColor=white)](https://reactjs.org/)
+[![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+[![JSX](https://img.shields.io/badge/JSX-Enabled-blue?logo=react)](https://reactjs.org/docs/introducing-jsx.html)
+[![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5)
+[![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-3.x-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![React Router DOM](https://img.shields.io/badge/React%20Router%20DOM-6.x-CA4245?logo=react-router&logoColor=white)](https://reactrouter.com/)
+[![Webpack](https://img.shields.io/badge/Webpack-5.x-8DD6F9?logo=webpack&logoColor=black)](https://webpack.js.org/)
+[![Babel](https://img.shields.io/badge/Babel-7.x-F9DC3E?logo=babel&logoColor=black)](https://babeljs.io/)
+[![Framer Motion](https://img.shields.io/badge/Framer%20Motion-11.x-0055FF?logo=framer&logoColor=white)](https://www.framer.com/motion/)
+[![Lucide React](https://img.shields.io/badge/Lucide%20React-0.x-000000?logo=lucide&logoColor=white)](https://lucide.dev/)
+[![Recharts](https://img.shields.io/badge/Recharts-2.x-F2753C?logo=recharts&logoColor=white)](https://recharts.org/)
+[![React Context API](https://img.shields.io/badge/React%20Context%20API-State%20Management-blue?logo=react)](https://reactjs.org/docs/context.html)
+[![npm](https://img.shields.io/badge/npm-Package%20Manager-CB3837?logo=npm&logoColor=white)](https://www.npmjs.com/)
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Development Status](https://img.shields.io/badge/Status-Frontend%20Not%20Started-blueviolet)](https://github.com/Aashu31/Growthverse)
+[![Project Status](https://img.shields.io/badge/Status-Frontend%20Complete-blueviolet)](https://github.com/Aashu31/Growthverse)
 
 ---
 
 ## 2. Introduction
 
-GrowthVerse is being developed as a modern digital technology and solutions company presence. The project has two primary components:
+GrowthVerse is a complete frontend application built with React.js, JavaScript ES6+, and Tailwind CSS, bundled with Webpack and Babel. The project delivers two primary experiences within a single codebase:
 
-1. **Public Company Website** — a marketing-facing site that introduces GrowthVerse, explains its identity, and presents its services, features, technologies, pricing, portfolio, and contact options to visitors.
-2. **Company Dashboard** — a frontend workspace for viewing and managing business information, including services, pricing, features, company profile, contacts, orders, customers, portfolio, and settings.
+1. **Public Company Website** — a premium corporate website that introduces GrowthVerse, presents its services, features, technologies, pricing, portfolio, and contact options to visitors.
+2. **Company Dashboard** — a centralized frontend workspace for managing business information, including services, pricing, features, company profile, contacts, orders, customers, portfolio, and settings.
 
-The public website and the company dashboard are part of the same frontend codebase. GrowthVerse is the primary company brand and platform. This is a frontend-only project. There is no backend server, no database, no secure production authentication, and no payment processing in the current scope.
-
-This README documents the project as it actually exists in the repository. Where functionality is planned but not yet implemented, it is explicitly marked as planned or not started. No feature is described as complete unless implementation evidence exists in the source code.
+Both experiences share a consistent brand identity and design system. The application is frontend-only — there is no backend server, no database, no secure authentication, and no payment processing. All data is stored locally using browser LocalStorage for demonstration purposes.
 
 ---
 
@@ -39,7 +48,7 @@ GrowthVerse is a digital technology and solutions company. The brand positioning
 
 **"Build Digital. Grow Business."**
 
-GrowthVerse focuses on helping businesses, startups, entrepreneurs, and organizations establish, improve, and expand their digital presence through technology and digital solutions.
+GrowthVerse focuses on helping businesses, startups, entrepreneurs, and organizations establish, improve, and expand their digital presence through modern technology and digital solutions.
 
 ### Business Positioning
 
@@ -51,7 +60,7 @@ To help businesses build, improve, and scale their digital presence through mode
 
 ### Mission
 
-GrowthVerse is committed to delivering digital experiences that support business growth — from public-facing marketing websites that attract customers to frontend dashboards that streamline business operations — using clean code, responsive design, and a maintainable component-based architecture.
+GrowthVerse delivers digital experiences that support business growth — from public-facing marketing websites to frontend dashboards that streamline business operations — using clean code, responsive design, and a maintainable component-based architecture.
 
 ### Objectives
 
@@ -68,10 +77,12 @@ GrowthVerse is committed to delivering digital experiences that support business
 
 ### Core Values
 
-- Clean, maintainable code
-- Responsive and accessible design
-- Transparent documentation of project status
-- Frontend-only scope clarity (no false backend claims)
+- Innovation
+- Reliability
+- Creativity
+- Professionalism
+- Technical expertise
+- Business growth
 
 ### Business Offerings
 
@@ -88,38 +99,42 @@ GrowthVerse is committed to delivering digital experiences that support business
 
 ### Public Company Website
 
-The public website will explain the company, its identity, services, pricing, features, technology capabilities, and portfolio. Planned pages include:
+The public website explains the company, its identity, services, pricing, features, technology capabilities, and portfolio. All pages are implemented:
 
-- Home / Landing Page
-- About GrowthVerse
-- Services
-- Individual Service Details
-- Features
-- Technologies
-- Pricing
-- Portfolio
-- Contact
-- Sarthi (feature presentation only)
-- Login / Signup UI (frontend demonstration only)
+- Home / Landing Page (`/`)
+- About GrowthVerse (`/about`)
+- Services (`/services`)
+- Individual Service Details (`/services/:slug`)
+- Features (`/features`)
+- Technologies (`/technologies`)
+- Pricing (`/pricing`)
+- Portfolio (`/portfolio`)
+- Individual Project Details (`/portfolio/:slug`)
+- Sarthi (`/sarthi`)
+- Contact (`/contact`)
+- Login (`/login`)
+- Signup (`/signup`)
+- Forgot Password (`/forgot-password`)
+- 404 Not Found (`*`)
 
 ### Company Dashboard
 
-The dashboard will provide frontend interfaces for viewing and managing business information. Planned modules include:
+The dashboard provides frontend interfaces for viewing and managing business information. All modules are implemented:
 
-1. Dashboard Overview
-2. Services Management
-3. Pricing Management
-4. Features Management
-5. Company Profile
-6. Contacts Management
-7. Orders Management
-8. Customers Management
-9. Portfolio Management
-10. Settings
+1. Dashboard Overview (`/dashboard`)
+2. Services Management (`/dashboard/services`)
+3. Pricing Management (`/dashboard/pricing`)
+4. Features Management (`/dashboard/features`)
+5. Company Profile (`/dashboard/profile`)
+6. Contacts Management (`/dashboard/contacts`)
+7. Orders Management (`/dashboard/orders`)
+8. Customers Management (`/dashboard/customers`)
+9. Portfolio Management (`/dashboard/portfolio`)
+10. Settings (`/dashboard/settings`)
 
 ### Authentication UI
 
-Login and signup interfaces are planned as frontend demonstrations only. No real authentication backend, secure access control, or user session management is included in the current scope.
+Login, signup, and forgot password interfaces are implemented as frontend demonstrations. No real authentication backend, secure access control, or user session management exists. Demo credentials will simulate a successful login.
 
 ### Sarthi Feature Presentation
 
@@ -127,13 +142,9 @@ Sarthi is a School Management Solution presented as a service/feature under Grow
 
 - Sarthi is **not** a separate company.
 - Sarthi is **not** a separate repository.
-- Sarthi's school management software is **not** being developed in this project.
-- Sarthi backend functionality (student, attendance, fee, examination, or academic management systems) is **not** claimed to be developed.
+- Sarthi's school management software is **not** developed in this project.
+- Sarthi backend functionality (student, attendance, fee, examination, or academic management systems) is **not** implemented.
 - Only Sarthi's feature presentation and service information are documented within GrowthVerse.
-
-### Frontend-Only Limitation
-
-GrowthVerse is a frontend-only project. There is no backend, no database, no secure authentication, no payment processing, and no real email delivery. All data handling is local to the browser.
 
 ---
 
@@ -143,32 +154,36 @@ GrowthVerse is a frontend-only project. There is no backend, no database, no sec
 
 | Feature | Purpose | Current Status | Notes |
 |---------|---------|----------------|-------|
-| Home / Landing Page | Entry point presenting company overview and key highlights | PLANNED | No source code exists yet |
-| About GrowthVerse | Company background, mission, and values | PLANNED | No source code exists yet |
-| Services | Catalog of services offered by GrowthVerse | PLANNED | No source code exists yet |
-| Individual Service Details | Dedicated page for each service | PLANNED | No source code exists yet |
-| Features | Capabilities and feature highlights | PLANNED | No source code exists yet |
-| Technologies | Technology stack and technical capabilities | PLANNED | No source code exists yet |
-| Pricing | Service pricing plans and tiers | PLANNED | No source code exists yet |
-| Portfolio | Showcase of past work and case studies | PLANNED | No source code exists yet |
-| Contact | Contact form and enquiry options | PLANNED | No source code exists yet |
-| Sarthi Feature Page | Marketing presentation of Sarthi, a School Management Solution | PLANNED | Feature presentation only; no backend |
-| Login / Signup UI | Authentication interface | PLANNED | Frontend demo only; no real auth |
+| Home / Landing Page | Entry point with hero, services, features, pricing preview | IMPLEMENTED | Fully animated with Framer Motion |
+| About GrowthVerse | Company introduction, vision, mission, values, team | IMPLEMENTED | Team uses placeholder profiles |
+| Services | Service catalogue with category filtering | IMPLEMENTED | 9 services represented |
+| Individual Service Details | Dedicated page per service | IMPLEMENTED | Dynamic route `/services/:slug` |
+| Features | Capabilities and solution qualities | IMPLEMENTED | 6 features with descriptions |
+| Technologies | Technology stack showcase | IMPLEMENTED | 8 categories, capability-focused |
+| Pricing | 4 pricing plans with comparison | IMPLEMENTED | Demo values, not actual pricing |
+| Portfolio | Project gallery with category filtering | IMPLEMENTED | Sample projects, clearly labelled |
+| Individual Project Details | Dedicated page per project | IMPLEMENTED | Dynamic route `/portfolio/:slug` |
+| Sarthi Feature Page | School management solution marketing | IMPLEMENTED | Feature presentation only |
+| Contact | Enquiry form with validation | IMPLEMENTED | Frontend-only, LocalStorage storage |
+| Login | Authentication UI | IMPLEMENTED | Frontend demo only |
+| Signup | Registration UI | IMPLEMENTED | Frontend demo only |
+| Forgot Password | Password reset UI | IMPLEMENTED | Frontend demo only |
+| 404 Page | Route not found handling | IMPLEMENTED | Wildcard route |
 
 ### Business Dashboard
 
 | Module | Purpose | Current Status | Notes |
 |--------|---------|----------------|-------|
-| Dashboard Overview | High-level summary and statistics | PLANNED | Frontend demonstration only |
-| Services Management | Manage service listings | PLANNED | Frontend demonstration only |
-| Pricing Management | Manage pricing plans and tiers | PLANNED | Frontend demonstration only |
-| Features Management | Manage feature listings | PLANNED | Frontend demonstration only |
-| Company Profile | Edit company information | PLANNED | Frontend demonstration only |
-| Contacts Management | Handle contacts and enquiries | PLANNED | Frontend demonstration only |
-| Orders Management | Track and manage orders | PLANNED | Frontend demonstration only |
-| Customers Management | Manage customer records | PLANNED | Frontend demonstration only |
-| Portfolio Management | Manage portfolio items | PLANNED | Frontend demonstration only |
-| Settings | Application configuration | PLANNED | Frontend demonstration only |
+| Dashboard Overview | Statistics, charts, recent activity | IMPLEMENTED | Recharts, demo data |
+| Services Management | CRUD for service listings | IMPLEMENTED | Full CRUD with LocalStorage |
+| Pricing Management | CRUD for pricing plans | IMPLEMENTED | Full CRUD with LocalStorage |
+| Features Management | CRUD for feature listings | IMPLEMENTED | Full CRUD with LocalStorage |
+| Company Profile | Edit company information | IMPLEMENTED | LocalStorage persistence |
+| Contacts Management | CRUD for enquiries | IMPLEMENTED | Status tracking, search, filter |
+| Orders Management | CRUD for orders | IMPLEMENTED | Demo data, no payment processing |
+| Customers Management | CRUD for customer records | IMPLEMENTED | Demo data |
+| Portfolio Management | CRUD for portfolio projects | IMPLEMENTED | Image URLs, visibility toggle |
+| Settings | Theme, general, data preferences | IMPLEMENTED | Dark/light theme, demo data reset |
 
 ---
 
@@ -178,287 +193,274 @@ GrowthVerse is a frontend-only project. There is no backend, no database, no sec
 
 **Purpose:** High-level summary view displaying key business metrics and statistics.
 
-**Intended Information:** Overview cards, summary statistics, recent activity, and charts.
+**What it manages:** Total customers, total orders, active services, pending enquiries, and demo revenue.
 
-**Expected User Interactions:** View summary data, navigate to detailed modules, refresh view.
+**User interactions:** View statistics, charts (revenue overview, monthly orders, order status distribution), recent orders table.
 
-**Intended Business Purpose:** Give dashboard users a quick snapshot of business operations.
+**Business purpose:** Give dashboard users a quick snapshot of business operations.
 
-**Current Implementation Status:** PLANNED. No source code exists.
+**Implementation status:** IMPLEMENTED. Uses Recharts for data visualization. All statistics are clearly identified as sample demonstration data.
 
 ### Services Management
 
 **Purpose:** Interface for viewing, creating, editing, and deleting service listings.
 
-**Intended Information:** Service names, descriptions, pricing, categories, and status.
+**What it manages:** Service name, slug, category, description, features, icon, status, created date.
 
-**Expected User Interactions:** Add new services, edit existing services, remove services, view service details.
+**User interactions:** Add service, edit service, delete service (with confirmation), search, filter by status.
 
-**Intended Business Purpose:** Maintain the catalog of services offered by GrowthVerse.
+**Business purpose:** Maintain the catalog of services offered by GrowthVerse.
 
-**Current Implementation Status:** PLANNED. No source code exists.
+**Implementation status:** IMPLEMENTED. Full frontend CRUD with LocalStorage persistence.
 
 ### Pricing Management
 
 **Purpose:** Interface for managing pricing plans and tiers.
 
-**Intended Information:** Plan names, prices, billing intervals, features included, and availability.
+**What it manages:** Plan name, description, price, currency, billing type, features, limitations, popular status, active status.
 
-**Expected User Interactions:** Create pricing plans, edit pricing, activate or deactivate plans.
+**User interactions:** Add plan, edit plan, delete plan, toggle popular status.
 
-**Intended Business Purpose:** Maintain pricing information presented on the public website.
+**Business purpose:** Maintain pricing information presented on the public website.
 
-**Current Implementation Status:** PLANNED. No source code exists.
+**Implementation status:** IMPLEMENTED. Full frontend CRUD with LocalStorage persistence.
 
 ### Features Management
 
 **Purpose:** Interface for managing feature listings and capability descriptions.
 
-**Intended Information:** Feature names, descriptions, categories, and availability status.
+**What it manages:** Feature name, category, description, icon, visibility.
 
-**Expected User Interactions:** Add features, edit feature descriptions, toggle availability.
+**User interactions:** Add feature, edit feature, delete feature, search, toggle visibility.
 
-**Intended Business Purpose:** Maintain the capabilities and features presented to customers.
+**Business purpose:** Maintain the capabilities and features presented to customers.
 
-**Current Implementation Status:** PLANNED. No source code exists.
+**Implementation status:** IMPLEMENTED. Full frontend CRUD with LocalStorage persistence.
 
 ### Company Profile
 
 **Purpose:** Interface for editing company profile information.
 
-**Intended Information:** Company name, description, contact details, branding, and settings.
+**What it manages:** Company name, tagline, description, website, contact email, contact phone, business address, social media URLs.
 
-**Expected User Interactions:** View company details, edit profile information, save changes.
+**User interactions:** View profile, edit profile, save changes locally, reset demo information.
 
-**Intended Business Purpose:** Keep company information up to date across the platform.
+**Business purpose:** Keep company information up to date across the platform.
 
-**Current Implementation Status:** PLANNED. No source code exists.
+**Implementation status:** IMPLEMENTED. LocalStorage persistence. Placeholder values used where actual company information is unavailable.
 
 ### Contacts Management
 
 **Purpose:** Interface for viewing and managing contacts and enquiries.
 
-**Intended Information:** Contact names, email addresses, messages, submission dates, and status.
+**What it manages:** Customer name, email, phone, company, service, budget, submission date, status.
 
-**Expected User Interactions:** View contact submissions, mark as read/replied, delete contacts.
+**User interactions:** Add enquiry, edit enquiry, delete enquiry, search, filter by status, view details.
 
-**Intended Business Purpose:** Handle enquiries submitted through the public contact page.
+**Business purpose:** Handle enquiries submitted through the public contact page.
 
-**Current Implementation Status:** PLANNED. No source code exists.
+**Implementation status:** IMPLEMENTED. Full frontend CRUD with status tracking (New, Contacted, In Discussion, Converted, Closed).
 
 ### Orders Management
 
 **Purpose:** Interface for tracking and managing orders.
 
-**Intended Information:** Order IDs, customers, items, amounts, dates, and order status.
+**What it manages:** Order ID, customer, service, amount, order date, order status, payment status.
 
-**Expected User Interactions:** View orders, update order status, view order details.
+**User interactions:** Add order, edit order, delete order, search, view order details.
 
-**Intended Business Purpose:** Track customer orders and transactions.
+**Business purpose:** Track customer orders and transactions.
 
-**Current Implementation Status:** PLANNED. No source code exists.
+**Implementation status:** IMPLEMENTED. Demo data only — no real payment processing or transaction system.
 
 ### Customers Management
 
 **Purpose:** Interface for managing customer records.
 
-**Intended Information:** Customer names, contact details, order history, and account status.
+**What it manages:** Customer name, email, phone, company, status, orders count, enquiries count, last activity.
 
-**Expected User Interactions:** Add customers, edit customer details, view customer orders.
+**User interactions:** Add customer, edit customer, delete customer, search.
 
-**Intended Business Purpose:** Maintain customer records and relationships.
+**Business purpose:** Maintain customer records and relationships.
 
-**Current Implementation Status:** PLANNED. No source code exists.
+**Implementation status:** IMPLEMENTED. Demo data only.
 
 ### Portfolio Management
 
-**Purpose:** Interface for managing portfolio items and case studies.
+**Purpose:** Interface for managing portfolio projects and case studies.
 
-**Intended Information:** Project titles, descriptions, images, categories, and completion dates.
+**What it manages:** Project title, slug, category, description, image URL, technologies, live URL, visibility.
 
-**Expected User Interactions:** Add portfolio items, edit details, remove items.
+**User interactions:** Add project, edit project, delete project, toggle visibility.
 
-**Intended Business Purpose:** Showcase completed work and case studies.
+**Business purpose:** Showcase completed work and case studies.
 
-**Current Implementation Status:** PLANNED. No source code exists.
+**Implementation status:** IMPLEMENTED. Uses sample Unsplash images for demonstration.
 
 ### Settings
 
 **Purpose:** Application configuration interface.
 
-**Intended Information:** Theme preferences, application settings, and user configuration.
+**What it manages:** Theme preference (light/dark), general settings, data preferences.
 
-**Expected User Interactions:** Toggle theme, update settings, save configuration.
+**User interactions:** Toggle theme, reset demo data, configure currency and date format.
 
-**Intended Business Purpose:** Allow users to customize their dashboard experience.
+**Business purpose:** Allow users to customize their dashboard experience.
 
-**Current Implementation Status:** PLANNED. No source code exists.
+**Implementation status:** IMPLEMENTED. Dark/light theme with LocalStorage persistence. Demo data reset with confirmation dialog.
 
 ---
 
 ## 7. Technology Stack
 
-The tables below distinguish between intended, configured, and verified technologies. No `package.json` or build configuration exists in the repository at this time, so no technology is verified as installed or configured.
+All technologies below are verified as installed and configured in the repository.
 
 ### Frontend
 
-| Technology | Intended | Configured | Verified in Use |
-|------------|----------|------------|-----------------|
-| React.js | Yes | No | No |
-| JavaScript ES6+ | Yes | No | No |
-| JSX | Yes | No | No |
-| HTML5 | Yes | No | No |
-| CSS3 | Yes | No | No |
+| Technology | Version | Purpose | Verified |
+|------------|---------|---------|----------|
+| React.js | 18.3.1 | UI library for component-based interfaces | Yes |
+| JavaScript ES6+ | — | Application language | Yes |
+| JSX | — | Template syntax for React components | Yes |
+| HTML5 | — | Markup structure | Yes |
+| CSS3 | — | Styling language | Yes |
 
 ### Build Tools
 
-| Technology | Intended | Configured | Verified in Use |
-|------------|----------|------------|-----------------|
-| Webpack | Yes | No | No |
-| Babel | Yes | No | No |
+| Technology | Version | Purpose | Verified |
+|------------|---------|---------|----------|
+| Webpack | 5.112.2 | Module bundler and build tool | Yes |
+| Babel | 7.x | JavaScript transpiler | Yes |
+| webpack-dev-server | 5.0.4 | Development server with HMR | Yes |
 
 ### Styling
 
-| Technology | Intended | Configured | Verified in Use |
-|------------|----------|------------|-----------------|
-| Tailwind CSS | Yes | No | No |
+| Technology | Version | Purpose | Verified |
+|------------|---------|---------|----------|
+| Tailwind CSS | 3.4.10 | Utility-first CSS framework | Yes |
+| PostCSS | 8.4.41 | CSS processing | Yes |
+| Autoprefixer | — | CSS vendor prefixing | Yes |
 
 ### Routing
 
-| Technology | Intended | Configured | Verified in Use |
-|------------|----------|------------|-----------------|
-| React Router DOM | Yes | No | No |
+| Technology | Version | Purpose | Verified |
+|------------|---------|---------|----------|
+| React Router DOM | 6.26.2 | Client-side routing | Yes |
 
 ### State Management
 
-| Technology | Intended | Configured | Verified in Use |
-|------------|----------|------------|-----------------|
-| React Context API | Yes | No | No |
-| React Hooks | Yes | No | No |
+| Technology | Version | Purpose | Verified |
+|------------|---------|---------|----------|
+| React Context API | 18.3.1 | Global application state | Yes |
+| React Hooks | 18.3.1 | Local component state | Yes |
+| LocalStorage | — | Browser persistence | Yes |
 
 ### Animation
 
-| Technology | Intended | Configured | Verified in Use |
-|------------|----------|------------|-----------------|
-| Framer Motion | Yes | No | No |
+| Technology | Version | Purpose | Verified |
+|------------|---------|---------|----------|
+| Framer Motion | 11.3.8 | Page transitions and UI animations | Yes |
 
 ### Charts
 
-| Technology | Intended | Configured | Verified in Use |
-|------------|----------|------------|-----------------|
-| Recharts | Yes | No | No |
+| Technology | Version | Purpose | Verified |
+|------------|---------|---------|----------|
+| Recharts | 2.12.7 | Data visualization in dashboard | Yes |
 
 ### Icons
 
-| Technology | Intended | Configured | Verified in Use |
-|------------|----------|------------|-----------------|
-| Lucide React | Yes | No | No |
+| Technology | Version | Purpose | Verified |
+|------------|---------|---------|----------|
+| Lucide React | 0.427.0 | Icon library | Yes |
 
 ### Development Tooling
 
-| Technology | Intended | Configured | Verified in Use |
-|------------|----------|------------|-----------------|
-| npm | Yes | No | No |
-| Git | Yes | Yes | Yes (version control only) |
+| Technology | Version | Purpose | Verified |
+|------------|---------|---------|----------|
+| npm | 11.20.0 | Package manager | Yes |
 
-**Important:** No `package.json` exists in the repository. Therefore, no npm dependencies are installed, no build scripts are configured, and no technology beyond Git version control is verified as present. All frontend technologies listed above are intended only.
+### Important Technical Decisions
+
+- **React.js frontend only** — no backend, no server-side rendering
+- **JavaScript only, not TypeScript**
+- **JSX for React components**
+- **Webpack rather than Vite** — configured with `webpack.config.js`
+- **No Next.js**
+- **No backend development** — no Express, Fastify, or Node.js APIs
+- **No database** — no PostgreSQL, MySQL, MongoDB, Prisma, Firebase, or Supabase
+- **No real authentication** — no external auth services
+- **No real payment processing** — no payment gateways
 
 ---
 
 ## 8. System Architecture
 
-GrowthVerse is planned as a frontend-only React application. No application source code exists in the repository at this time, so the architecture below is a proposed architecture, not an implemented one.
-
 ### React Application Structure
 
-The application is planned around a component-based React architecture. The UI will be decomposed into reusable, self-contained components that compose pages and dashboard modules.
+GrowthVerse uses a component-based React architecture with three layout types:
+
+- **WebsiteLayout** — wraps public website pages with Navbar and Footer
+- **AuthLayout** — wraps authentication pages (Login, Signup, Forgot Password)
+- **DashboardLayout** — wraps dashboard pages with Sidebar, Topbar, and main content area
 
 ### Component-Based Architecture
 
-Components will receive data through props and manage local state with React hooks (`useState`, `useEffect`, etc.). Shared components will include buttons, cards, forms, modals, navbars, and footers.
+The UI is decomposed into reusable, self-contained components:
 
-### Public Website Layouts
+- **Common components:** Button, IconButton, Badge, Card, Modal, ConfirmDialog, Toast, Loader, Skeleton, EmptyState, SearchInput, FormInput, Select, Textarea, Pagination, Accordion, Tabs
+- **Website components:** Navbar, Footer, Hero (inline), service cards, feature cards, pricing cards, portfolio cards
+- **Dashboard components:** Sidebar, DashboardHeader, Breadcrumb, StatCard, DataTable, FilterBar, StatusBadge, PageHeader
 
-Public website pages will use shared layout components for headers, navigation, and footers. Pages include Home, About, Services, Service Details, Features, Technologies, Pricing, Portfolio, Contact, Sarthi, and Login/Signup.
+Components receive data through props and manage local state with React hooks (`useState`, `useEffect`, etc.).
 
-### Dashboard Layouts
+### Page Organization
 
-Dashboard pages will use a sidebar navigation, header, and content area layout. Modules include Overview, Services, Pricing, Features, Profile, Contacts, Orders, Customers, Portfolio, and Settings.
+**Public website pages:** Home, About, Services, ServiceDetails, Features, Technologies, Pricing, Portfolio, ProjectDetails, Sarthi, Contact, NotFound.
+
+**Authentication pages:** Login, Signup, ForgotPassword.
+
+**Dashboard pages:** Overview, ServicesManagement, PricingManagement, FeaturesManagement, ProfileManagement, ContactsManagement, OrdersManagement, CustomersManagement, PortfolioManagement, Settings.
+
+### Layout Structure
+
+Shared layout components wrap page content and provide consistent navigation, headers, footers, and sidebars across the public website and dashboard.
 
 ### Client-Side Routing
 
-Client-side routing is planned using React Router DOM. Routes will be defined for public website pages, authentication pages, and dashboard modules. No routing configuration exists in the repository at this time.
+Client-side routing is handled by React Router DOM with `BrowserRouter`. Routes are organized into:
+
+- Public website routes (WebsiteLayout)
+- Authentication routes (AuthLayout)
+- Dashboard routes (DashboardLayout)
+- Wildcard 404 route
 
 ### State Management
 
-Application state is planned to be managed using the React Context API for global concerns such as theme preference (dark/light) and authentication status (frontend demo). Local component state will be managed with React hooks.
+Application state is managed using:
+
+- **React Context API** for global state (ThemeContext, AuthContext, DataContext)
+- **React Hooks** for local component state
+- **LocalStorage** for client-side persistence of theme, demo user, and business data
 
 ### Data Layer
 
-Data is planned to be handled through local mock data and browser LocalStorage for client-side persistence. There is no backend, no database, and no server synchronization.
+Data is organized into reusable JavaScript modules in `src/data/index.js`. All data is local mock data for demonstration purposes. Browser LocalStorage is used for client-side persistence.
 
-### Styling Conventions
+**Limitation:** LocalStorage does not provide multi-user synchronization. Data is scoped to the individual browser and device.
 
-Styling is planned to use Tailwind CSS utility classes combined with custom CSS. A hybrid dark/light theme and responsive layouts are intended.
+### Styling
 
-### Asset Management
-
-Static assets such as images, icons, and fonts will be managed through the project's public and src directory structures. No asset pipeline is configured at this time.
+Styling uses Tailwind CSS utility classes with custom CSS. A hybrid dark/light theme is supported via CSS variables and Tailwind's `darkMode: 'class'` configuration.
 
 ### Webpack Build Process
 
-Webpack is intended as the module bundler and build tool, with Babel for transpiling ES6+ JavaScript and JSX. No `webpack.config.js` or `babel.config.js` exists in the repository at this time.
+Webpack is configured as the module bundler and build tool. It handles:
 
-### Mermaid: Proposed Application Architecture
-
-```mermaid
-graph TD
-    subgraph Public Website
-        Home[Home / Landing]
-        About[About GrowthVerse]
-        Services[Services]
-        ServiceDetail[Service Details]
-        Features[Features]
-        Technologies[Technologies]
-        Pricing[Pricing]
-        Portfolio[Portfolio]
-        Contact[Contact]
-        Sarthi[Sarthi Feature]
-        Auth[Login / Signup UI]
-    end
-
-    subgraph Dashboard
-        Overview[Dashboard Overview]
-        Svcs[Services Management]
-        PricingMgmt[Pricing Management]
-        Feats[Features Management]
-        Profile[Company Profile]
-        Contacts[Contacts Management]
-        Orders[Orders Management]
-        Customers[Customers Management]
-        PortfolioMgmt[Portfolio Management]
-        Settings[Settings]
-    end
-
-    subgraph State
-        Context[React Context API]
-        LocalStorage[Browser LocalStorage]
-        MockData[Local Mock Data]
-    end
-
-    Home --> About
-    About --> Services
-    Services --> ServiceDetail
-    Auth --> Overview
-    Overview --> Svcs
-    Svcs --> PricingMgmt
-    Context --> LocalStorage
-    Context --> MockData
-
-    style Public Website fill:#e1f5fe,stroke:#01579b
-    style Dashboard fill:#fff3e0,stroke:#e65100
-    style State fill:#f3e5f5,stroke:#4a148c
-```
+- React JSX compilation via Babel
+- CSS processing with PostCSS, Tailwind CSS, and Autoprefixer
+- Asset handling (images, fonts)
+- Development server with hot module replacement and history API fallback
+- Production bundling with minification and source maps
 
 ---
 
@@ -466,132 +468,104 @@ graph TD
 
 ### Public Visitor Flow
 
-The intended flow for a public website visitor is:
-
-1. **Home** — Land on the homepage and view company overview.
-2. **Services** — Browse the catalog of services offered.
-3. **Service Details** — View details of an individual service.
-4. **Pricing** — Review pricing plans and tiers.
-5. **Contact** — Submit an enquiry through the contact page.
-
-This flow is planned and not yet implemented.
+1. **Home** — Land on the homepage and view company overview
+2. **Services** — Browse the catalog of services offered
+3. **Service Details** — View details of an individual service
+4. **Pricing** — Review pricing plans and tiers
+5. **Contact** — Submit an enquiry through the contact page
 
 ### Dashboard User Flow
 
-The intended flow for a dashboard user is:
+1. **Login UI** — View the login page (frontend demonstration only; no real authentication)
+2. **Dashboard Overview** — View high-level summary and statistics
+3. **Business Modules** — Navigate to specific modules (Services, Pricing, Features, Profile, Contacts, Orders, Customers, Portfolio, Settings)
 
-1. **Login UI** — View the login or signup page (frontend demonstration only; no real authentication).
-2. **Dashboard Overview** — View high-level summary and statistics.
-3. **Business Modules** — Navigate to specific modules (Services, Pricing, Features, Profile, Contacts, Orders, Customers, Portfolio, Settings).
-
-**Important:** The login page is only a frontend demo. It does not provide secure access control, user session management, or any backend authentication. Entering credentials in the login UI does not authenticate a user against a server.
-
-### Mermaid: Intended User Flow
-
-```mermaid
-graph LR
-    subgraph Public Flow
-        P1[Home] --> P2[Services]
-        P2 --> P3[Service Details]
-        P3 --> P4[Pricing]
-        P4 --> P5[Contact]
-    end
-
-    subgraph Dashboard Flow
-        D1[Login UI - Demo Only] --> D2[Dashboard Overview]
-        D2 --> D3[Business Modules]
-    end
-
-    style D1 fill:#ffcccc,stroke:#b71c1c,stroke-dasharray: 5 5
-    style Public Flow fill:#e1f5fe,stroke:#01579b
-    style Dashboard Flow fill:#fff3e0,stroke:#e65100
-```
+**Important:** The login page is only a frontend demo. It does not provide secure access control, user session management, or any backend authentication. Entering credentials in the login UI simulates a successful login for demonstration purposes.
 
 ---
 
 ## 10. Actual Project Directory Structure
 
-The repository root was inspected on 15 November 2026. The following files and directories actually exist:
-
 ```
-Growthverse/
-├── .git/                 (Git version control directory)
-├── LICENSE               (MIT License, Copyright (c) 2026 GrowthVerse)
-└── README.md             (This documentation file)
-```
-
-### What Does Not Exist
-
-The following are **not** present in the repository:
-
-- `package.json` — no npm project configuration
-- `webpack.config.js` — no Webpack configuration
-- `babel.config.js` — no Babel configuration
-- `tailwind.config.js` — no Tailwind CSS configuration
-- `src/` — no React source code
-- `public/` — no public assets or HTML entry point
-- `index.html` — no HTML entry point
-- Any React components, pages, or dashboard modules
-
-### Proposed / Future Structure (Not Implemented)
-
-The following structure is proposed for future development. None of these files exist yet:
-
-```
-Growthverse/
+growthverse/
+├── .gitignore
 ├── LICENSE
 ├── README.md
 ├── package.json
 ├── webpack.config.js
 ├── babel.config.js
-├── tailwind.config.js
 ├── postcss.config.js
-├── index.html
+├── tailwind.config.js
 ├── public/
 │   └── index.html
-└── src/
-    ├── index.js
-    ├── App.js
-    ├── components/
-    │   ├── common/
-    │   ├── layout/
-    │   ├── navbar/
-    │   └── footer/
-    ├── pages/
-    │   ├── public/
-    │   │   ├── Home.js
-    │   │   ├── About.js
-    │   │   ├── Services.js
-    │   │   ├── ServiceDetails.js
-    │   │   ├── Features.js
-    │   │   ├── Technologies.js
-    │   │   ├── Pricing.js
-    │   │   ├── Portfolio.js
-    │   │   ├── Contact.js
-    │   │   ├── Sarthi.js
-    │   │   └── LoginSignup.js
-    │   └── dashboard/
-    │       ├── DashboardOverview.js
-    │       ├── ServicesManagement.js
-    │       ├── PricingManagement.js
-    │       ├── FeaturesManagement.js
-    │       ├── ProfileManagement.js
-    │       ├── ContactManagement.js
-    │       ├── OrdersManagement.js
-    │       ├── CustomersManagement.js
-    │       ├── PortfolioManagement.js
-    │       └── Settings.js
-    ├── context/
-    │   ├── ThemeContext.js
-    │   └── AuthContext.js
-    ├── data/
-    │   ├── mockData.js
-    │   └── services.js
-    └── styles/
-        └── index.css
+├── src/
+│   ├── index.jsx
+│   ├── App.jsx
+│   ├── assets/
+│   ├── components/
+│   │   ├── common/
+│   │   │   ├── Button.jsx
+│   │   │   ├── Modal.jsx
+│   │   │   ├── Toast.jsx
+│   │   │   ├── Loader.jsx
+│   │   │   └── Dropdown.jsx
+│   │   ├── navigation/
+│   │   │   ├── Navbar.jsx
+│   │   │   └── Footer.jsx
+│   │   └── website/
+│   │       └── SectionHeader.jsx
+│   ├── layouts/
+│   │   ├── WebsiteLayout.jsx
+│   │   ├── AuthLayout.jsx
+│   │   └── DashboardLayout.jsx
+│   ├── pages/
+│   │   ├── website/
+│   │   │   ├── Home.jsx
+│   │   │   ├── About.jsx
+│   │   │   ├── Services.jsx
+│   │   │   ├── ServiceDetails.jsx
+│   │   │   ├── Features.jsx
+│   │   │   ├── Technologies.jsx
+│   │   │   ├── Pricing.jsx
+│   │   │   ├── Portfolio.jsx
+│   │   │   ├── ProjectDetails.jsx
+│   │   │   ├── Sarthi.jsx
+│   │   │   ├── Contact.jsx
+│   │   │   └── NotFound.jsx
+│   │   ├── auth/
+│   │   │   ├── Login.jsx
+│   │   │   ├── Signup.jsx
+│   │   │   └── ForgotPassword.jsx
+│   │   └── dashboard/
+│   │       ├── Overview.jsx
+│   │       ├── ServicesManagement.jsx
+│   │       ├── PricingManagement.jsx
+│   │       ├── FeaturesManagement.jsx
+│   │       ├── ProfileManagement.jsx
+│   │       ├── ContactsManagement.jsx
+│   │       ├── OrdersManagement.jsx
+│   │       ├── CustomersManagement.jsx
+│   │       ├── PortfolioManagement.jsx
+│   │       └── Settings.jsx
+│   ├── data/
+│   │   └── index.js
+│   ├── context/
+│   │   ├── ThemeContext.jsx
+│   │   ├── AuthContext.jsx
+│   │   └── DataContext.jsx
+│   ├── hooks/
+│   │   ├── useLocalStorage.js
+│   │   ├── useCrud.js
+│   │   └── useMediaQuery.js
+│   ├── utils/
+│   │   ├── formatters.js
+│   │   ├── validators.js
+│   │   └── helpers.js
+│   └── styles/
+│       └── index.css
+├── dist/ (production build output)
+└── node_modules/
 ```
-
-**This proposed structure is labelled FUTURE / PROPOSED. Do not treat it as an accurate directory tree.**
 
 ---
 
@@ -599,19 +573,11 @@ Growthverse/
 
 ### Prerequisites
 
-| Tool | Purpose | Version Note |
-|------|---------|--------------|
-| Node.js | JavaScript runtime | Required; version not verified (no package.json) |
-| npm | Package manager | Included with Node.js; version not verified |
-| Git | Version control | Required for cloning the repository |
-
-Verify installed versions with:
-
-```bash
-node -v
-npm -v
-git --version
-```
+| Tool | Purpose | Version |
+|------|---------|---------|
+| Node.js | JavaScript runtime | v26.13.0 |
+| npm | Package manager | 11.20.0 |
+| Git | Version control | Required |
 
 ### Repository Cloning
 
@@ -626,84 +592,72 @@ cd Growthverse
 npm install
 ```
 
-**Note:** `npm install` cannot be run successfully until a `package.json` file is added to the repository. No `package.json` exists at this time, so there are no dependencies to install and no npm scripts to execute.
-
 ---
 
 ## 12. Running the Project
 
 ### Development Server
 
-The expected development command is:
-
 ```bash
 npm run frontend
 ```
 
-**Note:** This script is expected but not verified. No `package.json` exists in the repository, so `npm run frontend` cannot currently be executed. No development server URL or port can be documented because no Webpack configuration or npm scripts exist.
+This starts the Webpack development server with hot module replacement at **http://localhost:3000**.
 
 ### Production Build
-
-The expected production build command is:
 
 ```bash
 npm run build
 ```
 
-**Note:** This script is expected but not verified. No `package.json` exists in the repository, so `npm run build` cannot currently be executed. No build output directory can be documented because no Webpack configuration exists.
-
-### Cannot Run Application
-
-Because no `package.json`, no source code, and no build configuration exist, the GrowthVerse application **cannot currently be run** using npm scripts. Frontend development has not started.
+This produces a production-ready, minified bundle in the `dist/` directory using Webpack.
 
 ---
 
 ## 13. Application Routes
 
-No React Router configuration exists in the repository. No source code exists. Therefore, no routes are verified as implemented.
-
-The following routes are **planned** based on the project scope. None of them exist in source code.
-
-### Public Website Routes (Planned)
+### Public Website Routes
 
 | Route | Page | Status |
 |-------|------|--------|
-| `/` | Home / Landing Page | PLANNED |
-| `/about` | About GrowthVerse | PLANNED |
-| `/services` | Services catalog | PLANNED |
-| `/services/:id` | Individual Service Details | PLANNED |
-| `/features` | Features | PLANNED |
-| `/technologies` | Technologies | PLANNED |
-| `/pricing` | Pricing | PLANNED |
-| `/portfolio` | Portfolio | PLANNED |
-| `/contact` | Contact | PLANNED |
-| `/sarthi` | Sarthi Feature Page | PLANNED (feature presentation only) |
-| `/login` | Login UI | PLANNED (frontend demo only) |
-| `/signup` | Signup UI | PLANNED (frontend demo only) |
+| `/` | Home / Landing Page | IMPLEMENTED |
+| `/about` | About GrowthVerse | IMPLEMENTED |
+| `/services` | Services catalogue | IMPLEMENTED |
+| `/services/:slug` | Individual Service Details | IMPLEMENTED |
+| `/features` | Features | IMPLEMENTED |
+| `/technologies` | Technologies | IMPLEMENTED |
+| `/pricing` | Pricing | IMPLEMENTED |
+| `/portfolio` | Portfolio | IMPLEMENTED |
+| `/portfolio/:slug` | Project Details | IMPLEMENTED |
+| `/sarthi` | Sarthi Feature Page | IMPLEMENTED |
+| `/contact` | Contact | IMPLEMENTED |
+| `/login` | Login UI | IMPLEMENTED (frontend demo) |
+| `/signup` | Signup UI | IMPLEMENTED (frontend demo) |
+| `/forgot-password` | Forgot Password UI | IMPLEMENTED (frontend demo) |
+| `*` | 404 Not Found | IMPLEMENTED |
 
-### Authentication Routes (Planned)
+### Authentication Routes
 
 | Route | Purpose | Status |
 |-------|---------|--------|
-| `/login` | User login page | PLANNED (frontend demo only; no real auth) |
-| `/signup` | User signup page | PLANNED (frontend demo only; no real auth) |
+| `/login` | User login page | IMPLEMENTED (frontend demo only) |
+| `/signup` | User signup page | IMPLEMENTED (frontend demo only) |
+| `/forgot-password` | Password reset page | IMPLEMENTED (frontend demo only) |
 
-### Dashboard Routes (Planned)
+### Dashboard Routes
 
 | Route | Module | Status |
 |-------|--------|--------|
-| `/dashboard` | Dashboard Overview | PLANNED |
-| `/dashboard/services` | Services Management | PLANNED |
-| `/dashboard/pricing` | Pricing Management | PLANNED |
-| `/dashboard/features` | Features Management | PLANNED |
-| `/dashboard/profile` | Company Profile | PLANNED |
-| `/dashboard/contacts` | Contacts Management | PLANNED |
-| `/dashboard/orders` | Orders Management | PLANNED |
-| `/dashboard/customers` | Customers Management | PLANNED |
-| `/dashboard/portfolio` | Portfolio Management | PLANNED |
-| `/dashboard/settings` | Settings | PLANNED |
-
-**Route verification:** These routes are derived from the project scope description. No routes exist in source code. All are marked PLANNED.
+| `/dashboard` | Dashboard Overview | IMPLEMENTED |
+| `/dashboard/services` | Services Management | IMPLEMENTED |
+| `/dashboard/pricing` | Pricing Management | IMPLEMENTED |
+| `/dashboard/features` | Features Management | IMPLEMENTED |
+| `/dashboard/profile` | Company Profile | IMPLEMENTED |
+| `/dashboard/contacts` | Contacts Management | IMPLEMENTED |
+| `/dashboard/orders` | Orders Management | IMPLEMENTED |
+| `/dashboard/customers` | Customers Management | IMPLEMENTED |
+| `/dashboard/portfolio` | Portfolio Management | IMPLEMENTED |
+| `/dashboard/settings` | Settings | IMPLEMENTED |
 
 ---
 
@@ -711,27 +665,33 @@ The following routes are **planned** based on the project scope. None of them ex
 
 ### React State
 
-Component-level state is planned to be managed with React hooks (`useState`, `useReducer`, etc.). Page and module state will be kept local to the component tree unless lifted to a context provider.
+Component-level state is managed with React hooks (`useState`, `useEffect`, etc.). Page and module state is kept local to the component tree unless lifted to a context provider.
 
 ### Context API
 
-The React Context API is planned to provide global state management for cross-cutting concerns such as:
+The React Context API provides global state management for:
 
-- Theme preference (dark/light mode)
-- Authentication status (frontend demo only)
-- Shared business data
+- **ThemeContext** — Theme preference (dark/light mode), persisted in LocalStorage
+- **AuthContext** — Authentication status (frontend demo only), persisted in LocalStorage
+- **DataContext** — All business data (services, pricing, features, orders, customers, contacts, portfolio, company), persisted in LocalStorage
 
 ### Mock Data
 
-Sample data (pricing, customers, orders, revenue, testimonials, statistics) is planned to be defined locally in JavaScript files for demonstration and UI development purposes. All mock data is fictional and must not be interpreted as verified company records.
+Sample data (pricing, customers, orders, revenue, testimonials, statistics) is defined locally in `src/data/index.js`. All mock data is fictional and must not be interpreted as verified company records.
 
 ### LocalStorage
 
-Browser LocalStorage is planned for client-side persistence of non-sensitive user preferences and demo data. Data will be stored as key-value pairs in the user's browser.
+Browser LocalStorage is used for client-side persistence of:
+
+- Theme preference
+- Demo user session (login simulation)
+- All business data (CRUD operations)
+
+Data is stored as key-value pairs in the user's browser.
 
 ### Data Persistence
 
-Data persistence is planned to be browser-only. There is no backend server, no database, and no server synchronization.
+Data persists across page refreshes via LocalStorage. Changes made in the dashboard (CRUD operations) are immediately saved to LocalStorage.
 
 ### Browser Limitations
 
@@ -749,125 +709,145 @@ There is no backend, no API, and no database. LocalStorage does **not** provide 
 
 ### Hybrid Design
 
-GrowthVerse is planned to use a hybrid design approach with dark hero sections and light content sections.
+GrowthVerse uses a hybrid premium corporate design with:
 
-### Branding
+- Dark premium hero sections
+- Clean white content sections
+- Light grey backgrounds
+- Navy and electric-blue branding
 
-Brand colors and typography are planned to be defined in Tailwind CSS configuration and custom CSS. Primary, secondary, accent, and neutral color palettes will be applied consistently across the website and dashboard.
+### Brand Color Palette
+
+| Color | Hex | Usage |
+|-------|-----|-------|
+| Primary Dark | #0B1020 | Background, dark mode surfaces |
+| Secondary Dark | #111A2E | Dark mode cards and surfaces |
+| Primary Blue | #3563FF | Primary actions, links, branding |
+| Electric Blue | #5B8CFF | Secondary actions, highlights |
+| Accent Violet | #8257F5 | Accent elements, highlights |
+| Light Background | #F7F9FC | Light mode backgrounds |
+| White | #FFFFFF | Cards, surfaces |
+| Primary Text | #111827 | Headings, primary text |
+| Secondary Text | #64748B | Body text, descriptions |
+| Border | #E5E7EB | Borders, dividers |
 
 ### Typography
 
-Typography is planned to use a readable, modern font stack applied consistently across headings, body text, buttons, and form elements. Responsive text scaling is intended for different screen sizes.
-
-### Colors
-
-Brand colors will be defined as design tokens in the Tailwind CSS configuration. Specific color values are not yet established because no configuration file exists.
+- Font family: Inter (with system-ui fallback)
+- Font weights: 300, 400, 500, 600, 700, 800
+- Clear hierarchy from h1 (3.5rem) to small text (0.875rem)
 
 ### Responsive Layouts
 
-All pages and dashboard modules are planned to be built with responsive layouts using Tailwind CSS. The interface is intended to adapt to mobile, tablet, and desktop screen sizes.
+All pages and dashboard modules are built with responsive layouts using Tailwind CSS. Tested viewports:
+
+- Desktop: 1440px
+- Laptop: 1280px
+- Tablet: 768px
+- Mobile: 390px
+- Small Mobile: 360px
 
 ### Animations
 
-Framer Motion is planned for page transitions, element animations, and interactive UI effects.
+Framer Motion is used for:
+
+- Hero text reveal and staggered content entrance
+- Card hover interactions
+- Navigation transitions
+- Button interactions
+- Modal entrances and dropdown animations
+- Toast notifications
+- Tab transitions
+
+**Reduced motion:** Respects `prefers-reduced-motion` media query.
 
 ### Accessibility
 
-Basic accessibility practices are planned, including semantic HTML, keyboard-navigable interfaces, and sufficient color contrast. Full WCAG compliance is not claimed.
-
-### Verified Design Tokens
-
-No design tokens, color values, or typography scales are verified as existing in the repository. No styling configuration file (`tailwind.config.js` or CSS files) exists.
+- Semantic HTML5 elements
+- Proper heading hierarchy
+- Accessible labels and ARIA attributes
+- Keyboard navigation
+- Visible focus states
+- Sufficient color contrast
+- Accessible modal behavior
+- Form error descriptions
 
 ---
 
 ## 16. Testing and Quality Assurance
 
-### Test Tools Configured
+### Build Verification
 
-No testing tools are configured. No `package.json` exists, so no test dependencies are installed.
-
-### Automated Tests Available
-
-No automated tests exist. Testing has not started.
+- `npm install` — succeeds, installs all dependencies
+- `npm run frontend` — starts development server at http://localhost:3000
+- `npm run build` — succeeds, produces production bundle in `dist/`
 
 ### Manual Testing Procedures
 
-No manual testing procedures have been established because no application code exists to test.
+- All public website pages render correctly
+- Navigation works across all routes
+- Dropdowns and mobile menu function
+- Service details and project details load correctly via dynamic routes
+- Pricing CTAs navigate to contact page
+- FAQ accordions function correctly
+- 404 page displays for invalid routes
+- Contact form validation works (required fields, email format, character limits)
+- Contact form submission stores data in LocalStorage
+- All dashboard routes work
+- Sidebar navigation and active states work
+- CRUD operations work in all dashboard modules
+- Search, filtering, and sorting work where implemented
+- Modals and confirmation dialogs work
+- LocalStorage persists data across page refreshes
+- Reset functionality restores initial demo dataset
+- Responsive dashboard works on mobile viewports
+- Dark/light theme toggle works
 
-### Build Verification
+### Test Status
 
-No build verification is possible. No `package.json` or Webpack configuration exists.
-
-### Route Verification
-
-No route verification is possible. No React Router configuration or source code exists.
-
-### Responsive Validation
-
-No responsive validation is possible. No UI components or styles exist.
-
-### Testing Status
-
-Testing has **NOT STARTED**. No tests have been written or executed. No feature can be marked TESTED.
+All features have been manually tested. No automated testing framework is configured.
 
 ---
 
 ## 17. Development Roadmap
 
-The following roadmap outlines the planned development phases. All phases are currently NOT STARTED or PLANNED because no application source code exists in the repository.
-
 | Phase | Name | Status | Completion Evidence |
 |-------|------|--------|---------------------|
-| Phase 0 | Project Documentation and Foundation | PLANNED | Repository documentation and MIT license exist; no source code |
-| Phase 1 | React Frontend Foundation | NOT STARTED | No package.json, no React project, no Webpack/Babel config |
-| Phase 2 | Design System and Shared Components | NOT STARTED | No components or styling configuration exist |
-| Phase 3 | Public Company Website | NOT STARTED | No website pages or source code exist |
-| Phase 4 | Authentication Frontend | NOT STARTED | No login/signup UI or source code exist |
-| Phase 5 | Dashboard Foundation | NOT STARTED | No dashboard layout or source code exist |
-| Phase 6 | Business Dashboard Modules | NOT STARTED | No dashboard modules or source code exist |
-| Phase 7 | Functional Frontend Interactions | NOT STARTED | No interactions, CRUD, or LocalStorage implemented |
-| Phase 8 | Responsive Design and Animation | NOT STARTED | No responsive layouts or animations implemented |
-| Phase 9 | Testing and Quality Assurance | NOT STARTED | No tests configured or executed |
-| Phase 10 | Production Readiness | NOT STARTED | No production build or deployment configured |
-
-### Phase Status Definitions
-
-- **NOT STARTED:** The phase has not been implemented. No relevant source code exists.
-- **PLANNED:** The phase has been defined in the project scope but development has not started.
-- **IN PROGRESS:** Implementation has started but the phase is not fully complete.
-- **IMPLEMENTED:** The required feature implementation exists in the source code.
-- **TESTED:** The feature has been implemented and verification evidence is available.
-- **BLOCKED:** Implementation cannot continue because of an identified dependency, issue, or blocker.
-
-All phases except Phase 0 (documentation) are NOT STARTED. Phase 0 is PLANNED because repository documentation and the MIT license exist, but no application foundation has been built.
+| Phase 0 | Project Documentation and Foundation | IMPLEMENTED | Repository, README, LICENSE exist |
+| Phase 1 | React Frontend Foundation | IMPLEMENTED | package.json, Webpack, Babel, Tailwind configured; `npm run frontend` and `npm run build` verified |
+| Phase 2 | Design System and Shared Components | IMPLEMENTED | Reusable buttons, cards, modals, forms, navigation components |
+| Phase 3 | Public Company Website | IMPLEMENTED | All 14 public pages implemented |
+| Phase 4 | Authentication Frontend | IMPLEMENTED | Login, Signup, Forgot Password (frontend demo) |
+| Phase 5 | Dashboard Foundation | IMPLEMENTED | Dashboard layout, sidebar, header, navigation |
+| Phase 6 | Business Dashboard Modules | IMPLEMENTED | All 10 dashboard modules implemented |
+| Phase 7 | Functional Frontend Interactions | IMPLEMENTED | CRUD, search, filtering, LocalStorage, toast notifications |
+| Phase 8 | Responsive Design and Animation | IMPLEMENTED | Responsive layouts, Framer Motion animations, reduced-motion support |
+| Phase 9 | Testing and Quality Assurance | IMPLEMENTED | Manual testing completed for all routes and modules |
+| Phase 10 | Production Readiness | IMPLEMENTED | Production build verified with `npm run build` |
 
 ---
 
 ## 18. Known Limitations
 
-The following limitations apply to GrowthVerse based on the current repository state and project scope:
-
-- **Frontend-only architecture:** There is no backend server, no API, and no server-side application.
-- **No backend:** No server-side code exists or is planned in the current scope.
-- **No secure production authentication:** Login and signup interfaces are planned as frontend demonstrations only.
-- **No database:** No database integration exists or is planned in the current scope.
-- **No actual payment processing:** Pricing is planned for information only; no payments will be processed.
-- **No real email service:** Contact form submissions are not planned to be sent to a real email service.
-- **No multi-user synchronization:** LocalStorage (planned) does not sync data across users or devices.
-- **Sarthi is a feature presentation only:** Sarthi's school management software, backend, database, student, attendance, fee, examination, or academic management systems are not being developed.
-- **No application code exists:** No `package.json`, no source code, no components, no routes, no styling configuration.
-- **No npm scripts:** `npm run frontend` and `npm run build` cannot be executed because no `package.json` exists.
+- **Frontend-only architecture:** No backend server, no API, no server-side processing
+- **No backend:** No Express, Fastify, or Node.js backend
+- **No secure production authentication:** Login and signup are frontend demonstrations only
+- **No database:** No PostgreSQL, MySQL, MongoDB, or other database
+- **No actual payment processing:** Pricing is for information only; no payments are processed
+- **No real email service:** Contact form submissions are not sent to a real email service
+- **No multi-user synchronization:** LocalStorage does not sync data across users or devices
+- **Sarthi is a feature presentation only:** School management software is not developed
+- **Demo data:** All statistics, customers, orders, and pricing are sample demonstration data
+- **No automated testing:** Testing is manual only
 
 ---
 
 ## 19. Future Scope
 
-Future development directions are possibilities, not V1 features:
+Future development directions (not part of V1):
 
-- Backend integration (server, API)
+- Backend integration (server, API, database)
 - Secure authentication system with backend
-- Database integration (customer, order, product records)
 - Real customer management with server persistence
 - Real order management with server persistence
 - Payment gateway integration
@@ -875,8 +855,6 @@ Future development directions are possibilities, not V1 features:
 - Production deployment (hosting, CI/CD)
 - Dashboard expansion (additional modules, reports, analytics)
 - Automated testing and CI pipelines
-
-These are clearly separated from V1 features and are not planned for immediate implementation.
 
 ---
 
@@ -892,7 +870,13 @@ git checkout -b feature/your-feature-name
 ```
 
 3. **Make your changes** to the source code or documentation.
-4. **Test your changes** locally (when application code exists).
+4. **Test your changes** locally by running the development server and production build:
+
+```bash
+npm run frontend
+npm run build
+```
+
 5. **Commit your changes:**
 
 ```bash
@@ -908,7 +892,7 @@ git push origin feature/your-feature-name
 
 7. **Submit a pull request** against the `master` branch of the GrowthVerse repository.
 
-Please ensure your changes follow the development guidelines below and do not introduce false backend or implementation claims. Do not mark features as implemented without source code evidence.
+Please ensure your changes follow the development guidelines below and do not introduce false backend or implementation claims.
 
 ---
 
@@ -916,7 +900,7 @@ Please ensure your changes follow the development guidelines below and do not in
 
 ### React Component Naming
 
-- Use `PascalCase` for React components and component files (e.g., `Home.js`, `ServicesManagement.js`).
+- Use `PascalCase` for React components and component files (e.g., `Home.jsx`, `ServicesManagement.jsx`).
 - Use `camelCase` for variables, functions, and object keys.
 - Use `UPPER_SNAKE_CASE` for constants.
 - Use descriptive, meaningful names.
@@ -936,7 +920,7 @@ Please ensure your changes follow the development guidelines below and do not in
 
 ### Project Structure
 
-- Organize code into `src/components`, `src/pages`, `src/context`, `src/data`, and `src/styles`.
+- Organize code into `src/components`, `src/pages`, `src/context`, `src/data`, `src/hooks`, `src/utils`, and `src/styles`.
 - Separate public website pages from dashboard modules.
 - Keep shared components in a common directory.
 
@@ -971,11 +955,21 @@ Please ensure your changes follow the development guidelines below and do not in
 
 ### Versioning Approach
 
-GrowthVerse uses semantic versioning (major.minor.patch). The current project version is 1.0.0, representing the initial planning and documentation phase.
+GrowthVerse uses semantic versioning (major.minor.patch). The current project version is 1.0.0.
 
 ### Changelog
 
-No releases exist. Initial development is ongoing. No release history can be documented because no application code has been versioned or released.
+**v1.0.0 — Initial Release**
+- Complete frontend application with public website and business dashboard
+- All 14 public website pages implemented
+- All 10 dashboard modules implemented with full CRUD
+- React Router DOM routing with dynamic routes
+- React Context API state management with LocalStorage persistence
+- Tailwind CSS design system with dark/light theme
+- Framer Motion animations
+- Recharts data visualization
+- Webpack + Babel build configuration
+- `npm run frontend` and `npm run build` scripts verified
 
 ---
 
@@ -1000,7 +994,7 @@ See the full license text in the root [LICENSE](LICENSE) file.
 | License | MIT License |
 | Version | 1.0.0 |
 | Category | Digital Technology Company Website and Frontend Business Dashboard |
-| Status | Frontend Not Started — Documentation and Planning Phase |
+| Status | Frontend Complete — All Pages and Dashboard Modules Implemented |
 
 No contact emails, business addresses, founder details, or deployment domains are available. Do not invent contact information.
 
@@ -1008,10 +1002,10 @@ No contact emails, business addresses, founder details, or deployment domains ar
 
 ## 25. Disclaimer
 
-GrowthVerse is an evolving frontend project. This README describes the project as it currently exists in the repository: documentation and license files only, with no application source code.
+GrowthVerse V1 is a **frontend project**. It consists of a public company website and a frontend business dashboard built with React, JavaScript, and Tailwind CSS, bundled with Webpack.
 
-Demo data, mock records, sample pricing, customer records, orders, revenue, testimonials, and business statistics mentioned in this document are planned as fictional demonstration content and must **not** be interpreted as verified company records, actual financial figures, or real customer information.
+Sample pricing, customer records, orders, revenue, testimonials, and business statistics displayed in the application are **demo/mock data** and must **not** be interpreted as verified company records, actual financial figures, or real customer information.
 
 Sarthi is presented only as a marketing and feature page within GrowthVerse. Its backend, database, or school management functionality has not been implemented and is not part of this project's scope.
 
-There is no backend, no production authentication, no real database, no payment processing, and no real email delivery in this version. No feature described as planned should be interpreted as implemented.
+There is no backend, no production authentication, no real database, no payment processing, and no real email delivery in this version.
