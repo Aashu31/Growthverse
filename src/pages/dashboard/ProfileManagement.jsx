@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useData } from "../../context/DataContext";
 import { Button } from "../../components/common/Button";
 import { Modal } from "../../components/common/Modal";
-import { LuEdit } from "lucide-react";
+import { Edit } from "lucide-react";
 
 export default function ProfileManagement() {
   const { demoData, updateEntity } = useData();
@@ -42,7 +42,7 @@ export default function ProfileManagement() {
         </div>
         <div className="flex gap-3">
           <Button variant="outline" onClick={() => setIsModalOpen(true)}>
-            <LuEdit className="h-4 w-4 mr-2" /> Edit Profile
+            <Edit className="h-4 w-4 mr-2" /> Edit Profile
           </Button>
           <button
             onClick={() => {

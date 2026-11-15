@@ -4,7 +4,7 @@ import { Button } from "../../components/common/Button";
 import { Modal } from "../../components/common/Modal";
 import { ConfirmDialog } from "../../components/common/Modal";
 import { generateId, formatDate } from "../../utils/formatters";
-import { LuPlus, LuEdit, LuTrash2, LuSearch } from "lucide-react";
+import { Plus, Edit, Trash2, Search } from "lucide-react";
 
 const CUSTOMER_STATUSES = ["Active", "Inactive"];
 
@@ -71,12 +71,12 @@ export default function CustomersManagement() {
           </p>
         </div>
         <Button variant="primary" onClick={() => setIsModalOpen(true)}>
-          <LuPlus className="h-4 w-4 mr-2" /> Add Customer
+          <Plus className="h-4 w-4 mr-2" /> Add Customer
         </Button>
       </div>
 
       <div className="relative mb-6">
-        <LuSearch className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
         <input
           type="text"
           placeholder="Search by name, email, or company..."
@@ -121,14 +121,14 @@ export default function CustomersManagement() {
                   <td className="py-4 text-secondary-text dark:text-gray-300 text-sm">{formatDate(customer.lastActivity)}</td>
                   <td className="py-4 text-right">
                     <Button variant="ghost" size="sm" onClick={() => { setEditingId(customer.id); setIsModalOpen(true); }}>
-                      <LuEdit className="h-4 w-4" />
+                      <Edit className="h-4 w-4" />
                     </Button>
                     <Button
                       variant="outline"
                       size="sm"
                       onClick={() => { setConfirmId(customer.id); setIsConfirmOpen(true); }}
                     >
-                      <LuTrash2 className="h-4 w-4" />
+                      <Trash2 className="h-4 w-4" />
                     </Button>
                   </td>
                 </tr>

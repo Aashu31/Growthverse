@@ -1,5 +1,4 @@
 import React from "react";
-import { LuMenu, LuX, LuArrowRight } from "lucide-react";
 
 export function Dropdown({
   trigger,

@@ -1,13 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import {
-  LuPhone,
-  LuMail,
-  LuMapPin,
-  LuClock,
-  LuGithub,
-  LuTwitter,
-  LuLinkedin,
+  Phone,
+  Mail,
+  MapPin,
+  Clock,
+  Github,
+  Twitter,
+  Linkedin,
 } from "lucide-react";
 import { Button } from "../common/Button";
 
@@ -65,19 +65,19 @@ export function Footer() {
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:text-blue-400 hover:bg-blue-600 transition-colors"
               >
-                <LuGithub className="h-5 w-5" />
+                <Github className="h-5 w-5" />
               </a>
               <a
                 href="#"
                 className="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:text-blue-400 hover:bg-blue-600 transition-colors"
               >
-                <LuLinkedin className="h-5 w-5" />
+                <Linkedin className="h-5 w-5" />
               </a>
               <a
                 href="#"
                 className="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:text-blue-400 hover:bg-blue-600 transition-colors"
               >
-                <LuTwitter className="h-5 w-5" />
+                <Twitter className="h-5 w-5" />
               </a>
             </div>
           </div>

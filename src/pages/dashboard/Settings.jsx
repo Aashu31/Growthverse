@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useTheme } from "../../context/ThemeContext";
 import { useData } from "../../context/DataContext";
-import { LuMoon, LuSun, LuTrash2, LuRefreshCw, LuAlertCircle } from "lucide-react";
+import { Moon, Sun, Trash2, RefreshCw, AlertCircle } from "lucide-react";
 import { Button } from "../../components/common/Button";
 import { ConfirmDialog } from "../../components/common/Modal";
 
@@ -64,7 +64,7 @@ export default function Settings() {
           <div className="flex items-center justify-between p-4 rounded-xl border border-border dark:border-gray-700 bg-white dark:bg-dark-secondary">
             <div className="flex items-center gap-3">
               <div className={`w-10 h-10 rounded-full ${isDark ? "bg-yellow-500" : "bg-blue-500"} flex items-center justify-center text-white shadow-lg`}>
-                {isDark ? <LuMoon className="h-5 w-5" /> : <LuSun className="h-5 w-5" />}
+                {isDark ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
               </div>
               <div>
                 <p className="font-medium text-primary-text dark:text-white">{isDark ? "Dark Theme" : "Light Theme"}</p>
@@ -90,10 +90,10 @@ export default function Settings() {
         </p>
         <div className="flex gap-3">
           <Button variant="outline" onClick={() => setIsResetConfirmOpen(true)}>
-            <LuRefreshCw className="h-4 w-4 mr-2" /> Reset Demo Data
+            <RefreshCw className="h-4 w-4 mr-2" /> Reset Demo Data
           </Button>
           <div className="bg-yellow-50 dark:bg-yellow-900/10 border border-yellow-100 dark:border-yellow-800/30 rounded-xl p-4 flex items-start gap-3">
-            <LuAlertCircle className="h-5 w-5 text-yellow-600 dark:text-yellow-400 flex-shrink-0 mt-0.5" />
+            <AlertCircle className="h-5 w-5 text-yellow-600 dark:text-yellow-400 flex-shrink-0 mt-0.5" />
             <p className="text-sm text-secondary-text dark:text-gray-300 leading-relaxed">
               This action cannot be undone. All custom dashboard data will be
               lost and replaced with the default demonstration dataset.

@@ -3,27 +3,27 @@ import { Outlet, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useTheme } from "../context/ThemeContext";
 import {
-  LuLayout,
-  LuLogOut,
-  LuSun,
-  LuMoon,
-  LuMenu,
-  LuX,
-  LuBell,
-  LuUser,
+  Layout,
+  LogOut,
+  Sun,
+  Moon,
+  Menu,
+  X,
+  Bell,
+  User,
 } from "lucide-react";
 
 const DASHBOARD_NAV = [
-  { name: "Overview", path: "/dashboard", icon: LuLayout },
-  { name: "Services", path: "/dashboard/services", icon: LuLayout },
-  { name: "Pricing", path: "/dashboard/pricing", icon: LuLayout },
-  { name: "Features", path: "/dashboard/features", icon: LuLayout },
-  { name: "Orders", path: "/dashboard/orders", icon: LuLayout },
-  { name: "Customers", path: "/dashboard/customers", icon: LuLayout },
-  { name: "Contacts", path: "/dashboard/contacts", icon: LuLayout },
-  { name: "Portfolio", path: "/dashboard/portfolio", icon: LuLayout },
-  { name: "Profile", path: "/dashboard/profile", icon: LuUser },
-  { name: "Settings", path: "/dashboard/settings", icon: LuLayout },
+  { name: "Overview", path: "/dashboard", icon: Layout },
+  { name: "Services", path: "/dashboard/services", icon: Layout },
+  { name: "Pricing", path: "/dashboard/pricing", icon: Layout },
+  { name: "Features", path: "/dashboard/features", icon: Layout },
+  { name: "Orders", path: "/dashboard/orders", icon: Layout },
+  { name: "Customers", path: "/dashboard/customers", icon: Layout },
+  { name: "Contacts", path: "/dashboard/contacts", icon: Layout },
+  { name: "Portfolio", path: "/dashboard/portfolio", icon: Layout },
+  { name: "Profile", path: "/dashboard/profile", icon: User },
+  { name: "Settings", path: "/dashboard/settings", icon: Layout },
 ];
 
 export default function DashboardLayout() {
@@ -60,7 +60,7 @@ export default function DashboardLayout() {
             onClick={() => setIsMobileOpen(false)}
             className="md:hidden p-2 text-gray-500 hover:text-primary-text dark:text-gray-400 dark:hover:text-white"
           >
-            <LuX className="h-5 w-5" />
+            <X className="h-5 w-5" />
           </button>
         </div>
         <div className="p-4 space-y-1">
@@ -85,7 +85,7 @@ export default function DashboardLayout() {
         <div className="p-6 border-t border-border dark:border-gray-700">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-10 h-10 rounded-xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
-              <LuUser className="h-5 w-5 text-gray-600 dark:text-gray-400" />
+              <User className="h-5 w-5 text-gray-600 dark:text-gray-400" />
             </div>
             <div>
               <p className="text-sm font-medium text-primary-text dark:text-white">
@@ -100,7 +100,7 @@ export default function DashboardLayout() {
             onClick={logout}
             className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
           >
-            <LuLogOut className="h-5 w-5" /> Logout
+            <LogOut className="h-5 w-5" /> Logout
           </button>
         </div>
       </aside>
@@ -115,7 +115,7 @@ export default function DashboardLayout() {
                 onClick={() => setIsMobileOpen(!isMobileOpen)}
                 className="md:hidden p-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg"
               >
-                <LuMenu className="h-5 w-5" />
+                <Menu className="h-5 w-5" />
               </button>
               <h1 className="text-lg font-semibold text-primary-text dark:text-white hidden sm:block">
                 Dashboard
@@ -138,14 +138,14 @@ export default function DashboardLayout() {
                 </svg>
               </div>
               <button className="p-2 text-gray-600 dark:text-gray-400 hover:text-primary-text dark:hover:text-white relative">
-                <LuBell className="h-5 w-5" />
+                <Bell className="h-5 w-5" />
               </button>
               <button
                 onClick={toggleTheme}
                 className="p-2 text-gray-600 dark:text-gray-400 hover:text-primary-text dark:hover:text-white rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
                 title="Toggle theme"
               >
-                {theme === "dark" ? <LuSun className="h-5 w-5" /> : <LuMoon className="h-5 w-5" />}
+                {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
               </button>
               <div className="flex items-center gap-3 pl-4 border-l border-border dark:border-gray-700">
                 <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white font-medium text-sm">

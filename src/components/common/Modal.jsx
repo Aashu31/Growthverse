@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { LuX } from "lucide-react";
+import { X } from "lucide-react";
 import { Button } from "./Button";
 
 export function Modal({
@@ -65,7 +65,7 @@ export function Modal({
               className="p-2"
               aria-label="Close modal"
             >
-              <LuX className="h-5 w-5" />
+              <X className="h-5 w-5" />
             </Button>
           </div>
         )}

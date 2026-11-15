@@ -5,7 +5,7 @@ import { Modal } from "../../components/common/Modal";
 import { ConfirmDialog } from "../../components/common/Modal";
 import { generateId, formatDate, formatCurrency } from "../../utils/formatters";
 import { getStatusColor } from "../../utils/helpers";
-import { LuPlus, LuEdit, LuTrash2, LuSearch } from "lucide-react";
+import { Plus, Edit, Trash2, Search } from "lucide-react";
 
 const ORDER_STATUSES = ["Pending", "Confirmed", "In Progress", "Completed", "Cancelled"];
 const PAYMENT_STATUSES = ["Unpaid", "Paid", "Partially Paid", "Refunded"];
@@ -72,12 +72,12 @@ export default function OrdersManagement() {
           </p>
         </div>
         <Button variant="primary" onClick={() => setIsModalOpen(true)}>
-          <LuPlus className="h-4 w-4 mr-2" /> Add Order
+          <Plus className="h-4 w-4 mr-2" /> Add Order
         </Button>
       </div>
 
       <div className="relative mb-6">
-        <LuSearch className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
         <input
           type="text"
           placeholder="Search by customer or service..."
@@ -128,14 +128,14 @@ export default function OrdersManagement() {
                   </td>
                   <td className="py-4 text-right">
                     <Button variant="ghost" size="sm" onClick={() => { setEditingId(order.id); setIsModalOpen(true); }}>
-                      <LuEdit className="h-4 w-4" />
+                      <Edit className="h-4 w-4" />
                     </Button>
                     <Button
                       variant="outline"
                       size="sm"
                       onClick={() => { setConfirmId(order.id); setIsConfirmOpen(true); }}
                     >
-                      <LuTrash2 className="h-4 w-4" />
+                      <Trash2 className="h-4 w-4" />
                     </Button>
                   </td>
                 </tr>

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { LuArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { SERVICES_DATA, CATEGORIES } from "../../data";
 
 export default function Services() {
@@ -69,7 +69,7 @@ export default function Services() {
                       {service.priceRange}
                     </span>
                     <span className="text-sm font-medium text-blue-600 dark:text-electric-blue">
-                      View Details <LuArrowRight className="h-4 w-4 ml-1" />
+                      View Details <ArrowRight className="h-4 w-4 ml-1" />
                     </span>
                   </div>
                 </div>

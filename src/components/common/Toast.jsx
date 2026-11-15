@@ -1,5 +1,4 @@
 import React from "react";
-import { LuPlus } from "lucide-react";
 import { Button } from "./Button";
 
 export function Toast({ id, type = "info", message, duration = 4000, onDismiss }) {

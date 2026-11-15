@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
-import { LuFilter, LuSearch } from "lucide-react";
+import { Filter, Search } from "lucide-react";
 import { PORTFOLIO_DATA } from "../../data";
 
 const CATEGORIES = ["All", "Websites", "Web Applications", "UI/UX", "AI Solutions", "Cloud and DevOps", "Branding"];
@@ -35,7 +35,7 @@ export default function Portfolio() {
             </div>
             <div className="flex gap-4 w-full lg:w-auto">
               <div className="relative flex-1 lg:w-64">
-                <LuSearch className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
                 <input
                   type="text"
                   placeholder="Search projects..."
@@ -48,7 +48,7 @@ export default function Portfolio() {
                 onClick={() => {}}
                 className="px-6 py-3 rounded-xl border border-border dark:border-gray-700 bg-white dark:bg-dark-secondary text-primary-text dark:text-white flex items-center gap-2 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
               >
-                <LuFilter className="h-4 w-4" /> Filter
+                <Filter className="h-4 w-4" /> Filter
               </button>
             </div>
           </div>

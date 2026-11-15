@@ -5,7 +5,7 @@ import { Modal } from "../../components/common/Modal";
 import { ConfirmDialog } from "../../components/common/Modal";
 import { generateId, formatDate } from "../../utils/formatters";
 import { getStatusColor } from "../../utils/helpers";
-import { LuPlus, LuEdit, LuTrash2, LuSearch } from "lucide-react";
+import { Plus, Edit, Trash2, Search } from "lucide-react";
 
 const STATUSES = ["New", "Contacted", "In Discussion", "Converted", "Closed"];
 
@@ -78,13 +78,13 @@ export default function ContactsManagement() {
           </p>
         </div>
         <Button variant="primary" onClick={() => setIsModalOpen(true)}>
-          <LuPlus className="h-4 w-4 mr-2" /> Add Enquiry
+          <Plus className="h-4 w-4 mr-2" /> Add Enquiry
         </Button>
       </div>
 
       <div className="flex gap-4 mb-6">
         <div className="relative flex-1 lg:w-96">
-          <LuSearch className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
           <input
             type="text"
             placeholder="Search by name or email..."
@@ -140,14 +140,14 @@ export default function ContactsManagement() {
                   </td>
                   <td className="py-4 text-right">
                     <Button variant="ghost" size="sm" onClick={() => { setEditingId(contact.id); setIsModalOpen(true); }}>
-                      <LuEdit className="h-4 w-4" />
+                      <Edit className="h-4 w-4" />
                     </Button>
                     <Button
                       variant="outline"
                       size="sm"
                       onClick={() => { setConfirmId(contact.id); setIsConfirmOpen(true); }}
                     >
-                      <LuTrash2 className="h-4 w-4" />
+                      <Trash2 className="h-4 w-4" />
                     </Button>
                   </td>
                 </tr>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { LuMail, LuArrowLeft } from "lucide-react";
+import { Mail, ArrowLeft } from "lucide-react";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -22,7 +22,7 @@ export default function ForgotPassword() {
       <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-dark px-4">
         <div className="max-w-md w-full bg-white dark:bg-dark-secondary rounded-3xl border border-border dark:border-gray-700 shadow-2xl p-8 md:p-12 text-center">
           <div className="w-16 h-16 rounded-full bg-blue-100 dark:bg-blue-900/20 flex items-center justify-center mx-auto mb-6 text-blue-600 dark:text-electric-blue">
-            <LuMail className="h-8 w-8" />
+            <Mail className="h-8 w-8" />
           </div>
           <h2 className="text-h3 text-primary-text dark:text-white mb-3">Check Your Email</h2>
           <p className="text-secondary-text dark:text-gray-300 mb-8">
@@ -59,7 +59,7 @@ export default function ForgotPassword() {
               Email Address
             </label>
             <div className="relative">
-              <LuMail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
               <input
                 type="email"
                 value={email}

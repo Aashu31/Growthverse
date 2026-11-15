@@ -4,7 +4,7 @@ import { Button } from "../../components/common/Button";
 import { Modal } from "../../components/common/Modal";
 import { ConfirmDialog } from "../../components/common/Modal";
 import { generateId, formatCurrency } from "../../utils/formatters";
-import { LuPlus, LuEdit, LuTrash2, LuSearch } from "lucide-react";
+import { Plus, Edit, Trash2, Search } from "lucide-react";
 
 const BILLING_TYPES = ["month", "year", "custom"];
 
@@ -74,12 +74,12 @@ export default function PricingManagement() {
           </p>
         </div>
         <Button variant="primary" onClick={() => setIsModalOpen(true)}>
-          <LuPlus className="h-4 w-4 mr-2" /> Add Plan
+          <Plus className="h-4 w-4 mr-2" /> Add Plan
         </Button>
       </div>
 
       <div className="relative mb-6">
-        <LuSearch className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
         <input
           type="text"
           placeholder="Search pricing plans..."
@@ -132,14 +132,14 @@ export default function PricingManagement() {
                   </td>
                   <td className="py-4 text-right">
                     <Button variant="ghost" size="sm" onClick={() => { setEditingId(plan.id); setIsModalOpen(true); }}>
-                      <LuEdit className="h-4 w-4" />
+                      <Edit className="h-4 w-4" />
                     </Button>
                     <Button
                       variant="outline"
                       size="sm"
                       onClick={() => { setConfirmId(plan.id); setIsConfirmOpen(true); }}
                     >
-                      <LuTrash2 className="h-4 w-4" />
+                      <Trash2 className="h-4 w-4" />
                     </Button>
                   </td>
                 </tr>

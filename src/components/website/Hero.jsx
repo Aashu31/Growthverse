@@ -1,34 +1,34 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { LuRocket, LuZap, LuShieldCheck, LuTarget, LuArrowRight } from "lucide-react";
+import { Rocket, Zap, ShieldCheck, Target, ArrowRight } from "lucide-react";
 import { Button } from "../common/Button";
 import { Navbar } from "../navigation/Navbar";
 import { Footer } from "../navigation/Footer";
 
 const FEATURES = [
   {
-    icon: LuRocket,
+    icon: Rocket,
     color: "text-blue-600",
     title: "Fast Delivery",
     description:
       "We build and launch your digital products quickly without compromising on quality.",
   },
   {
-    icon: LuZap,
+    icon: Zap,
     color: "text-electric-blue",
     title: "Modern Technology",
     description:
       "We use React, Tailwind CSS, and modern tools to create performant applications.",
   },
   {
-    icon: LuShieldCheck,
+    icon: ShieldCheck,
     color: "text-violet-600",
     title: "Quality Assured",
     description:
       "Every project goes through rigorous quality checks before delivery.",
   },
   {
-    icon: LuTarget,
+    icon: Target,
     color: "text-blue-600",
     title: "Business Focused",
     description:
@@ -116,7 +116,7 @@ export default function Home() {
                 <div className="p-8 md:p-12 relative z-10">
                   <div className="flex items-center gap-4 mb-8">
                     <div className="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center">
-                      <LuRocket className="h-6 w-6 text-white" />
+                      <Rocket className="h-6 w-6 text-white" />
                     </div>
                     <div>
                       <h4 className="font-semibold text-primary-text dark:text-white">Project Dashboard</h4>
@@ -147,7 +147,7 @@ export default function Home() {
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-xl bg-blue-100 dark:bg-blue-900/20 flex items-center justify-center text-blue-600 dark:text-electric-blue">
-                    <LuTarget className="h-5 w-5" />
+                    <Target className="h-5 w-5" />
                   </div>
                   <div>
                     <h4 className="font-semibold text-primary-text dark:text-white">Who We Are</h4>
@@ -158,7 +158,7 @@ export default function Home() {
                 </div>
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-xl bg-blue-100 dark:bg-blue-900/20 flex items-center justify-center text-blue-600 dark:text-electric-blue">
-                    <LuZap className="h-5 w-5" />
+                    <Zap className="h-5 w-5" />
                   </div>
                   <div>
                     <h4 className="font-semibold text-primary-text dark:text-white">What We Do</h4>
@@ -169,7 +169,7 @@ export default function Home() {
                 </div>
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-xl bg-blue-100 dark:bg-blue-900/20 flex items-center justify-center text-blue-600 dark:text-electric-blue">
-                    <LuShieldCheck className="h-5 w-5" />
+                    <ShieldCheck className="h-5 w-5" />
                   </div>
                   <div>
                     <h4 className="font-semibold text-primary-text dark:text-white">Who We Serve</h4>
@@ -249,7 +249,7 @@ export default function Home() {
                   href="/services"
                   className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-blue-600 dark:text-electric-blue hover:gap-2 transition-colors"
                 >
-                  Learn More <LuArrowRight className="h-4 w-4" />
+                  Learn More <ArrowRight className="h-4 w-4" />
                 </a>
               </motion.div>
             ))}

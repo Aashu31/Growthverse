@@ -1,5 +1,4 @@
 import React from "react";
-import { LuExternalLink } from "lucide-react";
 
 export function Button({
   children,

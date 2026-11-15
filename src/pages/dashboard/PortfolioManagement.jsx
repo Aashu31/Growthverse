@@ -4,7 +4,7 @@ import { Button } from "../../components/common/Button";
 import { Modal } from "../../components/common/Modal";
 import { ConfirmDialog } from "../../components/common/Modal";
 import { generateId } from "../../utils/formatters";
-import { LuPlus, LuEdit, LuTrash2, LuSearch, LuImage } from "lucide-react";
+import { Plus, Edit, Trash2, Search, Image } from "lucide-react";
 
 const PORTFOLIO_CATEGORIES = ["Websites", "Web Applications", "UI/UX", "AI Solutions", "Cloud and DevOps", "Branding"];
 
@@ -74,12 +74,12 @@ export default function PortfolioManagement() {
           </p>
         </div>
         <Button variant="primary" onClick={() => setIsModalOpen(true)}>
-          <LuPlus className="h-4 w-4 mr-2" /> Add Project
+          <Plus className="h-4 w-4 mr-2" /> Add Project
         </Button>
       </div>
 
       <div className="relative mb-6">
-        <LuSearch className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
         <input
           type="text"
           placeholder="Search projects..."
@@ -130,14 +130,14 @@ export default function PortfolioManagement() {
               </div>
               <div className="flex justify-end gap-3">
                 <Button variant="ghost" size="sm" onClick={() => { setEditingId(project.id); setIsModalOpen(true); }}>
-                  <LuEdit className="h-3 w-3 mr-1" /> Edit
+                  <Edit className="h-3 w-3 mr-1" /> Edit
                 </Button>
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={() => { setConfirmId(project.id); setIsConfirmOpen(true); }}
                 >
-                  <LuTrash2 className="h-3 w-3 mr-1" /> Delete
+                  <Trash2 className="h-3 w-3 mr-1" /> Delete
                 </Button>
               </div>
             </div>

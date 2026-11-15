@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
-  LuMenu,
-  LuX,
-  LuPhone,
-  LuMail,
-  LuMapPin,
-  LuClock,
-  LuChevronDown,
-  LuArrowRight,
-  LuGithub,
+  Menu,
+  X,
+  Phone,
+  Mail,
+  MapPin,
+  Clock,
+  ChevronDown,
+  ArrowRight,
+  Github,
 } from "lucide-react";
 import { Button } from "../common/Button";
 
@@ -88,7 +88,7 @@ export function Navbar() {
                         isActive(link.path) ? "text-blue-600 dark:text-electric-blue" : ""
                       }`}
                     >
-                      {link.name} <LuChevronDown className="ml-1 h-4 w-4" />
+                      {link.name} <ChevronDown className="ml-1 h-4 w-4" />
                     </Link>
                     {isDropdownOpen && (
                       <div className="absolute top-full left-0 mt-2 w-56 bg-white dark:bg-dark-secondary rounded-2xl border border-border dark:border-gray-700 shadow-2xl py-4 z-50">
@@ -126,7 +126,7 @@ export function Navbar() {
 
           <div className="flex items-center gap-4">
             <Button variant="ghost" size="sm" onClick={() => setIsMobileOpen(true)}>
-              <LuMenu className="h-5 w-5" />
+              <Menu className="h-5 w-5" />
               <span className="hidden md:inline ml-2">Menu</span>
             </Button>
           </div>
@@ -146,7 +146,7 @@ export function Navbar() {
                 <span className="font-bold text-primary-text dark:text-white">GrowthVerse</span>
               </div>
               <Button variant="ghost" size="sm" onClick={() => setIsMobileOpen(false)}>
-                <LuX className="h-5 w-5" />
+                <X className="h-5 w-5" />
               </Button>
             </div>
             <div className="p-6 space-y-4 flex-1 overflow-y-auto">
@@ -159,7 +159,7 @@ export function Navbar() {
                         className="w-full flex items-center justify-between text-sm font-medium text-primary-text dark:text-white"
                       >
                         {link.name}
-                        <LuChevronDown className={`h-4 w-4 transition-transform ${
+                        <ChevronDown className={`h-4 w-4 transition-transform ${
                           isDropdownOpen ? "rotate-180" : ""
                         }`} />
                       </button>
@@ -200,13 +200,13 @@ export function Navbar() {
               <div className="space-y-3 text-sm">
                 <p className="text-secondary-text dark:text-gray-400">Contact</p>
                 <div className="flex items-center gap-2 text-primary-text dark:text-white mb-2">
-                  <LuMail className="h-4 w-4 text-blue-600" />
+                  <Mail className="h-4 w-4 text-blue-600" />
                   <span>hello@growthverse.example</span>
                 </div>
               </div>
               <div className="flex gap-3 mt-4">
                 <a href="#" className="w-10 h-10 rounded-lg bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-500 hover:text-blue-600 dark:hover:text-electric-blue transition-colors">
-                  <LuGithub className="h-4 w-4" />
+                  <Github className="h-4 w-4" />
                 </a>
               </div>
             </div>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { LuMail, LuLock, LuUser, LuEye, LuEyeOff } from "lucide-react";
+import { Mail, Lock, User, Eye, EyeOff } from "lucide-react";
 import { validateAuthForm } from "../../utils/validators";
 
 export default function Signup() {
@@ -56,7 +56,7 @@ export default function Signup() {
               Full Name
             </label>
             <div className="relative">
-              <LuUser className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+              <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
               <input
                 type="text"
                 name="fullName"
@@ -76,7 +76,7 @@ export default function Signup() {
               Email Address
             </label>
             <div className="relative">
-              <LuMail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
               <input
                 type="email"
                 name="email"
@@ -96,7 +96,7 @@ export default function Signup() {
               Password
             </label>
             <div className="relative">
-              <LuLock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
               <input
                 type={showPassword ? "text" : "password"}
                 name="password"
@@ -110,7 +110,7 @@ export default function Signup() {
                 onClick={() => setShowPassword(!showPassword)}
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
               >
-                {showPassword ? <LuEyeOff className="h-4 w-4" /> : <LuEye className="h-4 w-4" />}
+                {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
               </button>
             </div>
             {errors.password && (
@@ -123,7 +123,7 @@ export default function Signup() {
               Confirm Password
             </label>
             <div className="relative">
-              <LuLock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
               <input
                 type={showPassword ? "text" : "password"}
                 name="confirmPassword"

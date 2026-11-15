@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { LuMail, LuPhone, LuMapPin, LuClock } from "lucide-react";
+import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import { validateContactForm } from "../../utils/validators";
 
 const SERVICE_OPTIONS = [
@@ -119,22 +119,22 @@ export default function Contact() {
               <div className="space-y-6">
                 {[
                   {
-                    icon: LuMail,
+                    icon: Mail,
                     title: "Email",
                     value: "hello@growthverse.example",
                   },
                   {
-                    icon: LuPhone,
+                    icon: Phone,
                     title: "Phone",
                     value: "+1 (555) 000-0000",
                   },
                   {
-                    icon: LuMapPin,
+                    icon: MapPin,
                     title: "Location",
                     value: "Placeholder Address",
                   },
                   {
-                    icon: LuClock,
+                    icon: Clock,
                     title: "Hours",
                     value: "Mon - Fri, 9:00 AM - 6:00 PM",
                   },
