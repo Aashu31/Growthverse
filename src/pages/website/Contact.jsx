@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Mail, Phone, MapPin, Clock } from "lucide-react";
-import { validateContactForm } from "../../utils/validators";
+import { ArrowRight } from "lucide-react";
+import { Button } from "../../components/common/Button";
+import { SectionHeader } from "../../components/website/Hero";
 
-const SERVICE_OPTIONS = [
+const PROJECT_TYPE_OPTIONS = [
   "Website Development",
   "Web Application Development",
   "UI/UX Design",
@@ -14,294 +15,316 @@ const SERVICE_OPTIONS = [
   "Sarthi - School Management Solution",
 ];
 
-const BUDGET_OPTIONS = [
-  "Under $2,500",
-  "$2,500 - $5,000",
-  "$5,000 - $10,000",
-  "$10,000 - $25,000",
-  "$25,000+",
-];
-
-const TIMELINE_OPTIONS = [
-  "ASAP",
-  "1-4 weeks",
-  "1-3 months",
-  "3-6 months",
-  "6+ months",
-];
+const WEB3FORMS_ACCESS_KEY = "8af1e732-87a4-4f9f-b3cf-b102529573bc";
+const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
-    phone: "",
-    companyName: "",
-    serviceRequired: "",
-    budgetRange: "",
-    projectTimeline: "",
-    projectDescription: "",
+    subject: "",
+    projectType: "",
+    message: "",
   });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
+  const [submitResult, setSubmitResult] = useState(null); // 'success' | 'error'
+  const [submitMessage, setSubmitMessage] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    setErrors((prev) => ({ ...prev, [name]: "" }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const validationErrors = validateContactForm(formData);
-    setErrors(validationErrors);
-    if (Object.keys(validationErrors).length === 0) {
-      setIsSubmitting(true);
-      // Simulate form submission
-      setTimeout(() => {
-        setIsSubmitting(false);
-        setSubmitted(true);
-        // Frontend-only: store demonstration enquiry locally
-        const enquiry = { ...formData, id: Date.now(), submittedAt: new Date().toISOString() };
-        try {
-          const existing = JSON.parse(localStorage.getItem("growthverse-contact-demo") || "[]");
-          localStorage.setItem("growthverse-contact-demo", JSON.stringify([...existing, enquiry]));
-        } catch (err) {
-          console.error("LocalStorage error:", err);
-        }
-      }, 1500);
+    if (errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: "" }));
     }
   };
 
-  if (submitted) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-dark">
-        <div className="max-w-md w-full bg-white dark:bg-dark-secondary rounded-3xl border border-border dark:border-gray-700 shadow-2xl p-8 md:p-12 text-center">
-          <div className="w-16 h-16 rounded-full bg-green-100 dark:bg-green-900/20 flex items-center justify-center mx-auto mb-6 text-green-600 dark:text-green-400">
-            <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-            </svg>
-          </div>
-          <h2 className="text-h3 text-primary-text dark:text-white mb-3">Message Sent</h2>
-          <p className="text-secondary-text dark:text-gray-300 mb-8">
-            Your enquiry has been recorded locally for demonstration purposes.
-            This is a frontend-only submission; no email was delivered and no
-            server received your message.
-          </p>
-          <button
-            onClick={() => setSubmitted(false)}
-            className="btn-primary"
-          >
-            Send Another Message
-          </button>
-        </div>
-      </div>
-    );
-  }
+  const validateEmail = (email) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!formData.fullName.trim()) {
+      newErrors.fullName = "Full name is required.";
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = "Email address is required.";
+    } else if (!validateEmail(formData.email)) {
+      newErrors.email = "Please enter a valid email address.";
+    }
+
+    if (!formData.message.trim()) {
+      newErrors.message = "Please enter a message.";
+    } else if (formData.message.trim().length < 10) {
+      newErrors.message = "Please provide more details (at least 10 characters).";
+    }
+
+    return newErrors;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const validationErrors = validateForm();
+    setErrors(validationErrors);
+
+    if (Object.keys(validationErrors).length > 0) {
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitResult(null);
+    setSubmitMessage("");
+
+    const formDataObj = new FormData();
+    formDataObj.append("access_key", WEB3FORMS_ACCESS_KEY);
+    formDataObj.append("name", formData.fullName);
+    formDataObj.append("email", formData.email);
+    formDataObj.append("subject", formData.subject || "No subject");
+    formDataObj.append("project_type", formData.projectType || "Not specified");
+    formDataObj.append("message", formData.message);
+
+    try {
+      const response = await fetch(WEB3FORMS_ENDPOINT, {
+        method: "POST",
+        body: formDataObj,
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSubmitResult("success");
+        setSubmitMessage("Thank you! Your message has been sent successfully.");
+        // Clear form after successful submission
+        setFormData({
+          fullName: "",
+          email: "",
+          subject: "",
+          projectType: "",
+          message: "",
+        });
+      } else {
+        setSubmitResult("error");
+        setSubmitMessage(
+          data.message || "Failed to send your message. Please try again."
+        );
+      }
+    } catch (err) {
+      setSubmitResult("error");
+      setSubmitMessage(
+        "Network error. Please check your connection and try again."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-dark">
+    <div className="min-h-screen bg-ivory text-charcoal dark:bg-charcoal-dark dark:text-white">
       <section className="py-20 lg:py-32">
         <div className="container-premium">
           <div className="grid lg:grid-cols-2 gap-16">
+            {/* Left side: Information */}
             <div className="space-y-8">
               <div className="space-y-4">
-                <span className="text-blue-600 dark:text-electric-blue font-medium uppercase tracking-wider text-sm">
-                  Contact Us
-                </span>
-                <h2 className="text-h2">Get in Touch</h2>
-                <p className="text-secondary-text dark:text-gray-300 leading-relaxed">
-                  Have a project in mind? Send us a message and we'll respond
-                  as soon as possible. This is a frontend contact form — all
-                  submissions are stored locally for demonstration only.
+                <span className="badge-accent mb-4 block">Contact Us</span>
+                <h2 className="text-h2">Let's Build Something Meaningful.</h2>
+                <p className="text-muted dark:text-gray-400 leading-relaxed">
+                  Have a digital project in mind? Whether you need a website,
+                  web application, or digital strategy, we're here to help you
+                  build and grow your business.
                 </p>
               </div>
+
               <div className="space-y-6">
-                {[
-                  {
-                    icon: Mail,
-                    title: "Email",
-                    value: "hello@growthverse.example",
-                  },
-                  {
-                    icon: Phone,
-                    title: "Phone",
-                    value: "+1 (555) 000-0000",
-                  },
-                  {
-                    icon: MapPin,
-                    title: "Location",
-                    value: "Placeholder Address",
-                  },
-                  {
-                    icon: Clock,
-                    title: "Hours",
-                    value: "Mon - Fri, 9:00 AM - 6:00 PM",
-                  },
-                ].map((item, idx) => (
-                  <div key={idx} className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-blue-600 dark:text-electric-blue flex-shrink-0">
-                      <item.icon className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <h4 className="font-medium text-primary-text dark:text-white">{item.title}</h4>
-                      <p className="text-secondary-text dark:text-gray-300 text-sm">{item.value}</p>
-                    </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-forest-light flex items-center justify-center text-forest-dark flex-shrink-0">
+                    <span className="text-[16px]">✉</span>
                   </div>
-                ))}
+                  <div>
+                    <h4 className="font-semibold text-charcoal dark:text-white">Email Us</h4>
+                    <p className="text-muted dark:text-gray-400 text-sm">
+                      Use the contact form below to send us a message.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-forest-light flex items-center justify-center text-forest-dark flex-shrink-0">
+                    <span className="text-[16px]">●</span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-charcoal dark:text-white">Project Discussion</h4>
+                    <p className="text-muted dark:text-gray-400 text-sm">
+                      Tell us about your project goals, timeline, and budget.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-forest-light flex items-center justify-center text-forest-dark flex-shrink-0">
+                    <span className="text-[16px]">●</span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-charcoal dark:text-white">Next Steps</h4>
+                    <p className="text-muted dark:text-gray-400 text-sm">
+                      We'll review your enquiry and respond as soon as possible.
+                    </p>
+                  </div>
+                </div>
               </div>
+
+              <a href="/services" className="btn-secondary">
+                View Our Services <ArrowRight className="h-4 w-4 ml-1" />
+              </a>
             </div>
+
+            {/* Right side: Form */}
             <div className="space-y-6">
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div className="grid md:grid-cols-2 gap-5">
+              {submitResult === "success" && (
+                <div className="p-6 rounded-xl border border-forest/30 bg-forest-light/50 text-forest-dark">
+                  <h4 className="font-semibold mb-2">Message Sent</h4>
+                  <p className="text-sm">{submitMessage}</p>
+                  <button
+                    onClick={() => setSubmitResult(null)}
+                    className="mt-4 text-sm font-medium text-forest-dark hover:underline"
+                  >
+                    Send another message
+                  </button>
+                </div>
+              )}
+              {submitResult === "error" && (
+                <div className="p-6 rounded-xl border border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-900/10 text-red-800 dark:text-red-200">
+                  <h4 className="font-semibold mb-2">Submission Failed</h4>
+                  <p className="text-sm">{submitMessage || "Please try again."}</p>
+                </div>
+              )}
+              {submitResult === null && (
+                <form onSubmit={handleSubmit} className="space-y-5">
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-primary-text dark:text-white block">
+                    <label
+                      htmlFor="fullName"
+                      className="text-sm font-medium text-charcoal dark:text-white block"
+                    >
                       Full Name <span className="text-red-500">*</span>
                     </label>
                     <input
-                      type="text"
+                      id="fullName"
                       name="fullName"
+                      type="text"
                       value={formData.fullName}
                       onChange={handleChange}
-                      className={`w-full px-4 py-3 rounded-xl border ${errors.fullName ? "border-red-500" : "border-border"} bg-white dark:bg-gray-800 text-primary-text dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-600/50 ${errors.fullName ? "ring-red-500/20" : ""}`}
+                      className={`w-full px-4 py-3 rounded-xl border ${errors.fullName ? "border-red-500" : "border-border"} bg-white dark:bg-charcoal text-charcoal dark:text-white focus:outline-none focus:ring-2 focus:ring-forest/50 transition-colors ${errors.fullName ? "ring-red-500/20" : ""}`}
                       placeholder="John Doe"
+                      required
                     />
                     {errors.fullName && (
-                      <p className="text-xs text-red-600 dark:text-red-400">{errors.fullName}</p>
+                      <p className="text-xs text-red-600 dark:text-red-400 mt-1">
+                        {errors.fullName}
+                      </p>
                     )}
                   </div>
+
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-primary-text dark:text-white block">
-                      Email <span className="text-red-500">*</span>
+                    <label
+                      htmlFor="email"
+                      className="text-sm font-medium text-charcoal dark:text-white block"
+                    >
+                      Email Address <span className="text-red-500">*</span>
                     </label>
                     <input
-                      type="email"
+                      id="email"
                       name="email"
+                      type="email"
                       value={formData.email}
                       onChange={handleChange}
-                      className={`w-full px-4 py-3 rounded-xl border ${errors.email ? "border-red-500" : "border-border"} bg-white dark:bg-gray-800 text-primary-text dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-600/50 ${errors.email ? "ring-red-500/20" : ""}`}
+                      className={`w-full px-4 py-3 rounded-xl border ${errors.email ? "border-red-500" : "border-border"} bg-white dark:bg-charcoal text-charcoal dark:text-white focus:outline-none focus:ring-2 focus:ring-forest/50 transition-colors ${errors.email ? "ring-red-500/20" : ""}`}
                       placeholder="john@company.com"
+                      required
                     />
                     {errors.email && (
-                      <p className="text-xs text-red-600 dark:text-red-400">{errors.email}</p>
+                      <p className="text-xs text-red-600 dark:text-red-400 mt-1">
+                        {errors.email}
+                      </p>
                     )}
                   </div>
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-primary-text dark:text-white block">
-                    Phone
-                  </label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    className={`w-full px-4 py-3 rounded-xl border ${errors.phone ? "border-red-500" : "border-border"} bg-white dark:bg-gray-800 text-primary-text dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-600/50 ${errors.phone ? "ring-red-500/20" : ""}`}
-                    placeholder="+1 (555) 000-0000"
-                  />
-                  {errors.phone && (
-                    <p className="text-xs text-red-600 dark:text-red-400">{errors.phone}</p>
-                  )}
-                </div>
-                <div className="grid md:grid-cols-2 gap-5">
+
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-primary-text dark:text-white block">
-                      Company Name <span className="text-red-500">*</span>
+                    <label
+                      htmlFor="subject"
+                      className="text-sm font-medium text-charcoal dark:text-white block"
+                    >
+                      Subject (optional)
                     </label>
                     <input
+                      id="subject"
+                      name="subject"
                       type="text"
-                      name="companyName"
-                      value={formData.companyName}
+                      value={formData.subject}
                       onChange={handleChange}
-                      className={`w-full px-4 py-3 rounded-xl border ${errors.companyName ? "border-red-500" : "border-border"} bg-white dark:bg-gray-800 text-primary-text dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-600/50 ${errors.companyName ? "ring-red-500/20" : ""}`}
-                      placeholder="Acme Corp"
+                      className="w-full px-4 py-3 rounded-xl border border-border dark:border-dark-border bg-white dark:bg-charcoal text-charcoal dark:text-white focus:outline-none focus:ring-2 focus:ring-forest/50 transition-colors"
+                      placeholder="e.g., Website Redesign"
                     />
-                    {errors.companyName && (
-                      <p className="text-xs text-red-600 dark:text-red-400">{errors.companyName}</p>
-                    )}
                   </div>
+
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-primary-text dark:text-white block">
-                      Service Required <span className="text-red-500">*</span>
+                    <label
+                      htmlFor="projectType"
+                      className="text-sm font-medium text-charcoal dark:text-white block"
+                    >
+                      Project Type (optional)
                     </label>
                     <select
-                      name="serviceRequired"
-                      value={formData.serviceRequired}
+                      id="projectType"
+                      name="projectType"
+                      value={formData.projectType}
                       onChange={handleChange}
-                      className={`w-full px-4 py-3 rounded-xl border ${errors.serviceRequired ? "border-red-500" : "border-border"} bg-white dark:bg-gray-800 text-primary-text dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-600/50 ${errors.serviceRequired ? "ring-red-500/20" : ""}`}
+                      className="w-full px-4 py-3 rounded-xl border border-border dark:border-dark-border bg-white dark:bg-charcoal text-charcoal dark:text-white focus:outline-none focus:ring-2 focus:ring-forest/50 transition-colors"
                     >
-                      <option value="">Select a service</option>
-                      {SERVICE_OPTIONS.map((svc) => (
-                        <option key={svc} value={svc}>{svc}</option>
+                      <option value="">Select a project type</option>
+                      {PROJECT_TYPE_OPTIONS.map((type) => (
+                        <option key={type} value={type}>
+                          {type}
+                        </option>
                       ))}
                     </select>
-                    {errors.serviceRequired && (
-                      <p className="text-xs text-red-600 dark:text-red-400">{errors.serviceRequired}</p>
+                  </div>
+
+                  <div className="space-y-2">
+                    <label
+                      htmlFor="message"
+                      className="text-sm font-medium text-charcoal dark:text-white block"
+                    >
+                      Message <span className="text-red-500">*</span>
+                    </label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      rows={5}
+                      className={`w-full px-4 py-3 rounded-xl border ${errors.message ? "border-red-500" : "border-border"} bg-white dark:bg-charcoal text-charcoal dark:text-white focus:outline-none focus:ring-2 focus:ring-forest/50 transition-colors ${errors.message ? "ring-red-500/20" : ""}`}
+                      placeholder="Tell us about your project..."
+                      required
+                    />
+                    {errors.message && (
+                      <p className="text-xs text-red-600 dark:text-red-400 mt-1">
+                        {errors.message}
+                      </p>
                     )}
                   </div>
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-primary-text dark:text-white block">
-                    Budget Range <span className="text-red-500">*</span>
-                  </label>
-                  <select
-                    name="budgetRange"
-                    value={formData.budgetRange}
-                    onChange={handleChange}
-                    className={`w-full px-4 py-3 rounded-xl border ${errors.budgetRange ? "border-red-500" : "border-border"} bg-white dark:bg-gray-800 text-primary-text dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-600/50 ${errors.budgetRange ? "ring-red-500/20" : ""}`}
+
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="btn-primary w-full py-4"
                   >
-                    <option value="">Select budget</option>
-                    {BUDGET_OPTIONS.map((b) => (
-                      <option key={b} value={b}>{b}</option>
-                    ))}
-                  </select>
-                  {errors.budgetRange && (
-                    <p className="text-xs text-red-600 dark:text-red-400">{errors.budgetRange}</p>
-                  )}
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-primary-text dark:text-white block">
-                    Project Timeline <span className="text-red-500">*</span>
-                  </label>
-                  <select
-                    name="projectTimeline"
-                    value={formData.projectTimeline}
-                    onChange={handleChange}
-                    className={`w-full px-4 py-3 rounded-xl border ${errors.projectTimeline ? "border-red-500" : "border-border"} bg-white dark:bg-gray-800 text-primary-text dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-600/50 ${errors.projectTimeline ? "ring-red-500/20" : ""}`}
-                  >
-                    <option value="">Select timeline</option>
-                    {TIMELINE_OPTIONS.map((t) => (
-                      <option key={t} value={t}>{t}</option>
-                    ))}
-                  </select>
-                  {errors.projectTimeline && (
-                    <p className="text-xs text-red-600 dark:text-red-400">{errors.projectTimeline}</p>
-                  )}
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-primary-text dark:text-white block">
-                    Project Description <span className="text-red-500">*</span>
-                  </label>
-                  <textarea
-                    name="projectDescription"
-                    value={formData.projectDescription}
-                    onChange={handleChange}
-                    rows={5}
-                    className={`w-full px-4 py-3 rounded-xl border ${errors.projectDescription ? "border-red-500" : "border-border"} bg-white dark:bg-gray-800 text-primary-text dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-600/50 ${errors.projectDescription ? "ring-red-500/20" : ""}`}
-                    placeholder="Tell us about your project..."
-                  />
-                  {errors.projectDescription && (
-                    <p className="text-xs text-red-600 dark:text-red-400">{errors.projectDescription}</p>
-                  )}
-                </div>
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="btn-primary w-full py-4"
-                >
-                  {isSubmitting ? "Sending..." : "Submit Enquiry"}
-                </button>
-              </form>
+                    {isSubmitting ? "Sending..." : "Send Message"}
+                  </button>
+                </form>
+              )}
             </div>
           </div>
         </div>

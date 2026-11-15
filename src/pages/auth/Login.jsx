@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Mail, Lock, Eye, EyeOff, ArrowRight } from "lucide-react";
-import { validateAuthForm } from "../../utils/validators";
+import { Mail, Lock, Eye, EyeOff } from "lucide-react";
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -11,7 +10,7 @@ export default function Login() {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate();
+  const navigate = useNavigate;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,36 +20,48 @@ export default function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const validationErrors = validateAuthForm(formData, "login");
-    setErrors(validationErrors);
-    if (Object.keys(validationErrors).length === 0) {
+    const newErrors = {};
+
+    if (!formData.email.trim()) {
+      newErrors.email = "Email address is required.";
+    }
+
+    if (!formData.password.trim()) {
+      newErrors.password = "Password is required.";
+    }
+
+    setErrors(newErrors);
+
+    if (Object.keys(newErrors).length === 0) {
       setIsSubmitting(true);
       setTimeout(() => {
         setIsSubmitting(false);
-        // Frontend-only demo authentication - NOT secure
-        const demoUser = { name: "Demo User", email: formData.email };
-        localStorage.setItem("growthverse-demo-user", JSON.stringify(demoUser));
+        // Frontend-only demo authentication
+        localStorage.setItem(
+          "growthverse-demo-user",
+          JSON.stringify({ name: "Demo User", email: formData.email })
+        );
         navigate("/dashboard");
       }, 1000);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-dark px-4">
-      <div className="max-w-md w-full bg-white dark:bg-dark-secondary rounded-3xl border border-border dark:border-gray-700 shadow-2xl p-8 md:p-12">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-charcoal-dark px-4">
+      <div className="max-w-md w-full bg-white dark:bg-charcoal rounded-3xl border border-border dark:border-dark-border shadow-xl p-8 md:p-12">
         <div className="text-center mb-10">
-          <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-blue-600/25">
+          <div className="w-16 h-16 bg-forest rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-forest/25">
             <span className="text-white font-bold text-2xl">GV</span>
           </div>
-          <h2 className="text-h3 text-primary-text dark:text-white">Welcome Back</h2>
-          <p className="text-secondary-text dark:text-gray-300 text-sm mt-2">
+          <h2 className="text-h3 text-charcoal dark:text-white">Welcome Back</h2>
+          <p className="text-muted dark:text-gray-400 text-sm mt-2">
             Sign in to access your dashboard
           </p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-5">
           <div className="space-y-2">
-            <label className="text-sm font-medium text-primary-text dark:text-white block">
+            <label className="text-sm font-medium text-charcoal dark:text-white block">
               Email Address
             </label>
             <div className="relative">
@@ -60,7 +71,7 @@ export default function Login() {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className={`w-full pl-10 pr-4 py-3 rounded-xl border ${errors.email ? "border-red-500" : "border-border"} bg-white dark:bg-gray-800 text-primary-text dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-600/50 ${errors.email ? "ring-red-500/20" : ""}`}
+                className={`w-full pl-10 pr-4 py-3 rounded-xl border ${errors.email ? "border-red-500" : "border-border"} bg-white dark:bg-charcoal text-charcoal dark:text-white focus:outline-none focus:ring-2 focus:ring-forest/50 ${errors.email ? "ring-red-500/20" : ""}`}
                 placeholder="you@company.com"
               />
             </div>
@@ -71,13 +82,13 @@ export default function Login() {
 
           <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <label className="text-sm font-medium text-primary-text dark:text-white block">
+              <label className="text-sm font-medium text-charcoal dark:text-white block">
                 Password
               </label>
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="text-xs text-blue-600 dark:text-electric-blue hover:underline"
+                className="text-xs text-forest-dark dark:text-forest-light hover:underline"
               >
                 {showPassword ? "Hide" : "Show"}
               </button>
@@ -89,7 +100,7 @@ export default function Login() {
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                className={`w-full pl-10 pr-10 py-3 rounded-xl border ${errors.password ? "border-red-500" : "border-border"} bg-white dark:bg-gray-800 text-primary-text dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-600/50 ${errors.password ? "ring-red-500/20" : ""}`}
+                className={`w-full pl-10 pr-10 py-3 rounded-xl border ${errors.password ? "border-red-500" : "border-border"} bg-white dark:bg-charcoal text-charcoal dark:text-white focus:outline-none focus:ring-2 focus:ring-forest/50 ${errors.password ? "ring-red-500/20" : ""}`}
                 placeholder="••••••••"
               />
               <button
@@ -106,11 +117,11 @@ export default function Login() {
           </div>
 
           <div className="flex items-center justify-between">
-            <label className="flex items-center gap-2 text-sm text-secondary-text dark:text-gray-300 cursor-pointer">
-              <input type="checkbox" className="rounded border-gray-300 text-blue-600 focus:ring-blue-600" />
+            <label className="flex items-center gap-2 text-sm text-muted dark:text-gray-400 cursor-pointer">
+              <input type="checkbox" className="rounded border-gray-300 text-forest-dark focus:ring-forest-dark" />
               Remember me
             </label>
-            <Link to="/forgot-password" className="text-sm text-blue-600 dark:text-electric-blue hover:underline">
+            <Link to="/forgot-password" className="text-sm text-forest-dark dark:text-forest-light hover:underline">
               Forgot password?
             </Link>
           </div>
@@ -124,19 +135,18 @@ export default function Login() {
           </button>
         </form>
 
-        <div className="mt-8 pt-6 border-t border-border dark:border-gray-700">
-          <p className="text-sm text-secondary-text dark:text-gray-400 text-center mb-4">
+        <div className="mt-8 pt-6 border-t border-border dark:border-dark-border">
+          <p className="text-sm text-muted dark:text-gray-400 text-center mb-4">
             Don't have an account?{" "}
-            <Link to="/signup" className="text-blue-600 dark:text-electric-blue font-medium hover:underline">
+            <Link to="/signup" className="text-forest-dark dark:text-forest-light font-medium hover:underline">
               Create an account
             </Link>
           </p>
-          <div className="bg-blue-50 dark:bg-blue-900/10 rounded-xl p-4 border border-blue-100 dark:border-blue-800/30">
-            <p className="text-xs text-secondary-text dark:text-gray-400 leading-relaxed">
-              <strong className="text-primary-text dark:text-white">Demo Mode:</strong>
+          <div className="bg-forest-light/50 dark:bg-forest/10 rounded-xl p-4 border border-forest/20 dark:border-forest/20">
+            <p className="text-xs text-muted dark:text-gray-400 leading-relaxed">
+              <strong className="text-charcoal dark:text-white">Demo Mode:</strong>
               This is frontend-only demonstration authentication. No real
-              authentication backend exists. Any credentials will simulate a
-              successful login.
+              authentication backend exists.
             </p>
           </div>
         </div>

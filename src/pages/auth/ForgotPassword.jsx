@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Mail, ArrowLeft } from "lucide-react";
+import { Mail } from "lucide-react";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -9,7 +9,7 @@ export default function ForgotPassword() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!email) return;
+    if (!email.trim()) return;
     setIsSubmitting(true);
     setTimeout(() => {
       setIsSubmitting(false);
@@ -19,13 +19,13 @@ export default function ForgotPassword() {
 
   if (sent) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-dark px-4">
-        <div className="max-w-md w-full bg-white dark:bg-dark-secondary rounded-3xl border border-border dark:border-gray-700 shadow-2xl p-8 md:p-12 text-center">
-          <div className="w-16 h-16 rounded-full bg-blue-100 dark:bg-blue-900/20 flex items-center justify-center mx-auto mb-6 text-blue-600 dark:text-electric-blue">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-charcoal-dark px-4">
+        <div className="max-w-md w-full bg-white dark:bg-charcoal rounded-3xl border border-border dark:border-dark-border shadow-2xl p-8 md:p-12 text-center">
+          <div className="w-16 h-16 rounded-full bg-forest-light flex items-center justify-center mx-auto mb-6 text-forest-dark">
             <Mail className="h-8 w-8" />
           </div>
-          <h2 className="text-h3 text-primary-text dark:text-white mb-3">Check Your Email</h2>
-          <p className="text-secondary-text dark:text-gray-300 mb-8">
+          <h2 className="text-h3 text-charcoal dark:text-white mb-3">Check Your Email</h2>
+          <p className="text-muted dark:text-gray-400 mb-8">
             Password reset instructions have been sent to {email}.
             <br />
             <span className="text-xs text-gray-400 block mt-2">
@@ -41,21 +41,21 @@ export default function ForgotPassword() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-dark px-4">
-      <div className="max-w-md w-full bg-white dark:bg-dark-secondary rounded-3xl border border-border dark:border-gray-700 shadow-2xl p-8 md:p-12">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-charcoal-dark px-4">
+      <div className="max-w-md w-full bg-white dark:bg-charcoal rounded-3xl border border-border dark:border-dark-border shadow-2xl p-8 md:p-12">
         <div className="text-center mb-10">
-          <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-blue-600/25">
+          <div className="w-16 h-16 bg-forest rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-forest/25">
             <span className="text-white font-bold text-2xl">GV</span>
           </div>
-          <h2 className="text-h3 text-primary-text dark:text-white">Forgot Password</h2>
-          <p className="text-secondary-text dark:text-gray-300 text-sm mt-2">
+          <h2 className="text-h3 text-charcoal dark:text-white">Forgot Password</h2>
+          <p className="text-muted dark:text-gray-400 text-sm mt-2">
             Enter your email to reset your password
           </p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-5">
           <div className="space-y-2">
-            <label className="text-sm font-medium text-primary-text dark:text-white block">
+            <label className="text-sm font-medium text-charcoal dark:text-white block">
               Email Address
             </label>
             <div className="relative">
@@ -64,7 +64,7 @@ export default function ForgotPassword() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 rounded-xl border border-border dark:border-gray-600 bg-white dark:bg-gray-800 text-primary-text dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-600/50"
+                className="w-full pl-10 pr-4 py-3 rounded-xl border border-border dark:border-dark-border bg-white dark:bg-charcoal text-charcoal dark:text-white focus:outline-none focus:ring-2 focus:ring-forest/50"
                 placeholder="you@company.com"
               />
             </div>
@@ -79,16 +79,16 @@ export default function ForgotPassword() {
           </button>
         </form>
 
-        <div className="mt-8 pt-6 border-t border-border dark:border-gray-700">
-          <p className="text-sm text-secondary-text dark:text-gray-400 text-center">
+        <div className="mt-8 pt-6 border-t border-border dark:border-dark-border">
+          <p className="text-sm text-muted dark:text-gray-400 text-center">
             Remember your password?{" "}
-            <Link to="/login" className="text-blue-600 dark:text-electric-blue font-medium hover:underline">
+            <Link to="/login" className="text-forest-dark dark:text-forest-light font-medium hover:underline">
               Sign in
             </Link>
           </p>
-          <div className="bg-blue-50 dark:bg-blue-900/10 rounded-xl p-4 border border-blue-100 dark:border-blue-800/30 mt-6">
-            <p className="text-xs text-secondary-text dark:text-gray-400 leading-relaxed">
-              <strong className="text-primary-text dark:text-white">Demo Mode:</strong>
+          <div className="bg-forest-light/50 dark:bg-forest/10 rounded-xl p-4 border border-forest/20 dark:border-forest/20 mt-6">
+            <p className="text-xs text-muted dark:text-gray-400 leading-relaxed">
+              <strong className="text-charcoal dark:text-white">Demo Mode:</strong>
               Password reset is a frontend demonstration. No real reset email
               is delivered and no backend authentication exists.
             </p>

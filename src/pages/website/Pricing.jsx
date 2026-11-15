@@ -1,147 +1,210 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { PRICING_DATA } from "../../data";
+import React, { useState } from "react";
+import { ArrowRight } from "lucide-react";
+import { Button } from "../../components/common/Button";
+import { SectionHeader } from "../../components/website/Hero";
+
+const DEV_PRICING_INR = {
+  min: "₹4,000",
+  max: "₹6,000",
+  includes: [
+    "Website/project development",
+    "Responsive design",
+    "Mobile-friendly implementation",
+    "Basic UI customization",
+    "Deployment assistance where applicable",
+    "Three months of free support and maintenance",
+  ],
+  note: "One-time project pricing. Final quotation depends on project scope and requirements.",
+};
+
+const DEV_PRICING_USD = {
+  min: "$1,000",
+  max: "$1,500",
+  includes: [
+    "Website/project development",
+    "Responsive design",
+    "Mobile-friendly implementation",
+    "Basic UI customization",
+    "Deployment assistance where applicable",
+    "Three months of free support and maintenance",
+  ],
+  note: "One-time project pricing. Final quotation depends on project scope and requirements.",
+};
+
+const MAINT_PRICING_INR = [
+  { name: "Monthly", price: "₹1,000", period: "Per month" },
+  { name: "Quarterly", price: "₹4,000", period: "Per 3 months" },
+  { name: "Yearly", price: "₹11,000", period: "Per year" },
+];
+
+const MAINT_PRICING_USD = [
+  { name: "Monthly", price: "$300", period: "Per month" },
+  { name: "Quarterly", price: "$1,200", period: "Per 3 months" },
+  { name: "Yearly", price: "$2,200", period: "Per year" },
+];
+
+const MAINTENANCE_INCLUDES = [
+  "Website maintenance",
+  "Technical support",
+  "Minor website modifications",
+  "Content and text modifications",
+  "Basic UI adjustments",
+  "Bug fixes",
+  "General website assistance",
+];
+
+const PRICING_TERMS = [
+  "Development pricing is a one-time project charge.",
+  "Three months of support and maintenance are included after project delivery.",
+  "Paid maintenance plans are optional after the included support period.",
+  "Maintenance plans cover reasonable minor modifications and technical support.",
+  "New features, major redesigns, and substantial scope changes require separate quotations.",
+  "The precise scope of support and turnaround time should be agreed with the customer.",
+];
 
 export default function Pricing() {
+  const [currency, setCurrency] = useState("INR");
+
+  const devPricing = currency === "INR" ? DEV_PRICING_INR : DEV_PRICING_USD;
+  const maintPricing = currency === "INR" ? MAINT_PRICING_INR : MAINT_PRICING_USD;
+  const currencySymbol = currency === "INR" ? "₹" : "$";
+
   return (
-    <div className="min-h-screen bg-white dark:bg-dark">
+    <div className="min-h-screen bg-ivory text-charcoal dark:bg-charcoal-dark dark:text-white">
       <section className="py-20 lg:py-32">
         <div className="container-premium">
-          <div className="text-center mb-16">
-            <h2 className="text-h2 mb-4">Simple, Transparent Pricing</h2>
-            <p className="text-lg text-secondary-text max-w-2xl mx-auto">
-              Choose the plan that fits your business needs.
-            </p>
-          </div>
-          <p className="text-secondary-text dark:text-gray-300 text-center max-w-xl mx-auto mb-16">
-            Pricing amounts are demonstration values until actual company
-            pricing is supplied.
-          </p>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {PRICING_DATA.map((plan) => (
-              <div
-                key={plan.id}
-                className={`card-premium relative ${
-                  plan.popular
-                    ? "border-blue-600 dark:border-blue-800/50 ring-1 ring-blue-600/20"
-                    : ""
-                }`}
-              >
-                {plan.popular && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-xs font-bold px-4 py-1 rounded-full uppercase tracking-wider shadow-lg shadow-blue-600/25">
-                    Popular
+          <SectionHeader
+            title="Transparent Pricing"
+            description="Simple, honest pricing for development and ongoing support."
+          />
+
+          {/* Development Pricing Section */}
+          <div className="mb-20 lg:mb-24">
+            <div className="text-center mb-12">
+              <h2 className="text-h3 mb-4">Website Development Pricing</h2>
+              <p className="text-muted dark:text-gray-400">
+                One-time project development charges.
+              </p>
+            </div>
+            <div className="card-premium p-8 lg:p-12 rounded-xl border border-border dark:border-dark-border">
+              <div className="flex flex-col lg:flex-row gap-8 items-center">
+                <div className="flex-1">
+                  <h3 className="text-h3 mb-2">{currency === "INR" ? "Indian Customers" : "International Customers"}</h3>
+                  <div className="text-5xl font-display font-bold text-charcoal dark:text-white mb-2">
+                    {devPricing.min} – {devPricing.max}
                   </div>
-                )}
-                <h3 className="text-xl font-semibold text-primary-text dark:text-white mb-2">
-                  {plan.name}
-                </h3>
-                <p className="text-secondary-text dark:text-gray-300 text-sm mb-6">
-                  {plan.description}
-                </p>
-                <div className="mb-8">
-                  <span className="text-h1 font-bold text-primary-text dark:text-white">
-                    {plan.currency === "USD" ? "$" : ""}{plan.price}
-                  </span>
-                  <span className="text-secondary-text dark:text-gray-400 text-sm">
-                    /{plan.billingType}
-                  </span>
+                  <p className="text-muted dark:text-gray-400 text-sm mb-4">
+                    One-time project pricing. Final quotation depends on project scope and requirements.
+                  </p>
+                  <h4 className="font-semibold text-charcoal dark:text-white mb-3">Includes</h4>
+                  <ul className="space-y-2 mb-6">
+                    {devPricing.includes.map((item, idx) => (
+                      <li key={idx} className="flex items-start gap-2 text-sm text-muted dark:text-gray-400">
+                        <span className="w-4 h-4 rounded-full bg-forest-light flex-shrink-0 mt-0.5 flex items-center justify-center text-forest-dark">
+                          <span className="text-[10px]">✓</span>
+                        </span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <h4 className="font-semibold text-primary-text dark:text-white mb-3">
-                  Included Features
-                </h4>
-                <ul className="space-y-3 mb-8">
-                  {plan.features.map((feat, idx) => (
-                    <li key={idx} className="flex items-start gap-3 text-secondary-text dark:text-gray-300 text-sm">
-                      <svg className="h-4 w-4 flex-shrink-0 mt-0.5 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                      </svg>
-                      {feat}
-                    </li>
-                  ))}
-                </ul>
-                <h4 className="font-semibold text-primary-text dark:text-white mb-3">
-                  Limitations
-                </h4>
-                <ul className="space-y-2 mb-8">
-                  {plan.limitations.map((lim, idx) => (
-                    <li key={idx} className="flex items-start gap-2 text-secondary-text dark:text-gray-400 text-sm">
-                      <span className="text-orange-500">-</span>
-                      {lim}
-                    </li>
-                  ))}
-                </ul>
-                <Link
-                  to="/contact"
-                  className={`block text-center py-4 rounded-xl font-semibold transition-colors ${
-                    plan.popular
-                      ? "bg-blue-600 text-white hover:bg-blue-700 shadow-lg shadow-blue-600/25"
-                      : "bg-white dark:bg-dark-secondary text-primary-text dark:text-white border border-border dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800"
-                  }`}
-                >
-                  {plan.price === 0 ? "Get Custom Quote" : "Select Plan"}
-                </Link>
-              </div>
-            ))}
-            <div className="lg:col-span-1">
-              <div className="card-premium">
-                <h3 className="text-xl font-semibold text-primary-text dark:text-white mb-6">
-                  Enterprise / Custom
-                </h3>
-                <p className="text-secondary-text dark:text-gray-300 text-sm mb-8">
-                  Need a tailored solution for your organization? Contact us for
-                  custom pricing and dedicated support.
-                </p>
-                <Link
-                  to="/contact"
-                  className="block text-center py-4 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors"
-                >
-                  Request Custom Quote
-                </Link>
+                <div className="flex-1 border-t border-border dark:border-dark-border lg:border-t-0 lg:border-l pt-6 lg:pt-0">
+                  <a href="/contact" className="btn-primary w-full lg:w-auto">
+                    Discuss Your Project
+                  </a>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
 
-      <section className="section-padding bg-gray-50 dark:bg-dark-secondary">
-        <div className="container-premium">
-          <div className="text-center mb-16">
-            <h2 className="text-h2 mb-4">Pricing FAQ</h2>
-            <p className="text-lg text-secondary-text max-w-2xl mx-auto">
-              Common questions about our pricing plans.
-            </p>
-          </div>
-          <div className="max-w-2xl mx-auto space-y-3">
-            {[
-              {
-                q: "Are these prices real?",
-                a: "No. Pricing amounts are demonstration values until actual company pricing is supplied.",
-              },
-              {
-                q: "Can I change plans later?",
-                a: "Yes. You can upgrade or downgrade your plan at any time.",
-              },
-              {
-                q: "Is there a free trial?",
-                a: "Contact us to discuss trial options for your business needs.",
-              },
-              {
-                q: "What payment methods are accepted?",
-                a: "This is a frontend demonstration. No real payment processing is available.",
-              },
-            ].map(({ q, a }, idx) => (
-              <div key={idx} className="border border-border dark:border-gray-700 rounded-xl overflow-hidden">
-                <button className="w-full flex items-center justify-between px-6 py-4 bg-transparent hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors focus:outline-none">
-                  <span className="font-medium text-primary-text dark:text-white">{q}</span>
-                  <svg className="h-5 w-5 text-secondary-text transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                  </svg>
+          {/* Maintenance Pricing Section */}
+          <div className="mb-20 lg:mb-24">
+            <div className="text-center mb-8">
+              <h2 className="text-h3 mb-4">Ongoing Maintenance &amp; Support</h2>
+              <p className="text-muted dark:text-gray-400 text-sm">
+                Optional plans after the included three-month free support period.
+              </p>
+            </div>
+
+            {/* Currency Switcher */}
+            <div className="flex items-center justify-center mb-10">
+              <div className="inline-flex p-1 rounded-lg border border-border dark:border-dark-border bg-white dark:bg-charcoal-dark">
+                <button
+                  onClick={() => setCurrency("INR")}
+                  className={`px-6 py-2 rounded text-sm font-medium transition-all ${
+                    currency === "INR"
+                      ? "bg-forest text-white shadow-sm"
+                      : "text-muted dark:text-gray-400 hover:text-forest dark:hover:text-forest-light"
+                  }`}
+                >
+                  INR (India)
                 </button>
-                <div className="px-6 pb-4 border-t border-border dark:border-gray-700 text-secondary-text dark:text-gray-300 text-sm">
-                  {a}
-                </div>
+                <button
+                  onClick={() => setCurrency("USD")}
+                  className={`px-6 py-2 rounded text-sm font-medium transition-all ${
+                    currency === "USD"
+                      ? "bg-forest text-white shadow-sm"
+                      : "text-muted dark:text-gray-400 hover:text-forest dark:hover:text-forest-light"
+                  }`}
+                >
+                  USD (International)
+                </button>
               </div>
-            ))}
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-6 max-w-3xl mx-auto">
+              {maintPricing.map((plan, idx) => (
+                <div
+                  key={plan.name}
+                  className={`card-premium p-8 rounded-xl border border-border dark:border-dark-border transition-all ${
+                    idx === 2
+                      ? "border-forest/50 bg-forest-light/50"
+                      : ""
+                  }`}
+                >
+                  <h4 className="font-semibold text-charcoal dark:text-white mb-2">{plan.name}</h4>
+                  <div className="text-3xl font-display font-bold text-charcoal dark:text-white mb-1">
+                    {plan.price}
+                  </div>
+                  <p className="text-muted dark:text-gray-400 text-sm mb-6">{plan.period}</p>
+                  <a href="/contact" className="btn-secondary w-full">
+                    Choose a Maintenance Plan
+                  </a>
+                  {idx === 2 && (
+                    <p className="mt-4 text-xs text-forest-dark dark:text-forest-light text-center font-medium">
+                      Most popular
+                    </p>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-10 lg:mt-12">
+              <h5 className="font-semibold text-charcoal dark:text-white mb-3">Included Services</h5>
+              <ul className="space-y-2 max-w-md mx-auto">
+                {MAINTENANCE_INCLUDES.map((item, idx) => (
+                  <li key={idx} className="flex items-start gap-2 text-sm text-muted dark:text-gray-400">
+                    <span className="w-4 h-4 rounded-full bg-forest-light flex-shrink-0 mt-0.5 flex items-center justify-center text-forest-dark">
+                      <span className="text-[10px]">✓</span>
+                    </span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* Transparency Terms */}
+          <div className="card-premium p-8 lg:p-12 rounded-xl border border-border dark:border-dark-border bg-surface dark:bg-charcoal">
+            <h5 className="font-semibold text-charcoal dark:text-white mb-4">Important Terms</h5>
+            <ul className="space-y-3 text-sm text-muted dark:text-gray-400 leading-relaxed">
+              {PRICING_TERMS.map((term, idx) => (
+                <li key={idx} className="flex items-start gap-2">
+                  <span className="mt-0.5 text-forest-dark dark:text-forest-light">•</span>
+                  {term}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>

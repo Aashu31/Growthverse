@@ -8,45 +8,54 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        dark: "#0B1020",
-        "dark-secondary": "#111A2E",
-        blue: "#3563FF",
-        "electric-blue": "#5B8CFF",
-        violet: "#8257F5",
-        light: "#F7F9FC",
+        // Warm off-white / ivory primary background
+        ivory: "#FDFBF7",
+        // White secondary background
         white: "#FFFFFF",
-        "primary-text": "#111827",
-        "secondary-text": "#64748B",
-        border: "#E5E7EB",
+        // Deep charcoal main text
+        charcoal: "#1A1A1A",
+        // Dark charcoal near-black for dark sections
+        "charcoal-dark": "#0F0F0F",
+        // Muted grey secondary text
+        muted: "#6B7280",
+        // Sophisticated forest green / olive accent (used sparingly)
+        forest: "#3F6212",
+        "forest-dark": "#2D4A19",
+        "forest-light": "#E7EFDA",
+        // Soft neutral borders
+        border: "#E7E5E4",
+        // Subtle neutral surfaces
+        surface: "#F5F5F0",
+        // Dark mode surfaces
+        "dark-surface": "#141414",
+        "dark-border": "#2A2A2A",
       },
       fontFamily: {
         sans: ["Inter", "system-ui", "sans-serif"],
-        display: ["Inter", "system-ui", "sans-serif"],
+        display: ["Manrope", "system-ui", "sans-serif"],
       },
       fontSize: {
-        h1: ["3.5rem", { lineHeight: "1.1", fontWeight: "800" }],
-        h2: ["2.75rem", { lineHeight: "1.2", fontWeight: "700" }],
-        h3: ["2rem", { lineHeight: "1.3", fontWeight: "600" }],
-        h4: ["1.5rem", { lineHeight: "1.4", fontWeight: "600" }],
-        body: ["1rem", { lineHeight: "1.6" }],
+        h1: ["3.75rem", { lineHeight: "1.05", fontWeight: "700", letterSpacing: "-0.02em" }],
+        h2: ["3rem", { lineHeight: "1.15", fontWeight: "700", letterSpacing: "-0.01em" }],
+        h3: ["2.25rem", { lineHeight: "1.2", fontWeight: "600" }],
+        h4: ["1.75rem", { lineHeight: "1.3", fontWeight: "600" }],
+        body: ["1rem", { lineHeight: "1.7" }],
         small: ["0.875rem", { lineHeight: "1.5" }],
       },
       spacing: {
         128: "32rem",
         144: "36rem",
+        180: "45rem",
       },
       borderRadius: {
-        xl: "1rem",
-        "2xl": "1.5rem",
-        "3xl": "2rem",
+        xl: "0.75rem",
+        "2xl": "1rem",
+        "3xl": "1.5rem",
       },
       animation: {
         "fade-in": "fadeIn 0.6s ease-out forwards",
         "fade-in-up": "fadeInUp 0.7s ease-out forwards",
-        "fade-in-down": "fadeInDown 0.6s ease-out forwards",
         "slide-up": "slideUp 0.5s ease-out forwards",
-        "pulse-slow": "pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
-        "float": "float 6s ease-in-out infinite",
       },
       keyframes: {
         fadeIn: {
@@ -57,17 +66,9 @@ module.exports = {
           "0%": { opacity: "0", transform: "translateY(20px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
-        fadeInDown: {
-          "0%": { opacity: "0", transform: "translateY(-20px)" },
-          "100%": { opacity: "1", transform: "translateY(0)" },
-        },
         slideUp: {
           "0%": { opacity: "0", transform: "translateY(30px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
-        },
-        float: {
-          "0%, 100%": { transform: "translateY(0)" },
-          "50%": { transform: "translateY(-20px)" },
         },
       },
     },
