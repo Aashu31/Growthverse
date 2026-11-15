@@ -28,6 +28,10 @@
     letter-spacing: -0.02em;
   }
 
+  .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+    color: #FDFBF7;
+  }
+
   h1 {
     font-size: 3.75rem;
     line-height: 1.05;

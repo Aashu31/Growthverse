@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   Menu,
@@ -30,27 +30,25 @@ const DROPDOWN_ITEMS = [
 ];
 
 export function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
   const location = useLocation();
-
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   const isActive = (path) => location.pathname === path;
 
+  const toggleDropdown = () => setIsDropdownOpen((prev) => !prev);
+  const closeDropdown = () => setIsDropdownOpen(false);
+  const openDropdown = () => setIsDropdownOpen(true);
+
+  const handleWrapperBlur = (e) => {
+    if (!dropdownRef.current?.contains(e.relatedTarget)) {
+      closeDropdown();
+    }
+  };
+
   return (
-    <nav
-      className={`fixed top-0 w-full z-40 transition-all duration-300 ${
-        isScrolled
-          ? "bg-ivory/90 dark:bg-charcoal-dark/90 backdrop-blur-md border-b border-border dark:border-dark-border shadow-sm"
-          : "bg-transparent"
-      }`}
-    >
+    <nav className="sticky top-0 w-full z-50 bg-ivory dark:bg-charcoal-dark border-b border-border dark:border-dark-border">
       <div className="container-premium">
         <div className="flex items-center justify-between h-20 px-4">
           <Link
@@ -73,24 +71,33 @@ export function Navbar() {
                   <div
                     key={link.name}
                     className="relative group"
-                    onMouseEnter={() => setIsDropdownOpen(true)}
-                    onMouseLeave={() => setIsDropdownOpen(false)}
+                    ref={dropdownRef}
+                    onMouseEnter={openDropdown}
+                    onMouseLeave={closeDropdown}
+                    onFocus={openDropdown}
+                    onBlur={handleWrapperBlur}
                   >
                     <Link
                       to={link.path}
                       className={`text-sm font-medium text-charcoal dark:text-white transition-colors ${
                         isActive(link.path) ? "text-forest dark:text-forest-light" : ""
                       }`}
+                      onClick={() => setIsMobileOpen(false)}
                     >
                       {link.name} <ChevronDown className="ml-1 h-4 w-4" />
                     </Link>
                     {isDropdownOpen && (
-                      <div className="absolute top-full left-0 mt-2 w-56 bg-white dark:bg-charcoal-dark rounded-xl border border-border dark:border-dark-border shadow-xl py-4 z-50">
+                      <div
+                        className="absolute top-full left-0 mt-1 w-56 bg-white dark:bg-charcoal-dark rounded-xl border border-border dark:border-dark-border shadow-xl py-3 z-50"
+                        onMouseEnter={openDropdown}
+                        onMouseLeave={closeDropdown}
+                      >
                         {DROPDOWN_ITEMS.map((item) => (
                           <Link
                             key={item.name}
                             to={item.path}
-                            className="block px-6 py-3 text-sm text-muted dark:text-gray-400 hover:bg-surface dark:hover:bg-charcoal-dark hover:text-forest dark:hover:text-forest-light transition-colors"
+                            className="block px-6 py-2.5 text-sm text-muted dark:text-gray-400 hover:bg-surface dark:hover:bg-charcoal-dark hover:text-forest dark:hover:text-forest-light transition-colors"
+                            onClick={closeDropdown}
                           >
                             {item.name}
                           </Link>
@@ -149,7 +156,7 @@ export function Navbar() {
                   return (
                     <div key={link.name} className="border-b border-border dark:border-dark-border pb-2">
                       <button
-                        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                        onClick={toggleDropdown}
                         className="w-full flex items-center justify-between text-sm font-medium text-charcoal dark:text-white"
                       >
                         {link.name}
@@ -164,6 +171,7 @@ export function Navbar() {
                               key={item.name}
                               to={item.path}
                               className="block px-2 py-2 text-sm text-muted dark:text-gray-400 hover:text-forest dark:hover:text-forest-light"
+                              onClick={() => setIsMobileOpen(false)}
                             >
                               {item.name}
                             </Link>
