@@ -11,14 +11,13 @@ export function Modal({
   closeOnBackdrop = true,
   className = "",
 }) {
-  if (!isOpen) return null;
-
   const sizes = {
     sm: "max-w-sm",
     md: "max-w-md",
     lg: "max-w-lg",
     xl: "max-w-xl",
     "2xl": "max-w-2xl",
+    "3xl": "max-w-3xl",
     full: "max-w-[90%] max-h-[90%]",
   };
 
@@ -32,11 +31,14 @@ export function Modal({
   );
 
   useEffect(() => {
+    if (!isOpen) return undefined;
     document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = "";
     };
   }, [isOpen]);
+
+  if (!isOpen) return null;
 
   return (
     <div

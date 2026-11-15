@@ -1,4 +1,5 @@
 const path = require("path");
+const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
@@ -50,12 +51,26 @@ module.exports = {
       filename: "index.html",
       inject: "body",
     }),
+    new webpack.DefinePlugin({
+      // Same-origin "/api" in development (proxied to Fastify) or an explicit
+      // absolute API URL in production.
+      "process.env.REACT_APP_API_URL": JSON.stringify(
+        process.env.REACT_APP_API_URL || "/api"
+      ),
+    }),
   ],
   devServer: {
     historyApiFallback: true,
     port: 3000,
     open: true,
     hot: true,
+    proxy: [
+      {
+        context: ["/api"],
+        target: process.env.API_PROXY_TARGET || "http://localhost:5000",
+        changeOrigin: true,
+      },
+    ],
     client: {
       overlay: {
         errors: true,

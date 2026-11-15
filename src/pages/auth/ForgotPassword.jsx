@@ -1,100 +1,114 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Mail } from "lucide-react";
+import { Mail, AlertCircle, ExternalLink } from "lucide-react";
+import { FormInput } from "../../components/common/Forms";
+import { useAuth } from "../../context/AuthContext";
+import { ApiError } from "../../api/client";
 
 export default function ForgotPassword() {
+  const { forgotPassword } = useAuth();
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [sent, setSent] = useState(false);
+  const [message, setMessage] = useState("");
+  const [devResetUrl, setDevResetUrl] = useState("");
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!email.trim()) return;
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setError("");
+
+    if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+
     setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      const response = await forgotPassword({ email: email.trim() });
+      setMessage(
+        response?.message ||
+          "If an account exists for that email, password reset instructions have been sent."
+      );
+      setDevResetUrl(response?.devResetUrl || "");
       setSent(true);
-    }, 1000);
+    } catch (requestError) {
+      if (requestError instanceof ApiError && requestError.status >= 500) {
+        setError("The server could not process the request. Please try again shortly.");
+      } else {
+        // Keep the response generic even for validation or network issues.
+        setMessage(
+          "If an account exists for that email, password reset instructions have been sent."
+        );
+        setSent(true);
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (sent) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-charcoal-dark px-4">
-        <div className="max-w-md w-full bg-white dark:bg-charcoal rounded-3xl border border-border dark:border-dark-border shadow-2xl p-8 md:p-12 text-center">
-          <div className="w-16 h-16 rounded-full bg-forest-light flex items-center justify-center mx-auto mb-6 text-forest-dark">
-            <Mail className="h-8 w-8" />
-          </div>
-          <h2 className="text-h3 text-charcoal dark:text-white mb-3">Check Your Email</h2>
-          <p className="text-muted dark:text-gray-400 mb-8">
-            Password reset instructions have been sent to {email}.
-            <br />
-            <span className="text-xs text-gray-400 block mt-2">
-              This is a frontend demonstration. No real email is delivered.
-            </span>
-          </p>
-          <Link to="/login" className="btn-primary">
-            Back to Sign In
-          </Link>
+      <div className="text-center">
+        <div className="w-16 h-16 rounded-2xl bg-forest-light dark:bg-forest/20 text-forest-dark dark:text-forest-light flex items-center justify-center mx-auto mb-6">
+          <Mail className="h-8 w-8" />
         </div>
+        <h1 className="text-2xl font-bold text-charcoal dark:text-white font-display mb-3">Check your email</h1>
+        <p className="text-sm text-muted dark:text-gray-400 mb-6">{message}</p>
+
+        {devResetUrl && (
+          <div className="mb-6 rounded-xl border border-amber-200 bg-amber-50 p-4 text-left text-sm text-amber-800 dark:border-amber-800/40 dark:bg-amber-900/20 dark:text-amber-200">
+            <p className="font-medium mb-2">Development email delivery is not configured.</p>
+            <a href={devResetUrl} className="inline-flex items-center gap-1 font-medium underline break-all">
+              Open reset link <ExternalLink className="h-3.5 w-3.5 shrink-0" />
+            </a>
+          </div>
+        )}
+
+        <Link to="/login" className="btn-primary inline-flex px-6 py-3">Back to sign in</Link>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-charcoal-dark px-4">
-      <div className="max-w-md w-full bg-white dark:bg-charcoal rounded-3xl border border-border dark:border-dark-border shadow-2xl p-8 md:p-12">
-        <div className="text-center mb-10">
-          <div className="w-16 h-16 bg-forest rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-forest/25">
-            <span className="text-white font-bold text-2xl">GV</span>
-          </div>
-          <h2 className="text-h3 text-charcoal dark:text-white">Forgot Password</h2>
-          <p className="text-muted dark:text-gray-400 text-sm mt-2">
-            Enter your email to reset your password
-          </p>
-        </div>
-
-        <form onSubmit={handleSubmit} className="space-y-5">
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-charcoal dark:text-white block">
-              Email Address
-            </label>
-            <div className="relative">
-              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 rounded-xl border border-border dark:border-dark-border bg-white dark:bg-charcoal text-charcoal dark:text-white focus:outline-none focus:ring-2 focus:ring-forest/50"
-                placeholder="you@company.com"
-              />
-            </div>
-          </div>
-
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="btn-primary w-full py-4"
-          >
-            {isSubmitting ? "Sending..." : "Send Reset Link"}
-          </button>
-        </form>
-
-        <div className="mt-8 pt-6 border-t border-border dark:border-dark-border">
-          <p className="text-sm text-muted dark:text-gray-400 text-center">
-            Remember your password?{" "}
-            <Link to="/login" className="text-forest-dark dark:text-forest-light font-medium hover:underline">
-              Sign in
-            </Link>
-          </p>
-          <div className="bg-forest-light/50 dark:bg-forest/10 rounded-xl p-4 border border-forest/20 dark:border-forest/20 mt-6">
-            <p className="text-xs text-muted dark:text-gray-400 leading-relaxed">
-              <strong className="text-charcoal dark:text-white">Demo Mode:</strong>
-              Password reset is a frontend demonstration. No real reset email
-              is delivered and no backend authentication exists.
-            </p>
-          </div>
-        </div>
+    <div>
+      <div className="text-center mb-8">
+        <h1 className="text-2xl font-bold text-charcoal dark:text-white font-display">Forgot your password?</h1>
+        <p className="text-sm text-muted dark:text-gray-400 mt-2">
+          Enter your email and we will send a single-use reset link.
+        </p>
       </div>
+
+      {error && (
+        <div
+          role="alert"
+          className="mb-5 flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700 dark:border-red-800/40 dark:bg-red-900/20 dark:text-red-300"
+        >
+          <AlertCircle className="h-5 w-5 mt-0.5 shrink-0" />
+          <span>{error}</span>
+        </div>
+      )}
+
+      <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+        <FormInput
+          label="Email address"
+          type="email"
+          name="email"
+          id="forgot-email"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+          placeholder="you@company.com"
+          autoComplete="email"
+          required
+        />
+        <button type="submit" disabled={isSubmitting} className="btn-primary w-full py-3.5 disabled:opacity-60">
+          {isSubmitting ? "Sending..." : "Send Reset Link"}
+        </button>
+      </form>
+
+      <p className="mt-6 text-xs text-center text-muted dark:text-gray-500">
+        For your security, the response is the same whether or not an account exists.
+      </p>
     </div>
   );
 }

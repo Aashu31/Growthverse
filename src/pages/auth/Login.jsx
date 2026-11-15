@@ -1,156 +1,164 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Mail, Lock, Eye, EyeOff } from "lucide-react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Mail, Lock, Eye, EyeOff, AlertCircle, CheckCircle2 } from "lucide-react";
+import { FormInput } from "../../components/common/Forms";
+import { useAuth } from "../../context/AuthContext";
+import { ApiError } from "../../api/client";
+import { roleHome } from "../../utils/permissions";
 
 export default function Login() {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+  const { login } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [formData, setFormData] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState({});
+  const [formError, setFormError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate;
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-    setErrors((prev) => ({ ...prev, [name]: "" }));
+  const params = new URLSearchParams(location.search);
+  const verified = params.get("verified") === "1";
+  const redirect = params.get("redirect");
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((previous) => ({ ...previous, [name]: value }));
+    setErrors((previous) => ({ ...previous, [name]: "" }));
+    setFormError("");
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const newErrors = {};
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-    if (!formData.email.trim()) {
-      newErrors.email = "Email address is required.";
+    const nextErrors = {};
+    if (!formData.email.trim()) nextErrors.email = "Email address is required.";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
+      nextErrors.email = "Please enter a valid email address.";
     }
+    if (!formData.password) nextErrors.password = "Password is required.";
 
-    if (!formData.password.trim()) {
-      newErrors.password = "Password is required.";
-    }
+    setErrors(nextErrors);
+    if (Object.keys(nextErrors).length > 0) return;
 
-    setErrors(newErrors);
-
-    if (Object.keys(newErrors).length === 0) {
-      setIsSubmitting(true);
-      setTimeout(() => {
-        setIsSubmitting(false);
-        // Frontend-only demo authentication
-        localStorage.setItem(
-          "growthverse-demo-user",
-          JSON.stringify({ name: "Demo User", email: formData.email })
-        );
-        navigate("/dashboard");
-      }, 1000);
+    setIsSubmitting(true);
+    setFormError("");
+    try {
+      const user = await login({
+        email: formData.email.trim(),
+        password: formData.password,
+      });
+      const target =
+        redirect && redirect.startsWith("/") && !redirect.startsWith("//")
+          ? redirect
+          : roleHome(user?.role);
+      navigate(target, { replace: true });
+    } catch (error) {
+      if (error instanceof ApiError) {
+        setErrors(error.fieldErrors());
+        setFormError(error.message || "Sign in failed. Please try again.");
+      } else {
+        setFormError("Unable to reach the server. Please try again.");
+      }
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-charcoal-dark px-4">
-      <div className="max-w-md w-full bg-white dark:bg-charcoal rounded-3xl border border-border dark:border-dark-border shadow-xl p-8 md:p-12">
-        <div className="text-center mb-10">
-          <div className="w-16 h-16 bg-forest rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-forest/25">
-            <span className="text-white font-bold text-2xl">GV</span>
-          </div>
-          <h2 className="text-h3 text-charcoal dark:text-white">Welcome Back</h2>
-          <p className="text-muted dark:text-gray-400 text-sm mt-2">
-            Sign in to access your dashboard
-          </p>
-        </div>
-
-        <form onSubmit={handleSubmit} className="space-y-5">
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-charcoal dark:text-white block">
-              Email Address
-            </label>
-            <div className="relative">
-              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                className={`w-full pl-10 pr-4 py-3 rounded-xl border ${errors.email ? "border-red-500" : "border-border"} bg-white dark:bg-charcoal text-charcoal dark:text-white focus:outline-none focus:ring-2 focus:ring-forest/50 ${errors.email ? "ring-red-500/20" : ""}`}
-                placeholder="you@company.com"
-              />
-            </div>
-            {errors.email && (
-              <p className="text-xs text-red-600 dark:text-red-400">{errors.email}</p>
-            )}
-          </div>
-
-          <div className="space-y-2">
-            <div className="flex items-center justify-between">
-              <label className="text-sm font-medium text-charcoal dark:text-white block">
-                Password
-              </label>
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="text-xs text-forest-dark dark:text-forest-light hover:underline"
-              >
-                {showPassword ? "Hide" : "Show"}
-              </button>
-            </div>
-            <div className="relative">
-              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-              <input
-                type={showPassword ? "text" : "password"}
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                className={`w-full pl-10 pr-10 py-3 rounded-xl border ${errors.password ? "border-red-500" : "border-border"} bg-white dark:bg-charcoal text-charcoal dark:text-white focus:outline-none focus:ring-2 focus:ring-forest/50 ${errors.password ? "ring-red-500/20" : ""}`}
-                placeholder="••••••••"
-              />
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
-              >
-                {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-              </button>
-            </div>
-            {errors.password && (
-              <p className="text-xs text-red-600 dark:text-red-400">{errors.password}</p>
-            )}
-          </div>
-
-          <div className="flex items-center justify-between">
-            <label className="flex items-center gap-2 text-sm text-muted dark:text-gray-400 cursor-pointer">
-              <input type="checkbox" className="rounded border-gray-300 text-forest-dark focus:ring-forest-dark" />
-              Remember me
-            </label>
-            <Link to="/forgot-password" className="text-sm text-forest-dark dark:text-forest-light hover:underline">
-              Forgot password?
-            </Link>
-          </div>
-
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="btn-primary w-full py-4"
-          >
-            {isSubmitting ? "Signing in..." : "Sign In"}
-          </button>
-        </form>
-
-        <div className="mt-8 pt-6 border-t border-border dark:border-dark-border">
-          <p className="text-sm text-muted dark:text-gray-400 text-center mb-4">
-            Don't have an account?{" "}
-            <Link to="/signup" className="text-forest-dark dark:text-forest-light font-medium hover:underline">
-              Create an account
-            </Link>
-          </p>
-          <div className="bg-forest-light/50 dark:bg-forest/10 rounded-xl p-4 border border-forest/20 dark:border-forest/20">
-            <p className="text-xs text-muted dark:text-gray-400 leading-relaxed">
-              <strong className="text-charcoal dark:text-white">Demo Mode:</strong>
-              This is frontend-only demonstration authentication. No real
-              authentication backend exists.
-            </p>
-          </div>
-        </div>
+    <div>
+      <div className="text-center mb-8">
+        <h1 className="text-2xl font-bold text-charcoal dark:text-white font-display">Welcome back</h1>
+        <p className="text-sm text-muted dark:text-gray-400 mt-2">
+          Sign in to manage your projects and account.
+        </p>
       </div>
+
+      {verified && (
+        <div className="mb-5 flex items-start gap-3 rounded-xl border border-green-200 bg-green-50 p-4 text-sm text-green-700 dark:border-green-800/40 dark:bg-green-900/20 dark:text-green-300">
+          <CheckCircle2 className="h-5 w-5 mt-0.5 shrink-0" />
+          <span>Your email address is verified. You can sign in now.</span>
+        </div>
+      )}
+
+      {formError && (
+        <div
+          role="alert"
+          className="mb-5 flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700 dark:border-red-800/40 dark:bg-red-900/20 dark:text-red-300"
+        >
+          <AlertCircle className="h-5 w-5 mt-0.5 shrink-0" />
+          <span>{formError}</span>
+        </div>
+      )}
+
+      <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+        <div className="relative">
+          <FormInput
+            label="Email address"
+            type="email"
+            name="email"
+            id="login-email"
+            value={formData.email}
+            onChange={handleChange}
+            error={errors.email}
+            placeholder="you@company.com"
+            autoComplete="email"
+            required
+            className="pl-10"
+          />
+          <Mail className="absolute left-3 top-[42px] h-4 w-4 text-gray-400 pointer-events-none" />
+        </div>
+
+        <div>
+          <div className="flex items-center justify-between mb-1">
+            <label htmlFor="login-password" className="block text-sm font-medium text-primary-text dark:text-white">
+              Password <span className="text-red-500">*</span>
+            </label>
+            <button
+              type="button"
+              onClick={() => setShowPassword((previous) => !previous)}
+              className="text-xs text-forest-dark dark:text-forest-light hover:underline"
+            >
+              {showPassword ? "Hide" : "Show"}
+            </button>
+          </div>
+          <div className="relative">
+            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400 pointer-events-none" />
+            <input
+              id="login-password"
+              name="password"
+              type={showPassword ? "text" : "password"}
+              value={formData.password}
+              onChange={handleChange}
+              autoComplete="current-password"
+              placeholder="Your password"
+              required
+              aria-invalid={Boolean(errors.password)}
+              className={`w-full pl-10 pr-11 py-3 rounded-xl border ${
+                errors.password ? "border-red-500 ring-red-500/20" : "border-border"
+              } bg-white dark:bg-gray-800 text-primary-text dark:text-white focus:outline-none focus:ring-2 focus:ring-forest/40`}
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword((previous) => !previous)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+              aria-label={showPassword ? "Hide password" : "Show password"}
+            >
+              {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+            </button>
+          </div>
+          {errors.password && <p className="mt-1 text-xs text-red-600 dark:text-red-400">{errors.password}</p>}
+        </div>
+
+        <div className="flex items-center justify-end">
+          <Link to="/forgot-password" className="text-sm text-forest-dark dark:text-forest-light hover:underline">
+            Forgot password?
+          </Link>
+        </div>
+
+        <button type="submit" disabled={isSubmitting} className="btn-primary w-full py-3.5 disabled:opacity-60">
+          {isSubmitting ? "Signing in..." : "Sign In"}
+        </button>
+      </form>
     </div>
   );
 }

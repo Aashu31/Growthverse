@@ -1,0 +1,273 @@
+// Prisma Schema for GrowthVerse Backend
+// PostgreSQL + Prisma. Authentication models added in Phase 2.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// --- Core Authentication and User Models ---
+
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+  STAFF
+  CUSTOMER
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+}
+
+model User {
+  id              String     @id @default(uuid())
+  name            String?
+  email           String     @unique
+  passwordHash    String
+  phone           String?
+  avatar          String?
+  role            Role       @default(CUSTOMER)
+  status          UserStatus @default(ACTIVE)
+  emailVerified   Boolean    @default(false)
+  emailVerifiedAt DateTime?
+  lastLoginAt     DateTime?
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+
+  sessions               RefreshSession[]
+  passwordResetTokens    PasswordResetToken[]
+  emailVerificationTokens EmailVerificationToken[]
+  customer               Customer?
+
+  @@index([role])
+  @@index([status])
+  @@map("users")
+}
+
+// Refresh sessions. Tokens are opaque random values; only SHA-256 hashes are stored.
+model RefreshSession {
+  id                 String    @id @default(uuid())
+  userId             String
+  tokenHash          String    @unique
+  expiresAt          DateTime
+  revokedAt          DateTime?
+  replacedByTokenHash String?
+  userAgent          String?
+  ipAddress          String?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
+  @@map("refresh_sessions")
+}
+
+model PasswordResetToken {
+  id        String   @id @default(uuid())
+  userId    String
+  tokenHash String   @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
+  @@map("password_reset_tokens")
+}
+
+model EmailVerificationToken {
+  id        String   @id @default(uuid())
+  userId    String
+  tokenHash String   @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
+  @@map("email_verification_tokens")
+}
+
+// --- Services Module ---
+
+model Service {
+  id               String   @id @default(uuid())
+  title            String
+  slug             String   @unique
+  description      String   @default("")
+  shortDescription String   @default("")
+  category         String   @default("General")
+  features         Json     @default("[]")
+  isPublished      Boolean  @default(true)
+  displayOrder     Int      @default(0)
+  isActive         Boolean  @default(true)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  projectInquiries ProjectInquiry[]
+
+  @@index([isActive, isPublished])
+  @@map("services")
+}
+
+// --- Pricing Plans Module ---
+
+model PricingPlan {
+  id             String   @id @default(uuid())
+  name           String
+  category       String   @default("General")
+  audience       String   @default("indian") // "indian" | "international"
+  billingCycle   String   @default("one-time") // "monthly" | "quarterly" | "yearly" | "one-time"
+  currency       String   @default("INR") // "INR" | "USD"
+  amount         Decimal  @db.Decimal(12, 2)
+  description    String   @default("")
+  features       Json     @default("[]")
+  supportDetails String   @default("")
+  isActive       Boolean  @default(true)
+  displayOrder   Int      @default(0)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@unique([name, category, audience, billingCycle])
+  @@index([audience, billingCycle, isActive])
+  @@map("pricing_plans")
+}
+
+// --- Features Module ---
+
+model Feature {
+  id           String   @id @default(uuid())
+  title        String
+  category     String   @default("General")
+  description  String   @default("")
+  icon         String   @default("Target")
+  isActive     Boolean  @default(true)
+  displayOrder Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([isActive])
+  @@map("features")
+}
+
+// --- Contact Enquiries Module ---
+
+model Contact {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  phone     String   @default("")
+  company   String   @default("")
+  service   String   @default("")
+  budget    String   @default("")
+  subject   String   @default("General enquiry")
+  message   String
+  status    String   @default("new") // new, contacted, in_progress, completed, closed
+  source    String   @default("website")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([status])
+  @@index([createdAt])
+  @@map("contacts")
+}
+
+// --- Project Inquiries / Orders Module ---
+// ProjectInquiry remains the storage model for the existing /api/orders module.
+model ProjectInquiry {
+  id           String    @id @default(uuid())
+  orderNumber  String?   @unique
+  customerId   String?
+  customerName String    @default("")
+  email        String    @default("")
+  phone        String    @default("")
+  company      String    @default("")
+  serviceId    String?
+  projectTitle String    @default("")
+  description  String    @default("")
+  budget       String    @default("")
+  amount       Decimal?  @db.Decimal(12, 2)
+  currency     String    @default("INR")
+  message      String    @default("")
+  status       String    @default("new")
+  startDate    DateTime?
+  dueDate      DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  service  Service?  @relation(fields: [serviceId], references: [id], onDelete: SetNull)
+  customer Customer? @relation(fields: [customerId], references: [id], onDelete: SetNull)
+
+  @@index([status])
+  @@index([customerId])
+  @@index([createdAt])
+  @@map("project_inquiries")
+}
+
+// --- Customers Module ---
+
+model Customer {
+  id        String   @id @default(uuid())
+  userId    String?  @unique
+  name      String
+  email     String
+  phone     String   @default("")
+  company   String   @default("")
+  country   String   @default("")
+  notes     String   @default("")
+  status    String   @default("active") // active | inactive | lead
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user        User?            @relation(fields: [userId], references: [id], onDelete: SetNull)
+  projectInquiries ProjectInquiry[]
+
+  @@index([email])
+  @@index([status])
+  @@map("customers")
+}
+
+// --- Portfolio Projects Module ---
+
+model PortfolioProject {
+  id           String   @id @default(uuid())
+  title        String
+  slug         String   @unique
+  description  String   @default("")
+  category     String   @default("General")
+  technologies Json     @default("[]")
+  thumbnail    String?
+  images       Json     @default("[]")
+  projectUrl   String?
+  isPublished  Boolean  @default(true)
+  isFeatured   Boolean  @default(false)
+  displayOrder Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([isPublished])
+  @@map("portfolio_projects")
+}
+
+// --- Site Settings Module ---
+
+model SiteSetting {
+  id        String   @id @default(uuid())
+  key       String   @unique
+  value     String
+  updatedAt DateTime @updatedAt
+
+  @@map("site_settings")
+}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { SERVICES_DATA } from "../../data";
 import { SectionHeader } from "../../components/website/Hero";
@@ -6,6 +6,7 @@ import { SectionHeader } from "../../components/website/Hero";
 export default function ServiceDetails() {
   const { slug } = useParams();
   const service = SERVICES_DATA.find((s) => s.slug === slug);
+  const [websiteAudience, setWebsiteAudience] = React.useState("India");
 
   if (!service) {
     return (
@@ -22,6 +23,10 @@ export default function ServiceDetails() {
       </div>
     );
   }
+
+  const isWebsiteDevelopment = service.slug === "website-development";
+  const websitePricing =
+    websiteAudience === "India" ? "₹4,000 – ₹6,000" : "$1,000 – $1,500";
 
   return (
     <div className="min-h-screen bg-white dark:bg-charcoal-dark text-charcoal dark:text-white">
@@ -82,10 +87,37 @@ export default function ServiceDetails() {
                     <span className="text-muted dark:text-gray-400">Category</span>
                     <span className="text-charcoal dark:text-white">{service.category}</span>
                   </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted dark:text-gray-400">Price Range</span>
-                    <span className="text-charcoal dark:text-white">{service.priceRange}</span>
-                  </div>
+                  {isWebsiteDevelopment ? (
+                    <>
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs font-medium text-muted dark:text-gray-400 uppercase tracking-wider">
+                          Audience
+                        </span>
+                        <button
+                          onClick={() => setWebsiteAudience("India")}
+                          className={`px-2 py-1 text-xs rounded border transition-colors ${websiteAudience === "India" ? "bg-forest text-white border-forest" : "border-border text-charcoal dark:text-white hover:bg-surface dark:hover:bg-charcoal"}`}
+                        >
+                          India
+                        </button>
+                        <button
+                          onClick={() => setWebsiteAudience("International")}
+                          className={`px-2 py-1 text-xs rounded border transition-colors ${websiteAudience === "International" ? "bg-forest text-white border-forest" : "border-border text-charcoal dark:text-white hover:bg-surface dark:hover:bg-charcoal"}`}
+                        >
+                          International
+                        </button>
+                      </div>
+                      <div className="text-sm font-medium text-charcoal dark:text-white">
+                        {websitePricing}
+                      </div>
+                    </>
+                  ) : (
+                    <div className="flex justify-between text-sm">
+                      <span className="text-muted dark:text-gray-400">Pricing</span>
+                      <span className="text-charcoal dark:text-white">
+                        Request a Custom Quote
+                      </span>
+                    </div>
+                  )}
                   <div className="flex justify-between text-sm">
                     <span className="text-muted dark:text-gray-400">Timeline</span>
                     <span className="text-charcoal dark:text-white">{service.timeline}</span>
@@ -96,6 +128,40 @@ export default function ServiceDetails() {
                   </div>
                 </div>
               </div>
+              {isWebsiteDevelopment && (
+                <div className="p-8 rounded-xl border border-border dark:border-dark-border bg-white dark:bg-charcoal-dark">
+                  <h3 className="font-semibold text-charcoal dark:text-white mb-4">Project Development Pricing</h3>
+                  <div className="space-y-4">
+                    <p className="text-muted dark:text-gray-400 text-sm leading-relaxed">
+                      One-time project development cost. Three months of free support and maintenance are included
+                      after project delivery. Paid maintenance plans are optional thereafter.
+                    </p>
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-medium text-muted dark:text-gray-400 uppercase tracking-wider">
+                        Audience
+                      </span>
+                      <button
+                        onClick={() => setWebsiteAudience("India")}
+                        className={`px-2 py-1 text-xs rounded border transition-colors ${websiteAudience === "India" ? "bg-forest text-white border-forest" : "border-border text-charcoal dark:text-white hover:bg-surface dark:hover:bg-charcoal"}`}
+                      >
+                        India
+                      </button>
+                      <button
+                        onClick={() => setWebsiteAudience("International")}
+                        className={`px-2 py-1 text-xs rounded border transition-colors ${websiteAudience === "International" ? "bg-forest text-white border-forest" : "border-border text-charcoal dark:text-white hover:bg-surface dark:hover:bg-charcoal"}`}
+                      >
+                        International
+                      </button>
+                    </div>
+                    <div className="text-sm font-medium text-charcoal dark:text-white">
+                      {websitePricing}
+                    </div>
+                    <a href="/contact" className="btn-primary w-full">
+                      Request Project Enquiry
+                    </a>
+                  </div>
+                </div>
+              )}
               <div className="p-8 rounded-xl border border-border dark:border-dark-border bg-white dark:bg-charcoal-dark">
                 <h3 className="font-semibold text-charcoal dark:text-white mb-4">Related Services</h3>
                 <div className="space-y-3">

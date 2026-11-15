@@ -5,11 +5,15 @@ import { SectionHeader } from "../../components/website/Hero";
 
 export default function Services() {
   const [activeCategory, setActiveCategory] = React.useState("All");
+  const [websiteAudience, setWebsiteAudience] = React.useState("India");
 
   const filteredServices =
     activeCategory === "All"
       ? SERVICES_DATA
       : SERVICES_DATA.filter((s) => s.category === activeCategory);
+
+  const websitePricing =
+    websiteAudience === "India" ? "₹4,000 – ₹6,000" : "$1,000 – $1,500";
 
   return (
     <div className="min-h-screen bg-ivory text-charcoal dark:bg-charcoal-dark dark:text-white">
@@ -61,12 +65,42 @@ export default function Services() {
                     {service.shortDescription}
                   </p>
                   <div className="flex items-center justify-between pt-4 border-t border-border dark:border-dark-border">
-                    <span className="text-sm font-medium text-charcoal dark:text-white">
-                      {service.priceRange}
-                    </span>
-                    <span className="text-sm font-medium text-charcoal dark:text-white">
-                      View Details <ArrowRight className="h-3 w-3 ml-1" />
-                    </span>
+                    {service.slug === "website-development" ? (
+                      <>
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs font-medium text-muted dark:text-gray-400 uppercase tracking-wider">
+                            Audience
+                          </span>
+                          <button
+                            onClick={() => setWebsiteAudience("India")}
+                            className={`px-2 py-1 text-xs rounded border transition-colors ${websiteAudience === "India" ? "bg-forest text-white border-forest" : "border-border text-charcoal dark:text-white hover:bg-surface dark:hover:bg-charcoal"}`}
+                          >
+                            India
+                          </button>
+                          <button
+                            onClick={() => setWebsiteAudience("International")}
+                            className={`px-2 py-1 text-xs rounded border transition-colors ${websiteAudience === "International" ? "bg-forest text-white border-forest" : "border-border text-charcoal dark:text-white hover:bg-surface dark:hover:bg-charcoal"}`}
+                          >
+                            International
+                          </button>
+                        </div>
+                        <span className="text-sm font-medium text-charcoal dark:text-white">
+                          {websitePricing}
+                        </span>
+                        <span className="text-xs font-medium text-charcoal dark:text-white">
+                          View Details <ArrowRight className="h-3 w-3 ml-1" />
+                        </span>
+                      </>
+                    ) : (
+                      <>
+                        <span className="text-sm font-medium text-muted dark:text-gray-400">
+                          Request a Quote
+                        </span>
+                        <span className="text-xs font-medium text-charcoal dark:text-white">
+                          View Details <ArrowRight className="h-3 w-3 ml-1" />
+                        </span>
+                      </>
+                    )}
                   </div>
                 </div>
               </a>

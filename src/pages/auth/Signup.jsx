@@ -1,181 +1,198 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Mail, Lock, User, Eye, EyeOff } from "lucide-react";
+import { Link } from "react-router-dom";
+import { CheckCircle2, ExternalLink, AlertCircle } from "lucide-react";
+import { FormInput } from "../../components/common/Forms";
+import { useAuth } from "../../context/AuthContext";
+import { ApiError } from "../../api/client";
+
+const passwordChecks = [
+  { label: "At least 10 characters", test: (value) => value.length >= 10 },
+  { label: "One uppercase letter", test: (value) => /[A-Z]/.test(value) },
+  { label: "One lowercase letter", test: (value) => /[a-z]/.test(value) },
+  { label: "One number", test: (value) => /[0-9]/.test(value) },
+];
 
 export default function Signup() {
+  const { register } = useAuth();
   const [formData, setFormData] = useState({
-    fullName: "",
+    name: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
   const [errors, setErrors] = useState({});
+  const [formError, setFormError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate();
+  const [result, setResult] = useState(null);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-    setErrors((prev) => ({ ...prev, [name]: "" }));
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((previous) => ({ ...previous, [name]: value }));
+    setErrors((previous) => ({ ...previous, [name]: "" }));
+    setFormError("");
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const newErrors = {};
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-    if (!formData.fullName.trim()) {
-      newErrors.fullName = "Full name is required.";
+    const nextErrors = {};
+    if (formData.name.trim().length < 2) nextErrors.name = "Please enter your full name.";
+    if (!formData.email.trim()) nextErrors.email = "Email address is required.";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
+      nextErrors.email = "Please enter a valid email address.";
     }
-
-    if (!formData.email.trim()) {
-      newErrors.email = "Email address is required.";
-    }
-
-    if (!formData.password.trim()) {
-      newErrors.password = "Password is required.";
-    } else if (formData.password.length < 6) {
-      newErrors.password = "Password must be at least 6 characters.";
-    }
-
+    const failedChecks = passwordChecks.filter((check) => !check.test(formData.password));
+    if (formData.password.length === 0) nextErrors.password = "Password is required.";
+    else if (failedChecks.length > 0) nextErrors.password = failedChecks[0].label + " is required.";
     if (formData.password !== formData.confirmPassword) {
-      newErrors.confirmPassword = "Passwords do not match.";
+      nextErrors.confirmPassword = "Passwords do not match.";
     }
 
-    setErrors(newErrors);
+    setErrors(nextErrors);
+    if (Object.keys(nextErrors).length > 0) return;
 
-    if (Object.keys(newErrors).length === 0) {
-      setIsSubmitting(true);
-      setTimeout(() => {
-        setIsSubmitting(false);
-        localStorage.setItem(
-          "growthverse-demo-user",
-          JSON.stringify({ name: formData.fullName, email: formData.email })
-        );
-        navigate("/dashboard");
-      }, 1000);
+    setIsSubmitting(true);
+    setFormError("");
+    try {
+      const response = await register({
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        password: formData.password,
+      });
+      setResult({
+        message: response?.message || "Account created. Please verify your email.",
+        devVerificationUrl: response?.devVerificationUrl || null,
+      });
+    } catch (error) {
+      if (error instanceof ApiError) {
+        setErrors(error.fieldErrors());
+        setFormError(error.message || "Registration failed. Please try again.");
+      } else {
+        setFormError("Unable to reach the server. Please try again.");
+      }
+    } finally {
+      setIsSubmitting(false);
     }
   };
+
+  if (result) {
+    return (
+      <div className="text-center">
+        <div className="w-16 h-16 rounded-2xl bg-forest-light dark:bg-forest/20 text-forest-dark dark:text-forest-light flex items-center justify-center mx-auto mb-6">
+          <CheckCircle2 className="h-8 w-8" />
+        </div>
+        <h1 className="text-2xl font-bold text-charcoal dark:text-white font-display mb-3">Account created</h1>
+        <p className="text-sm text-muted dark:text-gray-400 mb-6">{result.message}</p>
+
+        {result.devVerificationUrl && (
+          <div className="mb-6 rounded-xl border border-amber-200 bg-amber-50 p-4 text-left text-sm text-amber-800 dark:border-amber-800/40 dark:bg-amber-900/20 dark:text-amber-200">
+            <p className="font-medium mb-2">Development email delivery is not configured.</p>
+            <a
+              href={result.devVerificationUrl}
+              className="inline-flex items-center gap-1 font-medium underline break-all"
+            >
+              Open verification link <ExternalLink className="h-3.5 w-3.5 shrink-0" />
+            </a>
+          </div>
+        )}
+
+        <Link to="/login" className="btn-primary inline-flex px-6 py-3">Go to sign in</Link>
+      </div>
+    );
+  }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-charcoal-dark px-4">
-      <div className="max-w-md w-full bg-white dark:bg-charcoal rounded-3xl border border-border dark:border-dark-border shadow-xl p-8 md:p-12">
-        <div className="text-center mb-10">
-          <div className="w-16 h-16 bg-forest rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-forest/25">
-            <span className="text-white font-bold text-2xl">GV</span>
-          </div>
-          <h2 className="text-h3 text-charcoal dark:text-white">Create Account</h2>
-          <p className="text-muted dark:text-gray-400 text-sm mt-2">
-            Join GrowthVerse and start managing your business
-          </p>
-        </div>
-
-        <form onSubmit={handleSubmit} className="space-y-5">
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-charcoal dark:text-white block">
-              Full Name
-            </label>
-            <div className="relative">
-              <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-              <input
-                type="text"
-                name="fullName"
-                value={formData.fullName}
-                onChange={handleChange}
-                className={`w-full pl-10 pr-4 py-3 rounded-xl border ${errors.fullName ? "border-red-500" : "border-border"} bg-white dark:bg-charcoal text-charcoal dark:text-white focus:outline-none focus:ring-2 focus:ring-forest/50 ${errors.fullName ? "ring-red-500/20" : ""}`}
-                placeholder="John Doe"
-              />
-            </div>
-            {errors.fullName && (
-              <p className="text-xs text-red-600 dark:text-red-400">{errors.fullName}</p>
-            )}
-          </div>
-
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-charcoal dark:text-white block">
-              Email Address
-            </label>
-            <div className="relative">
-              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                className={`w-full pl-10 pr-4 py-3 rounded-xl border ${errors.email ? "border-red-500" : "border-border"} bg-white dark:bg-charcoal text-charcoal dark:text-white focus:outline-none focus:ring-2 focus:ring-forest/50 ${errors.email ? "ring-red-500/20" : ""}`}
-                placeholder="you@company.com"
-              />
-            </div>
-            {errors.email && (
-              <p className="text-xs text-red-600 dark:text-red-400">{errors.email}</p>
-            )}
-          </div>
-
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-charcoal dark:text-white block">
-              Password
-            </label>
-            <div className="relative">
-              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-              <input
-                type={showPassword ? "text" : "password"}
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                className={`w-full pl-10 pr-10 py-3 rounded-xl border ${errors.password ? "border-red-500" : "border-border"} bg-white dark:bg-charcoal text-charcoal dark:text-white focus:outline-none focus:ring-2 focus:ring-forest/50 ${errors.password ? "ring-red-500/20" : ""}`}
-                placeholder="••••••••"
-              />
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
-              >
-                {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-              </button>
-            </div>
-            {errors.password && (
-              <p className="text-xs text-red-600 dark:text-red-400">{errors.password}</p>
-            )}
-          </div>
-
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-charcoal dark:text-white block">
-              Confirm Password
-            </label>
-            <div className="relative">
-              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-              <input
-                type={showPassword ? "text" : "password"}
-                name="confirmPassword"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-                className={`w-full pl-10 pr-10 py-3 rounded-xl border ${errors.confirmPassword ? "border-red-500" : "border-border"} bg-white dark:bg-charcoal text-charcoal dark:text-white focus:outline-none focus:ring-2 focus:ring-forest/50 ${errors.confirmPassword ? "ring-red-500/20" : ""}`}
-                placeholder="••••••••"
-              />
-            </div>
-            {errors.confirmPassword && (
-              <p className="text-xs text-red-600 dark:text-red-400">{errors.confirmPassword}</p>
-            )}
-          </div>
-
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="btn-primary w-full py-4"
-          >
-            {isSubmitting ? "Creating account..." : "Create Account"}
-          </button>
-        </form>
-
-        <div className="mt-8 pt-6 border-t border-border dark:border-dark-border">
-          <p className="text-sm text-muted dark:text-gray-400 text-center">
-            Already have an account?{" "}
-            <Link to="/login" className="text-forest-dark dark:text-forest-light font-medium hover:underline">
-              Sign in
-            </Link>
-          </p>
-        </div>
+    <div>
+      <div className="text-center mb-8">
+        <h1 className="text-2xl font-bold text-charcoal dark:text-white font-display">Create your account</h1>
+        <p className="text-sm text-muted dark:text-gray-400 mt-2">
+          Track projects, orders and enquiries in one place.
+        </p>
       </div>
+
+      {formError && (
+        <div
+          role="alert"
+          className="mb-5 flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700 dark:border-red-800/40 dark:bg-red-900/20 dark:text-red-300"
+        >
+          <AlertCircle className="h-5 w-5 mt-0.5 shrink-0" />
+          <span>{formError}</span>
+        </div>
+      )}
+
+      <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+        <FormInput
+          label="Full name"
+          name="name"
+          id="signup-name"
+          value={formData.name}
+          onChange={handleChange}
+          error={errors.name}
+          placeholder="Your name"
+          autoComplete="name"
+          required
+        />
+        <FormInput
+          label="Email address"
+          type="email"
+          name="email"
+          id="signup-email"
+          value={formData.email}
+          onChange={handleChange}
+          error={errors.email}
+          placeholder="you@company.com"
+          autoComplete="email"
+          required
+        />
+        <FormInput
+          label="Password"
+          type="password"
+          name="password"
+          id="signup-password"
+          value={formData.password}
+          onChange={handleChange}
+          error={errors.password}
+          placeholder="Create a strong password"
+          autoComplete="new-password"
+          required
+        />
+
+        <ul className="grid grid-cols-2 gap-1.5 text-xs">
+          {passwordChecks.map((check) => {
+            const passed = check.test(formData.password);
+            return (
+              <li
+                key={check.label}
+                className={passed ? "text-green-600 dark:text-green-400" : "text-muted dark:text-gray-500"}
+              >
+                {passed ? "✓" : "•"} {check.label}
+              </li>
+            );
+          })}
+        </ul>
+
+        <FormInput
+          label="Confirm password"
+          type="password"
+          name="confirmPassword"
+          id="signup-confirm-password"
+          value={formData.confirmPassword}
+          onChange={handleChange}
+          error={errors.confirmPassword}
+          placeholder="Repeat your password"
+          autoComplete="new-password"
+          required
+        />
+
+        <p className="text-xs text-muted dark:text-gray-500">
+          Public sign-up creates a customer account. Staff and administrative roles are assigned
+          only by a super administrator.
+        </p>
+
+        <button type="submit" disabled={isSubmitting} className="btn-primary w-full py-3.5 disabled:opacity-60">
+          {isSubmitting ? "Creating account..." : "Create Account"}
+        </button>
+      </form>
     </div>
   );
 }
