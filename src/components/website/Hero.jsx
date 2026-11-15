@@ -2,7 +2,6 @@ import React from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "../common/Button";
-import { Navbar } from "../navigation/Navbar";
 
 const WHY_FEATURES = [
   {
@@ -40,14 +39,6 @@ export function SectionHeader({ title, description, className = "" }) {
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col bg-ivory text-charcoal">
-      {/* Announcement Bar */}
-      <div className="bg-forest text-white text-xs font-medium px-4 py-2 text-center">
-        New: Digital transformation services now available. Start your project today.
-      </div>
-
-      {/* Navigation */}
-      <Navbar />
-
       {/* Hero */}
       <section className="relative pt-32 pb-24 lg:pt-48 lg:pb-32 overflow-hidden">
         <div className="container-premium relative">
